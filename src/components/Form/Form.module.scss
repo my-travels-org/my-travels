@@ -1,0 +1,23 @@
+@use "@styles/variables";
+
+.form {
+  &_container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    gap: 1rem;
+    &_field {
+      background-color: variables.$primary-blue-color;
+      padding: 1rem;
+      border-radius: 2rem;
+      border: none;
+      color: black;
+      &::placeholder {
+        color: variables.$primary-background-color;
+      }
+    }
+  }
+  &_button {
+    background-color: red;
+  }
+}
