@@ -1,7 +1,7 @@
 import { Field, FieldProps } from '@/types'
 import React, { useState } from 'react'
 
-export default function useField ({ type, name, placeholder }: FieldProps): Field {
+export default function useField ({ type, name, placeholder, required = false, error = '' }: FieldProps): Field {
   const [value, setValue] = useState('')
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -9,6 +9,6 @@ export default function useField ({ type, name, placeholder }: FieldProps): Fiel
   }
 
   return {
-    value, onChange, type, name, placeholder
+    value, onChange, type, name, placeholder, required, error
   }
 }

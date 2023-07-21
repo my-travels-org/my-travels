@@ -1,10 +1,13 @@
 @use "@styles/variables";
 
 .form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 2rem;
   &_container {
     display: flex;
     flex-direction: column;
-    padding: 0 2rem;
     gap: 1rem;
     &_field {
       background-color: variables.$primary-blue-color;
@@ -12,12 +15,18 @@
       border-radius: 2rem;
       border: none;
       color: black;
+      font-family: inherit;
       &::placeholder {
         color: variables.$primary-background-color;
       }
     }
   }
   &_button {
-    background-color: red;
+    width: 100%;
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem;
+    font-family: inherit;
+    font-weight: bold;
   }
 }
