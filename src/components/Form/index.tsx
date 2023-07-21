@@ -15,7 +15,10 @@ export default function Form ({ states, submitButton = 'Enviar', onSubmit }: For
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.form_container}>
         {states.map((field) => (
-          <input {...field} key={field.name} className={styles.form_container_field} />
+          <div className={styles.form_container_fields} key={field.name}>
+            <label htmlFor={field.name}>{field.placeholder}</label>
+            <input {...field}  className={styles.form_container_fields_input} id={field.name}/>
+          </div>
         ))}
       </div>
 
