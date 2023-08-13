@@ -1,18 +1,23 @@
 'use client'
 
-import axios from 'axios'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 // import { ValidatedErrors } from '@/types/errors/validatedErrors'
 import { Form } from '@components/index'
 import { registerFields } from '@constants/FormFields'
 import { registerSchema } from '@constants/FormSchemas'
 import { type CreateUserDTO, type RegisterFieldValues } from '@/types'
+import { RegisterService } from '@services/Register'
 import styles from './Register.module.scss'
 
 export default function Register (): JSX.Element {
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const router = useRouter()
-  const handleSubmit = (data: RegisterFieldValues): any => {
+
+  const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
+    setIsSubmitted(true)
     const { name, lastname, surname, email, password, maritalStatus, city, birthdate, activity1, activity2, activity3 } = data
     const payload: CreateUserDTO = {
       nombre: name,
@@ -27,15 +32,21 @@ export default function Register (): JSX.Element {
       actividad2: activity2,
       actividad3: activity3
     }
-    // const data = Object.assign({}, ...fieldsData)
 
-    axios.post('http://localhost:8000/api/auth/register', payload)
-      .then((response) => {
-        router.push('/')
-      }).catch((error) => {
-        console.log(error)
-        // const errors: ValidatedErrors = JSON.parse(error.response.data.message)
-      })
+    toast.promise(RegisterService.addUser(payload), {
+      loading: 'Registrando usuario...',
+      success: () => {
+        setTimeout(() => {
+          router.push('/')
+        }, 1000)
+        return 'Usuario registrado con éxito'
+      },
+      error: (err: any) => {
+        const errors = Object.values(JSON.parse(err.response.data)).join(', ')
+        setIsSubmitted(false)
+        return `Ocurrió un error al intentar registrar: ${errors}`
+      }
+    })
   }
 
   return (
@@ -47,6 +58,7 @@ export default function Register (): JSX.Element {
         onSubmit={handleSubmit}
         schema={registerSchema}
         className={styles.register_form}
+        isSubmitDisabled={isSubmitted}
       />
 
     </section>

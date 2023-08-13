@@ -15,15 +15,17 @@ export interface FormProps {
   submitButton?: string
   onSubmit: (values) => any
   className?: string
+  isSubmitDisabled?: boolean
 }
 
 export interface ButtonProps {
-  props: {
-    type: 'reset' | 'button'
-    onClick: () => void
-  }
+  onClick?: () => void
+  type: 'reset' | 'button' | 'submit'
   className?: string
   children: React.ReactNode
+  props: {
+    [key: string]: any
+  }
 }
 
 export interface LoginFieldValues {
