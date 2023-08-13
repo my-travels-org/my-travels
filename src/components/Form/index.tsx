@@ -4,6 +4,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
+import { Button } from '@components/index'
 import { FormProps } from '@/types'
 import styles from './Form.module.scss'
 
@@ -12,7 +13,8 @@ export default function Form ({
   submitButton = 'Enviar',
   schema,
   onSubmit: handleFormSubmit,
-  className = ''
+  className = '',
+  isSubmitDisabled = false
 }: FormProps): JSX.Element {
   const {
     register,
@@ -57,7 +59,13 @@ export default function Form ({
         ))}
       </div>
 
-      <button className={styles.form_button} type='submit'>{submitButton}</button>
+      <Button
+        className={styles.form_button}
+        type='submit'
+        props={{ disabled: isSubmitDisabled }}
+      >
+        {submitButton}
+      </Button>
     </form>
   )
 }

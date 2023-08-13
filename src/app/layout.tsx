@@ -1,5 +1,9 @@
+'use client'
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Toaster } from 'sonner'
+
 import '@styles/global.scss'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,6 +23,7 @@ export default function RootLayout ({
     <html lang='en'>
       <body className={inter.className}>
         <main>
+          <Toaster position='top-center' closeButton duration={2500} visibleToasts={3} />
           {children}
         </main>
       </body>
