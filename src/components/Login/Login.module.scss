@@ -1,19 +1,30 @@
 @use "@styles/variables.scss";
 
-.title,
-.description {
-  text-align: center;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-  width: 100%;
-}
-.links {
+.login{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 2rem;
-  gap: 1rem;
+  justify-content: center;
+  height: 100dvh;
+  gap: 2rem;
+  &_title {
+    text-align: center;
+    font-size: 3.4rem;
+  }
+  &_description {
+    text-align: center;
+  }
+  &_form {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    width: 100%;
+    &_links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 2rem;
+      gap: 1rem;
+    }
+  }
 }

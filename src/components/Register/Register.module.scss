@@ -1,4 +1,9 @@
-.title {
-  text-align: center;
-  margin: 2rem 0;
+.register{
+  &_title {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  &_form{
+    width: 100%;
+  }
 }
