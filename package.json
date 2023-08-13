@@ -10,6 +10,7 @@
     "lint": "ts-standard"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.2.0",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
@@ -19,16 +20,17 @@
     "next": "13.4.10",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.1.6"
+    "react-hook-form": "^7.45.4",
+    "typescript": "5.1.6",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "sass": "1.64.0",
-    "ts-standard": "^12.0.2"
+    "ts-standard": "12.0.2"
   },
   "eslintConfig": {
     "extends": [
-      "./node_modules/ts-standard/eslintrc.json",
-      "next/core-web-vitals"
+      "./node_modules/ts-standard/eslintrc.json"
     ],
     "parserOptions": {
       "project": "./tsconfig.json",
