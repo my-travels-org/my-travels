@@ -1,21 +1,33 @@
 'use client'
 
-// import axios from 'axios'
+import axios from 'axios'
 
 import { Form } from '@components/index'
 import { registerFields } from '@constants/FormFields'
 import { registerSchema } from '@constants/FormSchemas'
-import { RegisterFieldValues } from '@/types'
+import { type CreateUserDTO, type RegisterFieldValues } from '@/types'
 import styles from './Register.module.scss'
 
 export default function Register (): JSX.Element {
-  const handleSubmit = (data: RegisterFieldValues[]): any => {
-    console.log(data)
-
+  const handleSubmit = (data: RegisterFieldValues): any => {
+    const { name, lastname, surname, email, password, maritalStatus, city, birthdate, activity1, activity2, activity3 } = data
+    const payload: CreateUserDTO = {
+      nombre: name,
+      apellido_p: lastname,
+      apellido_m: surname,
+      correo: email,
+      password,
+      estado_civil: maritalStatus,
+      ciudad: city,
+      fecha_nacimiento: birthdate.toISOString().slice(0, 10),
+      actividad1: activity1,
+      actividad2: activity2,
+      actividad3: activity3
+    }
     // const data = Object.assign({}, ...fieldsData)
 
-    // axios.post('http://localhost:8000/usuario/guardarUsuario/', data)
-    // .then((response) => console.log(response)).catch((error) => console.log(error))
+    axios.post('http://localhost:8000/api/auth/register', payload)
+      .then((response) => console.log(response)).catch((error) => console.log(error))
   }
 
   return (

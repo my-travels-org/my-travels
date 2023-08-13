@@ -39,8 +39,22 @@ export interface RegisterFieldValues {
   password: string
   maritalStatus: string // should be an enum
   city: string
-  birthdate: string
-  activity1: string // should be an enum
-  activity2: string // should be an enum
-  activity3: string // should be an enum
+  birthdate: Date
+  activity1: number // should be an enum
+  activity2: number // should be an enum
+  activity3: number // should be an enum
+}
+
+export interface CreateUserDTO {
+  nombre: string
+  apellido_p: string
+  apellido_m: string
+  correo: string
+  password: string
+  estado_civil: string
+  ciudad: string
+  fecha_nacimiento: string
+  actividad1: number
+  actividad2: number
+  actividad3: number
 }
