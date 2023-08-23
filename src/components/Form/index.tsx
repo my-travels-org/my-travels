@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import { useEffect } from 'react'
+
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -14,9 +15,11 @@ export default function Form ({
   schema,
   onSubmit: handleFormSubmit,
   className = '',
-  isSubmitDisabled = false
+  isSubmitDisabled = false,
+  initialValues = {}
 }: FormProps): JSX.Element {
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors }
@@ -26,6 +29,11 @@ export default function Form ({
   })
 
   const onSubmit = (data: any): void => handleFormSubmit(data)
+
+  useEffect(() => {
+    if (Object.keys(initialValues).length === 0) return
+    reset(initialValues)
+  }, [])
 
   return (
     <form

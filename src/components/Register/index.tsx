@@ -1,23 +1,21 @@
 'use client'
 
+import axios from 'axios'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-// import { ValidatedErrors } from '@/types/errors/validatedErrors'
 import { Form } from '@components/index'
-import { registerFields } from '@constants/FormFields'
-import { registerSchema } from '@constants/FormSchemas'
+import { registerFields, registerSchema, initialValues } from '@constants/RegisterForm'
 import { type CreateUserDTO, type RegisterFieldValues } from '@/types'
-import { RegisterService } from '@services/Register'
 import styles from './Register.module.scss'
 
 export default function Register (): JSX.Element {
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const router = useRouter()
+  // const router = useRouter()
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
-    setIsSubmitted(true)
+    // setIsSubmitted(true)
     const { name, lastname, surname, email, password, maritalStatus, city, birthdate, activity1, activity2, activity3 } = data
     const payload: CreateUserDTO = {
       nombre: name,
@@ -33,11 +31,12 @@ export default function Register (): JSX.Element {
       actividad3: activity3
     }
 
-    toast.promise(RegisterService.addUser(payload), {
+    toast.promise(axios.post('/api/auth/signup', payload), {
       loading: 'Registrando usuario...',
-      success: () => {
+      success: (data) => {
         setTimeout(() => {
-          router.push('/')
+          console.log(data)
+          // router.push('/')
         }, 1000)
         return 'Usuario registrado con éxito'
       },
@@ -59,6 +58,7 @@ export default function Register (): JSX.Element {
         schema={registerSchema}
         className={styles.register_form}
         isSubmitDisabled={isSubmitted}
+        initialValues={initialValues}
       />
 
     </section>

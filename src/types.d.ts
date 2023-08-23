@@ -16,6 +16,9 @@ export interface FormProps {
   onSubmit: (values) => any
   className?: string
   isSubmitDisabled?: boolean
+  initialValues?: {
+    [key: string]: any
+  }
 }
 
 export interface ButtonProps {
@@ -59,4 +62,13 @@ export interface CreateUserDTO {
   actividad1: number
   actividad2: number
   actividad3: number
+}
+
+export interface LoginUserDTO {
+  email: string
+  password: string
+}
+
+export interface User {
+  [key: string]: string
 }

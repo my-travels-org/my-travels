@@ -3,8 +3,7 @@
 import Link from 'next/link'
 
 import { Form } from '@components/index'
-import { loginFields } from '@constants/FormFields'
-import { loginSchema } from '@constants/FormSchemas'
+import { loginFields, loginSchema } from '@constants/LoginForm'
 import { type LoginFieldValues } from '@/types'
 import styles from './Login.module.scss'
 
