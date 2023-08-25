@@ -1,21 +1,24 @@
 'use client'
 
-import axios from 'axios'
-import { useState } from 'react'
-// import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
 import { Form } from '@components/index'
+import { userService } from '@services/User'
 import { registerFields, registerSchema, initialValues } from '@constants/RegisterForm'
 import { type CreateUserDTO, type RegisterFieldValues } from '@/types'
 import styles from './Register.module.scss'
 
 export default function Register (): JSX.Element {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
   const [isSubmitted, setIsSubmitted] = useState(false)
-  // const router = useRouter()
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
-    // setIsSubmitted(true)
+    setIsSubmitted(true)
     const { name, lastname, surname, email, password, maritalStatus, city, birthdate, activity1, activity2, activity3 } = data
     const payload: CreateUserDTO = {
       nombre: name,
@@ -31,13 +34,15 @@ export default function Register (): JSX.Element {
       actividad3: activity3
     }
 
-    toast.promise(axios.post('/api/auth/signup', payload), {
+    toast.promise(userService.create(payload), {
       loading: 'Registrando usuario...',
-      success: (data) => {
-        setTimeout(() => {
-          console.log(data)
-          // router.push('/')
-        }, 1000)
+      success: async () => {
+        await signIn('credentials', {
+          email,
+          password,
+          redirect: false
+        })
+        router.push('/')
         return 'Usuario registrado con éxito'
       },
       error: (err: any) => {
@@ -47,6 +52,11 @@ export default function Register (): JSX.Element {
       }
     })
   }
+  console.log(session, status)
+
+  useEffect(() => {
+    router.prefetch('/')
+  }, [])
 
   return (
     <section className={styles.register}>

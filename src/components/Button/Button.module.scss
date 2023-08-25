@@ -8,6 +8,7 @@
   background-color: variables.$secondary-blue-color;
   color: white;
   font-family: inherit;
+  cursor: pointer;
   &:disabled{
     opacity: 0.5;
     cursor: not-allowed;

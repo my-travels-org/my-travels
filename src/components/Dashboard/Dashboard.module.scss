@@ -1,0 +1,9 @@
+.dashboard{
+  &_nav{
+    display: flex;
+    justify-content: space-between;
+    &_signout {
+      width: 80px;
+    }
+  }
+}
