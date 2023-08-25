@@ -16,14 +16,17 @@ export interface FormProps {
   onSubmit: (values) => any
   className?: string
   isSubmitDisabled?: boolean
+  initialValues?: {
+    [key: string]: any
+  }
 }
 
 export interface ButtonProps {
-  onClick?: () => void
-  type: 'reset' | 'button' | 'submit'
+  onClick?: any
+  type?: 'reset' | 'button' | 'submit'
   className?: string
   children: React.ReactNode
-  props: {
+  props?: {
     [key: string]: any
   }
 }
@@ -53,6 +56,25 @@ export interface CreateUserDTO {
   apellido_m: string
   correo: string
   password: string
+  estado_civil: string
+  ciudad: string
+  fecha_nacimiento: string
+  actividad1: number
+  actividad2: number
+  actividad3: number
+}
+
+export interface LoginUserDTO {
+  email: string
+  password: string
+}
+
+export interface User {
+  id: number
+  nombre: string
+  apellido_p: string
+  apellido_m: string
+  correo: string
   estado_civil: string
   ciudad: string
   fecha_nacimiento: string

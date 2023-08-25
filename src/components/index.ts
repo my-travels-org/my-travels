@@ -1,6 +1,8 @@
+
+import Button from './Button'
+import Dashboard from './Dashboard'
+import Form from './Form'
 import Login from './Login'
 import Register from './Register'
-import Form from './Form'
-import Button from './Button'
 
-export { Login, Register, Form, Button }
+export { Button, Dashboard, Form, Login, Register }

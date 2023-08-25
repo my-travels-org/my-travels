@@ -1,20 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
-// import { ValidatedErrors } from '@/types/errors/validatedErrors'
 import { Form } from '@components/index'
-import { registerFields } from '@constants/FormFields'
-import { registerSchema } from '@constants/FormSchemas'
+import { userService } from '@services/User'
+import { registerFields, registerSchema, initialValues } from '@constants/RegisterForm'
 import { type CreateUserDTO, type RegisterFieldValues } from '@/types'
-import { RegisterService } from '@services/Register'
 import styles from './Register.module.scss'
 
 export default function Register (): JSX.Element {
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const { data: session, status } = useSession()
   const router = useRouter()
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
     setIsSubmitted(true)
@@ -33,12 +34,15 @@ export default function Register (): JSX.Element {
       actividad3: activity3
     }
 
-    toast.promise(RegisterService.addUser(payload), {
+    toast.promise(userService.create(payload), {
       loading: 'Registrando usuario...',
-      success: () => {
-        setTimeout(() => {
-          router.push('/')
-        }, 1000)
+      success: async () => {
+        await signIn('credentials', {
+          email,
+          password,
+          redirect: false
+        })
+        router.push('/')
         return 'Usuario registrado con éxito'
       },
       error: (err: any) => {
@@ -48,6 +52,11 @@ export default function Register (): JSX.Element {
       }
     })
   }
+  console.log(session, status)
+
+  useEffect(() => {
+    router.prefetch('/')
+  }, [])
 
   return (
     <section className={styles.register}>
@@ -59,6 +68,7 @@ export default function Register (): JSX.Element {
         schema={registerSchema}
         className={styles.register_form}
         isSubmitDisabled={isSubmitted}
+        initialValues={initialValues}
       />
 
     </section>
