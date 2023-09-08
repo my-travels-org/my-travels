@@ -48,8 +48,7 @@ export default function Form ({
           return (
             <Fragment key={title}>
               {isStepper
-                ? (
-                    i === currentStep &&
+                ? (i === currentStep &&
                       <div className={styles.form_container_section}>
                         <Stepper
                           fields={fields}
@@ -64,7 +63,7 @@ export default function Form ({
                   )
                 : (
                     fields.map((field) => (
-                      <div key={title} className={styles.form_container_section}>
+                      <div key={`${title}-${field.id}`} className={styles.form_container_section}>
                         <Field
                           key={field.id}
                           field={field}

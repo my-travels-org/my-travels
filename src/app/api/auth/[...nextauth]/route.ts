@@ -18,7 +18,7 @@ const handler = NextAuth({
         const correo = credentials?.email
         const password = credentials?.password
 
-        const res = await fetch(`${process.env.SERVER_API as string}/auth/login`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API as string}/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
