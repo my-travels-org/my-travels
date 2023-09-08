@@ -49,17 +49,17 @@ export default function Form ({
             <Fragment key={title}>
               {isStepper
                 ? (i === currentStep &&
-                      <div className={styles.form_container_section}>
-                        <Stepper
-                          fields={fields}
-                          title={title}
-                          step={i}
-                          maxSteps={sections.length - 1}
-                          handleStep={handleStep}
-                          register={register}
-                          errors={errors}
-                        />
-                      </div>
+                  <div className={styles.form_container_section}>
+                    <Stepper
+                      fields={fields}
+                      title={title}
+                      step={i}
+                      maxSteps={sections.length - 1}
+                      handleStep={handleStep}
+                      register={register}
+                      errors={errors}
+                    />
+                  </div>
                   )
                 : (
                     fields.map((field) => (
@@ -81,7 +81,7 @@ export default function Form ({
       </div>
 
       <Button
-        className={styles.form_button}
+        className={`${styles.form_button} ${isStepper && currentStep !== sections.length - 1 ? styles.form_button_hidden : ''}`}
         type='submit'
         props={{ disabled: isSubmitDisabled }}
       >
