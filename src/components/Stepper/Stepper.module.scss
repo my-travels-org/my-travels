@@ -1,0 +1,26 @@
+@use "@styles/variables";
+
+.stepper {
+  display: grid;
+  place-items: center;
+  gap: 1.5rem;
+  &_field {
+    width: 100%;
+  }
+  &_buttons {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    grid-template-areas: "back next";
+    margin-top: 1rem;
+    &_btn {
+      &_back {
+        grid-area: back;
+      }
+      &_next {
+        grid-area: next;
+      }
+    }
+  }
+}

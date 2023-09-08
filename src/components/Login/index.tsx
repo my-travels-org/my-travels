@@ -7,9 +7,9 @@ import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
 import { Form } from '@components/index'
-import { loginFields, loginSchema } from '@constants/LoginForm'
-import { type LoginFieldValues } from '@/types'
+import { loginSections, loginSchema } from '@constants/LoginForm'
 import styles from './Login.module.scss'
+import { LoginUserDTO } from '@/types/User'
 
 export default function Login (): JSX.Element {
   const { data: session, status } = useSession()
@@ -17,14 +17,16 @@ export default function Login (): JSX.Element {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
-  const handleSubmit = async (values: LoginFieldValues): Promise<void> => {
+  const handleSubmit = async (values: LoginUserDTO): Promise<void> => {
     const res = await signIn('credentials', {
       email: values.email,
       password: values.password,
       redirect: false
     })
 
-    if (res?.error !== null) { toast.error(res?.error) } else setIsLoggedIn(true)
+    if (res?.error !== null) {
+      toast.error(res?.error)
+    } else setIsLoggedIn(true)
   }
 
   useEffect(() => {
@@ -44,23 +46,25 @@ export default function Login (): JSX.Element {
     <>
       {status === 'unauthenticated' && (
         <section className={styles.login}>
-          <h1 className={styles.login_title}>Bienvenido a MyTravels.</h1>
-          <span className={styles.login_description}>
-            Inicia sesión con tu correo y contraseña.
-          </span>
+          <div className={styles.login_left}>
+            <h1 className={styles.login_left_title}>Bienvenido a MyTravels.</h1>
+          </div>
           <div className={styles.login_form}>
+            <span className={styles.login_description}>
+              <strong>Inicia sesión con tu correo y contraseña.</strong>
+            </span>
             <Form
-              fields={loginFields}
+              sections={loginSections}
               submitButton='Iniciar sesión'
               onSubmit={handleSubmit}
               schema={loginSchema}
             />
             <div className={styles.login_form_links}>
-              <span>
+              <span className={styles.login_form_links_element}>
                 ¿No tienes una cuenta? <Link href='/register'>Regístrate</Link>
               </span>
               <span>
-                <Link href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
+                <Link className={styles.login_form_links_element} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
               </span>
             </div>
           </div>

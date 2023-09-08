@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { ButtonProps } from '@/types'
+import { Props } from '@/types/Button'
 import styles from './Button.module.scss'
 
-export default function Button ({ props = {}, children, className = '', onClick = () => {}, type = 'button' }: ButtonProps): React.ReactNode {
+export default function Button ({ props = {}, children, className = '', onClick = () => {}, type = 'button' }: Props): React.ReactNode {
   return (
     <button
       className={`${styles.button} ${className}`}
