@@ -1,0 +1,25 @@
+@use '@styles/variables';
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  &_label{
+    padding-left: 4px;
+  }
+  &_input {
+    background-color: variables.$primary-blue-color;
+    padding: 1rem;
+    border-radius: 2rem;
+    border: none;
+    color: black;
+    font-family: inherit;
+    &::placeholder {
+      color: variables.$primary-background-color;
+    }
+  }
+  &_error{
+    font-weight: 500;
+    color: red;
+  }
+}

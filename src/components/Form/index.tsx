@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, Fragment } from 'react'
-
+import { Fragment, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Button } from '@components/index'
-import { FormProps } from '@/types'
+import { Button, Stepper, Field } from '@components/index'
+import { Props } from '@/types/Form'
 import styles from './Form.module.scss'
 
 export default function Form ({
@@ -16,8 +15,11 @@ export default function Form ({
   onSubmit: handleFormSubmit,
   className = '',
   isSubmitDisabled = false,
-  initialValues = {}
-}: FormProps): JSX.Element {
+  initialValues = {},
+  isStepper = false,
+  currentStep = 0,
+  handleStep = (_step: number): void => {}
+}: Props): JSX.Element {
   const {
     reset,
     register,
@@ -42,35 +44,41 @@ export default function Form ({
       className={`${styles.form} ${className}`}
     >
       <div className={styles.form_container}>
-        {sections.map(({ fields, title }) => (
-          <Fragment key={title}>
+        {sections.map(({ fields, title }, i) => {
+          return (
+            <Fragment key={title}>
+              {isStepper
+                ? (
+                    i === currentStep &&
+                      <div className={styles.form_container_section}>
+                        <Stepper
+                          fields={fields}
+                          title={title}
+                          step={i}
+                          maxSteps={sections.length - 1}
+                          handleStep={handleStep}
+                          register={register}
+                          errors={errors}
+                        />
+                      </div>
+                  )
+                : (
+                    fields.map((field) => (
+                      <div key={title} className={styles.form_container_section}>
+                        <Field
+                          key={field.id}
+                          field={field}
+                          register={register}
+                          errors={errors}
+                        />
 
-            {fields.map(({ id, label, props, ...field }) => (
-              <div className={styles.form_container_field} key={id}>
-                <label
-                  htmlFor={id}
-                  className={styles.form_container_field_label}
-                >
-                  {label}
-                </label>
-                <input
-                  {...field}
-                  {...register(id)}
-                  {...props}
-                  name={id}
-                  id={id}
-                  className={styles.form_container_field_input}
-                />
-                {(errors[id] !== undefined) && (
-                  <span className={styles.form_container_field_error}>
-                    {errors[id]?.message as string}
-                  </span>
-                )}
-              </div>
-            ))}
+                      </div>
 
-          </Fragment>
-        ))}
+                    ))
+                  )}
+            </Fragment>
+          )
+        })}
       </div>
 
       <Button

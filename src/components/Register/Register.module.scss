@@ -1,7 +1,12 @@
 .register{
+  display: flex;
+  height: 100dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
   &_title {
     text-align: center;
-    margin: 2rem 0;
   }
   &_form{
     width: 100%;
