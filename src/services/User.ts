@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-import { type LoginUserDTO, type CreateUserDTO, User } from '@/types'
+import { type LoginUserDTO, type CreateUserDTO, User } from '@/types/User'
 
-const baseUrl = process.env.NEXT_PUBLIC_SERVER_API ?? ''
+const baseUrl = process.env.SERVER_API ?? ''
 
 const create = async (user: CreateUserDTO): Promise<User> => {
   return await axios.post(`${baseUrl}/auth/register`, user)

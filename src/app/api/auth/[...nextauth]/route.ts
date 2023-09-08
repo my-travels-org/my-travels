@@ -18,13 +18,15 @@ const handler = NextAuth({
         const correo = credentials?.email
         const password = credentials?.password
 
-        const res = await fetch('http://127.0.0.1:8000/api/auth/login', {
+        const res = await fetch(`${process.env.SERVER_API as string}/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ correo, password })
         })
+
+        console.log(res)
 
         if (!res.ok) {
           throw new Error('Credenciales inválidas.')

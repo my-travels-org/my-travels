@@ -1,14 +1,14 @@
 import * as yup from 'yup'
 
-import { Section } from '@/types'
+import { Section } from '@/types/Form'
 import { email, required } from '@constants/YupErrors'
 
 export const loginSections: Section[] = [
   {
     title: 'Iniciar sesión',
     fields: [
-      { id: 'email', label: 'Correo electrónico', type: 'email', required: true },
-      { id: 'password', label: 'Contraseña', type: 'password', required: true }
+      { id: 'email', label: 'Correo electrónico', type: 'email' },
+      { id: 'password', label: 'Contraseña', type: 'password' }
     ]
   }
 ]

@@ -8,8 +8,8 @@ import { toast } from 'sonner'
 
 import { Form } from '@components/index'
 import { loginSections, loginSchema } from '@constants/LoginForm'
-import { type LoginFieldValues } from '@/types'
 import styles from './Login.module.scss'
+import { LoginUserDTO } from '@/types/User'
 
 export default function Login (): JSX.Element {
   const { data: session, status } = useSession()
@@ -17,14 +17,16 @@ export default function Login (): JSX.Element {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
-  const handleSubmit = async (values: LoginFieldValues): Promise<void> => {
+  const handleSubmit = async (values: LoginUserDTO): Promise<void> => {
     const res = await signIn('credentials', {
       email: values.email,
       password: values.password,
       redirect: false
     })
 
-    if (res?.error !== null) { toast.error(res?.error) } else setIsLoggedIn(true)
+    if (res?.error !== null) {
+      toast.error(res?.error)
+    } else setIsLoggedIn(true)
   }
 
   useEffect(() => {
