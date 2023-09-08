@@ -16,8 +16,8 @@ export default function Stepper ({ fields, title, step, maxSteps, errors, regist
         />
       ))}
       <div className={styles.stepper_buttons}>
-        {step > 0 && <Button type='button' onClick={() => handleStep(-1)}>Anterior</Button>}
-        {step < maxSteps && <Button type='button' onClick={() => handleStep(1)}>Siguiente</Button>}
+        {step > 0 && <Button type='button' className={`${styles.stepper_buttons_btn} ${styles.stepper_button_btn_back}`} onClick={() => handleStep(-1)}>Anterior</Button>}
+        {step < maxSteps && <Button type='button' className={`${styles.stepper_buttons_btn} ${styles.stepper_buttons_btn_next}`} onClick={() => handleStep(1)}>Siguiente</Button>}
       </div>
     </div>
   )
