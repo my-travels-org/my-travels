@@ -6,18 +6,22 @@
   align-items: center;
   justify-content: center;
   height: 100dvh;
-  gap: 2rem;
-  &_title {
-    text-align: center;
-    font-size: 3.4rem;
+  gap: 3rem;
+  &_left{
+    &_title {
+      text-align: center;
+      font-size: 3.4rem;
+      color: variables.$primary-green-color;
+    }
   }
   &_description {
+    margin-bottom: 30px;
     text-align: center;
+    color: variables.$primary-blue-color;
   }
   &_form {
     display: flex;
     flex-direction: column;
-    gap: 5rem;
     width: 100%;
     &_links {
       display: flex;
@@ -25,6 +29,44 @@
       align-items: center;
       padding: 0 2rem;
       gap: 1rem;
+      &_element{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .login{
+    &_form{
+      width: 47.5%;
+      &_links{
+        &_element{
+          flex-direction: row;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login{
+    flex-direction: row;
+    gap: 8rem;
+    &_form{
+      width: 40%;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .login{
+    gap: 20rem;
+    &_form{
+      width: 25%;
     }
   }
 }

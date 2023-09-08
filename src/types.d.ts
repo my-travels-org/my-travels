@@ -9,8 +9,13 @@ export interface Field {
     [key: string]: any
   }
 }
-export interface FormProps {
+
+export interface Section {
+  title: string
   fields: Field[]
+}
+export interface FormProps {
+  sections: Section[]
   schema: yup.ObjectSchema<any>
   submitButton?: string
   onSubmit: (values) => any

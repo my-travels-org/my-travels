@@ -7,12 +7,12 @@ import { toast } from 'sonner'
 
 import { Form } from '@components/index'
 import { userService } from '@services/User'
-import { registerFields, registerSchema, initialValues } from '@constants/RegisterForm'
+import { registerSections, registerSchema, initialValues } from '@constants/RegisterForm'
 import { type CreateUserDTO, type RegisterFieldValues } from '@/types'
 import styles from './Register.module.scss'
 
 export default function Register (): JSX.Element {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
 
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -52,25 +52,33 @@ export default function Register (): JSX.Element {
       }
     })
   }
-  console.log(session, status)
 
   useEffect(() => {
     router.prefetch('/')
   }, [])
 
+  useEffect(() => {
+    if (status === 'authenticated') router.replace('/')
+  }, [status])
+
   return (
     <section className={styles.register}>
-      <h1 className={styles.register_title}>Regístrate.</h1>
-      <Form
-        fields={registerFields}
-        submitButton='Registrarme'
-        onSubmit={handleSubmit}
-        schema={registerSchema}
-        className={styles.register_form}
-        isSubmitDisabled={isSubmitted}
-        initialValues={initialValues}
-      />
 
+      {status === 'unauthenticated' &&
+        (
+          <>
+            <h1 className={styles.register_title}>Regístrate.</h1>
+            <Form
+              sections={registerSections}
+              submitButton='Registrarme'
+              onSubmit={handleSubmit}
+              schema={registerSchema}
+              className={styles.register_form}
+              isSubmitDisabled={isSubmitted}
+              initialValues={initialValues}
+            />
+          </>
+        )}
     </section>
   )
 }
