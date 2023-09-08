@@ -11,7 +11,8 @@ export interface Props {
     [key: string]: any
   }
   isStepper?: boolean
-  stepper?: number
+  currentStep?: number
+  handleStep?: (step: number) => void
 }
 
 export interface Section {

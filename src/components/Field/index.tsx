@@ -1,10 +1,10 @@
 import { Props } from '@/types/Field'
 import styles from './Field.module.scss'
 
-export default function Field ({ field, register, errors }: Props): JSX.Element {
+export default function Field ({ field, register, errors, className = '' }: Props): JSX.Element {
   const { id } = field
   return (
-    <div className={styles.field} key={id}>
+    <div className={`${styles.field} ${className}`} key={id}>
       <label
         htmlFor={id}
         className={styles.field_label}

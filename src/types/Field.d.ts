@@ -11,4 +11,5 @@ export interface Props {
   field: Field
   register: UseFormRegister<any>
   errors: FieldErrors<any>
+  className?: string
 }

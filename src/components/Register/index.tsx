@@ -16,6 +16,7 @@ export default function Register (): JSX.Element {
   const router = useRouter()
 
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [step, setStep] = useState(0)
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
     setIsSubmitted(true)
@@ -53,6 +54,10 @@ export default function Register (): JSX.Element {
     })
   }
 
+  const handleStep = (step: number): void => {
+    setStep((prev) => prev + step)
+  }
+
   useEffect(() => {
     router.prefetch('/')
   }, [])
@@ -63,7 +68,6 @@ export default function Register (): JSX.Element {
 
   return (
     <section className={styles.register}>
-
       {status === 'unauthenticated' &&
         (
           <>
@@ -77,6 +81,8 @@ export default function Register (): JSX.Element {
               isSubmitDisabled={isSubmitted}
               initialValues={initialValues}
               isStepper
+              currentStep={step}
+              handleStep={handleStep}
             />
           </>
         )}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -17,7 +17,8 @@ export default function Form ({
   isSubmitDisabled = false,
   initialValues = {},
   isStepper = false,
-  stepper = 0
+  currentStep = 0,
+  handleStep = (_step: number): void => {}
 }: Props): JSX.Element {
   const {
     reset,
@@ -43,19 +44,41 @@ export default function Form ({
       className={`${styles.form} ${className}`}
     >
       <div className={styles.form_container}>
-        {sections.map(({ fields, title }) => (
-          <div key={title} className={styles.form_container_section}>
-            {isStepper
-              ? (
-                <Stepper fields={fields} step={stepper} />
-                )
-              : (
-                  fields.map((field) => (
-                    <Field key={field.id} field={field} register={register} errors={errors} />
-                  ))
-                )}
-          </div>
-        ))}
+        {sections.map(({ fields, title }, i) => {
+          return (
+            <Fragment key={title}>
+              {isStepper
+                ? (
+                    i === currentStep &&
+                      <div className={styles.form_container_section}>
+                        <Stepper
+                          fields={fields}
+                          title={title}
+                          step={i}
+                          maxSteps={sections.length - 1}
+                          handleStep={handleStep}
+                          register={register}
+                          errors={errors}
+                        />
+                      </div>
+                  )
+                : (
+                    fields.map((field) => (
+                      <div key={title} className={styles.form_container_section}>
+                        <Field
+                          key={field.id}
+                          field={field}
+                          register={register}
+                          errors={errors}
+                        />
+
+                      </div>
+
+                    ))
+                  )}
+            </Fragment>
+          )
+        })}
       </div>
 
       <Button
