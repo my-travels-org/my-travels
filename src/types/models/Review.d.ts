@@ -1,38 +1,38 @@
+import internal from "stream"
+import { number } from "yup"
+import { Climates} from "../Climates"
+import { Activities } from "../Activities"
+import { Zones } from "../Zones"
+import { ambiente_alijamiento } from "../Ambiente_alojamiento"
+
+
 export interface GetResponseReviews{
-  message: string 
-  rewiews: Review[]
+ 
+  reviews: Review[]
+}
+
+export interface GetResponseOneReview{
+  review: Review[]
 }
 
 export interface Review {
-  /*destino: string
-  estado: string
-  ciudad: string
-  actividad: string
-
-  calificacion: number
-  cantidad_gastada: string
-  created_at: Date
-  fecha_visita: Date
-  id: number
-  id_destino: number
-  id_usuario: number
-  motivo: string
-  resenia: string
-  updated_at: Date*/
-
-
-  destino: string
-  estado: string
-  ciudad: string
-  actividad: string
-  calificacion_alojamiento: number
-  nombre: string
-  calle: string
-  numero: string
-  clima: string
-  fecha_visita: Date
-  resenia: string
-  calificacion_destino: number
-  apellido_p: string
-  apellido_m: string
+  actividades: Activities[]
+  "alojamiento-nombre"?: string
+  "alojamiento-numero"?: number
+  "alojamiento-calle"?: string
+  ambiente_alojamiento?: ambiente_alijamiento[]
+  calificacion_alojamiento?: number
+  climas: Climates[]
+  "destino-calificacion_destino": number
+  "destino-ciudad": string
+  'destino-destino': string
+  "destino-estado": string
+  "destino-fecha_visita": Date
+  'destino-id': number
+  "destino-resenia": string
+  "resenia-id": number
+  "usuario-apellido_m": string
+  "usuario-apellido_p": string
+  "usuario-nombre": string
+  zonas: Zones[]
 }

@@ -1,40 +1,56 @@
 @use "@styles/variables.scss";
 .container {
-    width: 80%;
-    height: 320px;
-    margin: 20px 25px 20px ;
+    width: 90%;
+    height: 70vh;
+    margin: 20px 5% 25px ;
     background-color: variables.$secondary-background-color;
-    border-color: variables.$secondary-border-color;
     align-items: center;
     justify-content: center;
+    border-radius: 20px;
+    transition: 400ms all ease; 
+    
+
+}
+.container:hover {
+    filter: brightness(0.8);
 }
 
+
 .tittle{
-   margin-left: 10px;
-    font-size: 1.3rem;
-    text-align: justify;
+   margin-top: 2%;
+    font-size: 2em bold;
+    text-align:center;
+    margin-bottom: 3%;
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    
 }
 .image { 
-    width: 95%;
-    height: 170px;
-    margin: 10px 10px 5px ;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: aqua;
 }
 
 .review{
     width: 100%;
+    height: 15%;
+    max-height:15%;
     font-size: 12px;
     text-align: center;
     padding: 10px;
     font-weight: 400;
     line-height: 1.5rem;
+    overflow: hidden;
+    color: white;
+    
 
 }
-.rate{
-    margin-top: 5px;
-    margin-left: 15px;
-}
-.rate{
-    margin-top: 5px;
-    margin-left: 15px;
-    color: variables.$secondary-green-color;
+
+
+.button{
+    width: 60%;
+    margin:20px 20%;
 }

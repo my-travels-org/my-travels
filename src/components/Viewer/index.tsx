@@ -1,20 +1,33 @@
 'use client'
-
-import { Button } from '@components/index'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import Link from 'next/link' 
+import { Button, StarRating } from '@components/index'
+import Image from 'next/image'
 import styles from './Viewer.module.scss'
+import { Review } from '@/types/models/Review'
 
-export default function Viewer(props): JSX.Element {
+export interface ViewerProps {
+  review: Review
+}
+
+export default function Viewer ({review} :  ViewerProps ): JSX.Element {
+  
   return(
 
-
     <div className={styles.container} >
-      <p className={styles.tittle} > {props.tittle}</p>
-      <img className={styles.image} src='' />
-      <p className={styles.rate} > {props.rate} </p>
-      <p className={styles.review} > "{props.review}"</p>
-      <Button>Guardar</Button>
+      <Link key={review['destino-id']}  href={`/dashboard/${review['resenia-id']}`}>
+        <div className={styles.image}> 
+          <Image src="/next.svg" width={50} height={50} alt='30'/> 
+        </div>
+        {!review['alojamiento-nombre'] ? <h3 className={styles.tittle} > {review['destino-destino']}</h3>:
+        <p className={styles.tittle} > {review['destino-destino']} - {review['alojamiento-nombre']}</p> }
+        
+        <div> 
+        <StarRating rating={review['destino-calificacion_destino']} />
+         </div>
+        <p className={styles.Price} > {"$3,500.00"} </p>
+        <p className={styles.review} > "{review['destino-resenia'] }"</p>
+      </Link>
+      <Button className={styles.button}>Guardar</Button>
         </div>
     )
 }
