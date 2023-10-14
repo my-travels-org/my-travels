@@ -1,16 +1,13 @@
 @use "@styles/variables.scss";
 .text{
-    width:70px;
-    justify-content: center;
+    border-radius:15px; 
+    padding : 4px;
     background-color: variables.$secondary-green-color;
-    margin-left: 10px;
-    border-radius: 40%;
     
 }
 .container{
-    margin-left: 5%;
-    display:inline-flex;
-    text-align: center;
+    display:'flex';
+     flex-direction: 'column' ;
     
     
 }

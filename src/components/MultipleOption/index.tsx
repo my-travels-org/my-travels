@@ -1,28 +1,25 @@
 'use client'
 
-import { Climates } from '@/types/Climates'
+
 import styles from './MultipleOption.module.scss'
 
 
 export interface ViewerProps {
-    value: string
-    id_destino: number
-    id: number
+  value: string
+  id_1: number
+  id_2: number
 }
 
 export default function MultipleOption (value :  ViewerProps[]): JSX.Element {
   
   return(
 
-      <span className={styles.container}>
-                {value?.length && value.map((val,counter) =>{
-                  return(
-                    <p className={styles.text}>{val.value}</p>
-                  )
-                })}
-                
-              </span>
-    
+      
+    <div className={styles.container}>
+      { value?.length && value.map((val, counter) => (
+        <span key={counter} className={styles.text}>{val.value} </span>
+      ))}
+    </div>
       
      
     )

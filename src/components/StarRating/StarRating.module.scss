@@ -1,20 +1,21 @@
 @use "@styles/variables.scss";
 .rating {
-  margin-left: 10%;
+    margin-left: 10%;
     display: inline-block;
     font-size: 0; 
+    justify-content: center;
   }
   
   .star {
-    width: 20px; /* Tamaño de cada estrella */
-    height: 20px;
-    background-color: variables.$primary-background-color;
+    width: 25px; /* Tamaño de cada estrella */
+    height: 25px;
+    background-color: variables.$secondary-background-color;
     display: inline-block;
-    margin-right: 5px; /* Espacio entre las estrellas */
+    margin-right: 7px; /* Espacio entre las estrellas */
     
   }
   
   .filled {
-    background-color: #ffc107; /* Color de las estrellas llenas */
+    background: #ffc107; /* Color de las estrellas llenas */
     
   }
