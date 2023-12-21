@@ -1,0 +1,48 @@
+@use "@styles/variables";
+
+.button {
+  background: none;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  &_hamburger {
+    position: relative;
+    &::before,
+    &::after,
+    & {
+      width: 3rem;
+      height: 0.3rem;
+      border-radius: 1rem;
+      background-color: variables.$secondary-green-color;
+      transition: transform 250ms ease-in-out;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    &::before {
+      top: 9px;
+    }
+
+    &::after {
+      bottom: 9px;
+    }
+
+    &_open {
+      transform: rotate(0.625turn);
+
+      &::before {
+        transform: rotate(90deg) translateX(-9px);
+      }
+
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+}
