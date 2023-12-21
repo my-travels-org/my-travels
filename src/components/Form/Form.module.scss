@@ -24,6 +24,9 @@
     padding: 1rem;
     font-family: inherit;
     font-weight: bold;
+    &_hidden{
+      display: none;
+    }
   }
 }
 

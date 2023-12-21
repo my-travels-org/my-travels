@@ -1,0 +1,13 @@
+@use "@styles/variables.scss";
+.text{
+    border-radius:15px; 
+    padding : 4px;
+    background-color: variables.$secondary-green-color;
+    
+}
+.container{
+    display:'flex';
+     flex-direction: 'column' ;
+    
+    
+}
