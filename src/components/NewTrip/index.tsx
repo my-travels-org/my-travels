@@ -52,7 +52,7 @@ export default function NewTrip (): JSX.Element {
     Ambiente_de_alojamiento,
     } = initialState;
 
-  const handleChange = (nombre, value) => {
+  const handleChange = (nombre: any, value: any) => {
     setInitialState((prevState) => {
         return{
             ...prevState,
