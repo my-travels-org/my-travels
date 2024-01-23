@@ -78,6 +78,7 @@ export default function NewTrip2 (): JSX.Element {
           <>
             <h1 className={styles.register_title}>Cuentanos tu aventura.</h1>
             <Form
+            
               sections={registerSections}
               submitButton='Registrarme'
               onSubmit={handleSubmit}

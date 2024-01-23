@@ -20,7 +20,7 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'zoneType', label: 'Tipo de zona', type: 'number', required: true },
+      { id: 'zoneType', label: 'Tipo de zona', type: 'multiple', required: true },
       { id: 'motive', label: 'Motivo de vicita', type: 'number', required: true },
       { id: 'climate', label: 'Tipo de clima', type: 'number', required: true },
       { id: 'activities', label: 'Actividades realizadas', type: 'number', required: true }
@@ -37,7 +37,7 @@ export const registerSections: Section[] = [
   {
     fields: [
       { id: 'lodgingName', label: 'Nombre del alojamiento', type: 'text', required: true },
-      { id: 'coordinates', label: 'Ubicación del alojamiento', type: 'number', required: true },
+      { id: 'coordinates', label: 'Ubicación del alojamiento', type: 'coordinates', required: true },
       { id: 'lodgingType', label: 'Ambiente del alojamiento', type: 'number', required: true }
     ],
     title: 'alojamiento'
