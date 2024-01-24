@@ -3,27 +3,22 @@ import { Link } from '@/types/Constants'
 export const links: Link[] = [
   {
     name: 'Inicio',
-    path: '/',
-    requireAuth: false
+    path: '/'
   },
   {
     name: 'Categorías',
-    path: '/categories',
-    requireAuth: false
+    path: '/categories'
   },
   {
     name: 'Para ti',
-    path: '/for-you',
-    requireAuth: true
+    path: '/for-you'
   },
   {
     name: 'Descubre',
-    path: '/discover',
-    requireAuth: true
+    path: '/discover'
   },
   {
     name: 'Mis viajes',
-    path: '/my-trips',
-    requireAuth: true
+    path: '/my-travels'
   }
 ]

@@ -30,14 +30,24 @@
     background-color: variables.$secondary-blue-color;
     will-change: transform, visibility;
     &_list{
-      height: 50%;
+      padding: 6rem 0;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
+      justify-content: space-between;
       &_element{
         font-size: 2.3rem;
+        
         &_link{
           color: white;
+          &_active{
+            color: variables.$primary-background-color;
+          
+          }
+          &:hover{
+            color: variables.$primary-background-color;
+            transition: all 250ms ease-in-out;
+          }
         }
       }
     }

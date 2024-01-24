@@ -1,18 +1,15 @@
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import useToggle from '@/hooks/useToggle'
 import styles from './Aside.module.scss'
 import Hamburger from '../Hamburger'
 import { links } from '@/constants/Links'
-import { useSession } from 'next-auth/react'
 
 export default function Aside (): JSX.Element {
   const { value, toggle } = useToggle()
-  const { status } = useSession()
+  const pathname = usePathname()
 
-  const renderLinks = links.filter(({ requireAuth }) => (
-    !requireAuth || (requireAuth && status === 'authenticated')
-  ))
   return (
     <>
       <aside className={`${styles.aside} ${value ? styles.aside_open : ''}`}>
@@ -22,10 +19,10 @@ export default function Aside (): JSX.Element {
         <nav className={styles.aside_nav}>
           <ul className={styles.aside_nav_list}>
             {
-              renderLinks.map(({ name, path }) => {
+              links.map(({ name, path }) => {
                 return (
                   <li key={path} className={styles.aside_nav_list_element}>
-                    <Link href={path} className={styles.aside_nav_list_element_link} onClick={() => toggle()}>
+                    <Link href={path} className={`${styles.aside_nav_list_element_link} ${pathname === path ? styles.aside_nav_list_element_link_active : ''}`} onClick={() => toggle()}>
                       <h2>
                         {name}
                       </h2>
