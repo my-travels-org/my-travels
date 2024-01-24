@@ -1,13 +1,10 @@
-import useToggle from '@hooks/useToggle'
-
 import styles from './Hamburger.module.scss'
+import { HamburgerProps } from '@/types/Hamburger'
 
-export default function Hamburger (): JSX.Element {
-  const { value, toggle } = useToggle()
-
+export default function Hamburger ({ value, toggle }: HamburgerProps): JSX.Element {
   return (
-    <button className={styles.button} onClick={() => toggle()}>
+    <span className={styles.button} onClick={() => toggle()}>
       <div className={`${styles.button_hamburger} ${value ? styles.button_hamburger_open : ''}`} />
-    </button>
+    </span>
   )
 }
