@@ -20,5 +20,10 @@ export const links: Link[] = [
     name: 'Descubre',
     path: '/discover',
     requireAuth: true
+  },
+  {
+    name: 'Mis viajes',
+    path: '/my-trips',
+    requireAuth: true
   }
 ]
