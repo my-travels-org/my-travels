@@ -26,8 +26,6 @@ const handler = NextAuth({
           body: JSON.stringify({ correo, password })
         })
 
-        console.log(res)
-
         if (!res.ok) {
           throw new Error('Credenciales inválidas.')
         }
