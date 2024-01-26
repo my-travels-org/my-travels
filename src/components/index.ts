@@ -14,5 +14,7 @@ import Viewer from './Viewer'
 import Stepper from './Stepper'
 import StarRating from './StarRating'
 import MultipleOption from './MultipleOption'
+import AboutUs from './AboutUS'
+import Conditions from './Conditions'
 
-export { Button, Dashboard, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }
+export { Button, Dashboard, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption, AboutUs, Conditions }
