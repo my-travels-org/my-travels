@@ -6,7 +6,7 @@ export default function Footer (): JSX.Element {
     <footer className={styles.footer}>
       <div className={`conatiner ${styles.content}`}> 
         <nav className={styles.navigation}>
-            <Link href="/page">Inicio</Link>
+            <Link href="/">Inicio</Link>
             <Link href="/aboutUs">Nosotros</Link>
             <Link href="/terms-and-conditions">Terminos y Condiciones</Link>
         </nav>

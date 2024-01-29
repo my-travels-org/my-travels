@@ -16,5 +16,6 @@ import StarRating from './StarRating'
 import MultipleOption from './MultipleOption'
 import AboutUs from './AboutUS'
 import Conditions from './Conditions'
+import Search from './Search'
 
-export { Button, Dashboard, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption, AboutUs, Conditions }
+export { Button, Dashboard, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption, AboutUs, Conditions, Search }
