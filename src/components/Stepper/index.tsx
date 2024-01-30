@@ -3,8 +3,6 @@ import { Button, Field } from '@components/index'
 import styles from './Stepper.module.scss'
 
 export default function Stepper ({ fields, title, step, maxSteps, errors, register, handleStep }: Props): JSX.Element {
-  console.log(errors)
-  console.log(fields)
   return (
     <div className={styles.stepper}>
       <h4 className={styles.stepper_title}>{title}</h4>

@@ -19,7 +19,7 @@
   transition: all 250ms ease-in-out;
   transform: translateX(100%);
   will-change: transform, visibility;
-
+  z-index: 1;
   &_nav{
     display: flex;
     justify-content: center;
@@ -27,7 +27,7 @@
     width: 75%;
     height: 100%;
     z-index: 2;
-    background-color: variables.$secondary-blue-color;
+    background-color: variables.$tertiary-color;
     will-change: transform, visibility;
     &_list{
       padding: 6rem 0;
@@ -75,7 +75,7 @@
         width: 3rem;
         height: 0.3rem;
         border-radius: 1rem;
-        background-color: variables.$secondary-green-color;
+        background-color: variables.$secondary-color;
         transition: transform 250ms ease-in-out;
       }
 

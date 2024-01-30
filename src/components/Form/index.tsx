@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, Stepper, Field } from '@components/index'
-import { Props } from '@/types/Form'
+import { FormProps } from '@/types/Form'
 import styles from './Form.module.scss'
 
 export default function Form ({
@@ -19,7 +19,7 @@ export default function Form ({
   isStepper = false,
   currentStep = 0,
   handleStep = (_step: number): void => {}
-}: Props): JSX.Element {
+}: FormProps): JSX.Element {
   const {
     reset,
     register,
