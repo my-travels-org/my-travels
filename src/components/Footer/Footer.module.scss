@@ -2,8 +2,8 @@
 
 .footer {    
     background-color: #313131;
-    padding: 5rem  5rem;
-    margin-top: 5rem;
+    padding: 8rem  5rem;
+    
     
     
 }
@@ -11,7 +11,8 @@
 @media (min-width:768px) {
     .content{
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        flex-wrap: wrap;
     }
 }
 
@@ -19,6 +20,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
 }
 
 @media (min-width:768px) {
@@ -34,6 +36,7 @@
     text-decoration: none;
     font-weight: 600rem;
     padding-left: 2rem;
+    
 }
 
 .navigation a:hover {
@@ -41,9 +44,31 @@
 }
 
 .copyRight{
-    font-size: 2.8rem;
+
+    font-size: 2rem;
     color: '#FAFAFA';
-    font-weight: 600600rem;
     text-align: center;
+    margin-top: 2rem;
+}
+.subContainer{
+    margin: 0 10%;
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: left;
+    justify-items: center;
     
+}
+
+
+.subContainer a{
+    padding: 1.5rem 0;
+
+    
+}
+
+.subContainer h4{
+    
+    font-size: 2.8rem;
 }

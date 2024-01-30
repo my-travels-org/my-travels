@@ -4,7 +4,9 @@
     padding: 5rem;
     padding-left: 6rem;
     align-content: center;
-    height: 90vh;
+    height: 100%;
+   
+    
 }
 .heading {
     margin-top: 10rem;
@@ -24,10 +26,15 @@
     
 }
 
+.text h3{
+    margin-top: 5rem;
+}
+
 .content {
-    margin-top: 7rem;
+    margin: 5rem 0;
     display: grid;
     gap: 4rem;
+    
     
 }
 .image{
@@ -46,7 +53,7 @@
 
 .title{
     
-    text-align: center;
+    text-align: left;
     margin-bottom: 1rem;
     margin-top: 2.5rem;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

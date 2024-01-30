@@ -17,5 +17,8 @@ import MultipleOption from './MultipleOption'
 import AboutUs from './AboutUS'
 import Conditions from './Conditions'
 import Search from './Search'
+import Questions from './Questions'
+import Proximamente from './Proximamente'
 
-export { Button, Dashboard, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption, AboutUs, Conditions, Search }
+
+export { Button, Dashboard, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption, AboutUs, Conditions, Search, Questions, Proximamente }
