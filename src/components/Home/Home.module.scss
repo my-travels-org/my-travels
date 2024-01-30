@@ -1,0 +1,74 @@
+@use "@styles/variables.scss";
+
+.home{
+  padding: 2rem 1rem;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  &_welcome{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    &_title{
+      font-size: 3rem;
+      color: variables.$primary-color;
+    }
+    &_text{
+      line-height: 1.4;
+      font-size: 1.6rem;
+      color: variables.$secondary-color;
+    }
+  }
+  &_carousel{
+    // display: grid;
+    // grid-template-columns: repeat(3, 1fr);
+    // grid-template-areas: 'Valorados Valorados Emergentes'
+    //                      'Culturales Naturaleza Naturaleza';
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  &_travels{
+    display: flex;
+    padding: 2rem 0;
+    gap: 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    &_text{
+      line-height: 1.4;
+      color: variables.$secondary-color;
+    }
+    &_button{
+      width: 100%;
+      text-align: center;
+      padding: 1.5rem 0;
+      border-radius: 0.5rem;
+      background-color: variables.$primary-color;
+      color: white;
+      font-size: inherit;
+    }
+  }
+  &_faq{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    gap: 2rem;
+    
+    &_wrapper{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      &_title{
+        line-height: 1.4;
+        color: variables.$secondary-color;
+      }
+      &_text{
+        line-height: 1.4;
+        color: variables.$primary-color;
+      }
+    }
+  }
+}

@@ -1,6 +1,10 @@
 import { Field } from './Field'
 
-export interface Props {
+export interface Section {
+  title: string
+  fields: Field[]
+}
+export interface FormProps {
   sections: Section[]
   schema: yup.ObjectSchema<any>
   submitButton?: string
@@ -13,9 +17,4 @@ export interface Props {
   isStepper?: boolean
   currentStep?: number
   handleStep?: (step: number) => void
-}
-
-export interface Section {
-  title: string
-  fields: Field[]
 }

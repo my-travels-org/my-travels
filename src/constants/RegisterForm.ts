@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-import { Section } from '@/types'
+import { Section } from '@/types/Form'
 import { required, email, positive, integer } from '@constants/YupErrors'
 
 export const registerSections: Section[] = [
@@ -9,8 +9,7 @@ export const registerSections: Section[] = [
       { id: 'name', label: 'Nombre', type: 'text', required: true },
       { id: 'lastname', label: 'Apellido Paterno', type: 'text', required: true },
       { id: 'surname', label: 'Apellido Materno', type: 'text', required: true },
-      { id: 'birthdate', label: 'Fecha de nacimiento', type: 'date', required: true },
-      { id: 'maritalStatus', label: 'Estado civil', type: 'text', required: true } // should be type: select
+      { id: 'birthdate', label: 'Fecha de nacimiento', type: 'date', required: true }
 
     ],
     title: 'Datos personales'
