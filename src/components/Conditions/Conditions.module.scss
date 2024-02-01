@@ -1,0 +1,36 @@
+@use "@styles/variables";
+
+.heading {
+    margin-top: 9rem;
+    color: variables.$primary-color;
+    text-align: center;
+    font-weight: 600;
+    font-size: 3em;
+}
+.mainContainer {
+    width: 60%;
+    display: grid;
+    margin: 0 auto;
+}
+
+.textContainer {
+    margin: 10%;
+    text-align: justify;
+    font-size: 2rem;
+}
+.title {
+    text-align: justify;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+        sans-serif;
+}
+
+.conditionTitle {
+    margin-top: 2.5rem;
+}
+
+.text {
+    margin-top: 1.5rem;
+    line-height: 3rem;
+}

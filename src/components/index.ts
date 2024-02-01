@@ -15,5 +15,10 @@ import Viewer from './Viewer'
 import Stepper from './Stepper'
 import StarRating from './StarRating'
 import MultipleOption from './MultipleOption'
+import AboutUs from './AboutUS'
+import Conditions from './Conditions'
+import Search from './Search'
+import Questions from './Questions'
+import Proximamente from './Proximamente'
 
-export { Button, Carousel, Home, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }
+export { AboutUs, Aside, Button, Carousel, Conditions, Home, Hamburger, Field, Form, Footer, Header, Loader, Login, Proximamente, Questions, Register, Search, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }

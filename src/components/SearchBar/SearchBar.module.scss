@@ -1,0 +1,21 @@
+.searchBarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px; /* Ajusta la altura según tus necesidades */
+    background-color: #f0f0f0; /* Ajusta el color de fondo según tus preferencias */
+  }
+  
+  .form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input {
+    padding: 8px;
+    margin-right: 8px;
+  }
+  
+  .button {
+    padding: 8px 16px;
+  }
