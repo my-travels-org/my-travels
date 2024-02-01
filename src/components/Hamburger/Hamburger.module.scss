@@ -17,7 +17,7 @@
       width: 3rem;
       height: 0.3rem;
       border-radius: 1rem;
-      background-color: variables.$secondary-color;
+      background-color: variables.$primary-background-color;
       transition: transform 250ms ease-in-out;
     }
 
@@ -40,6 +40,7 @@
     &_open {
       width: 3rem;
       transform: rotate(0.625turn);
+      z-index: 2;
 
       &::before {
         transform: rotate(90deg) translateX(-9px);

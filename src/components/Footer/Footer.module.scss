@@ -1,74 +1,60 @@
 @use "@styles/variables";
 
-.footer {    
-    background-color: #313131;
-    padding: 8rem  5rem;
-    
-    
-    
+.footer {
+	background-color: variables.$secondary-background-color;
+	padding: 8rem 5rem;
 }
 
-@media (min-width:768px) {
-    .content{
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-    }
-}
-
-.navigation{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-}
-
-@media (min-width:768px) {
-    .navigation{
-        flex-direction: row;
-        gap: 2rem;
-    }
+.navigation {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .navigation a {
-    font-size: 2.8rem;
-    color: '#FAFAFA';
-    text-decoration: none;
-    font-weight: 600rem;
-    padding-left: 2rem;
-    
+	font-size: 2.8rem;
+	color: "#FAFAFA";
+	text-decoration: none;
+	font-weight: 600rem;
+	padding-left: 2rem;
 }
 
 .navigation a:hover {
-    color: variables.$primary-green-color;
+	color: variables.$primary-color;
 }
 
-.copyRight{
-
-    font-size: 2rem;
-    color: '#FAFAFA';
-    text-align: center;
-    margin-top: 2rem;
+.copyRight {
+	font-size: 2rem;
+	color: "#FAFAFA";
+	text-align: center;
+	margin-top: 2rem;
 }
-.subContainer{
-    margin: 0 10%;
-    padding: 3rem 0;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    text-align: left;
-    justify-items: center;
-    
+.subContainer {
+	margin: 0 10%;
+	padding: 3rem 0;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	text-align: left;
+	justify-items: center;
 }
 
-
-.subContainer a{
-    padding: 1.5rem 0;
-
-    
+.subContainer a {
+	padding: 1.5rem 0;
 }
 
-.subContainer h4{
-    
-    font-size: 2.8rem;
+.subContainer h4 {
+	font-size: 2.8rem;
+}
+
+@media (min-width: 768px) {
+	.content {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+	.navigation {
+		flex-direction: row;
+		gap: 2rem;
+	}
 }
