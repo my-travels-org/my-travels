@@ -27,7 +27,6 @@ export interface RegisterFieldValues {
   surname: string
   email: string
   password: string
-  maritalStatus: string // should be an enum
   city: string
   birthdate: Date
   activity1: number // should be an enum

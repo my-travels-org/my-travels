@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { CarouselProps } from '@/types/Carousel'
+import { CarouselProps } from '@/types/components/Carousel'
 import styles from './Carousel.module.scss'
 
 export default function Carousel ({ carousel }: CarouselProps): JSX.Element {

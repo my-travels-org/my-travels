@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Props } from '@/types/Button'
+import { Props } from '@/types/components/Button'
 import styles from './Button.module.scss'
 
 export default function Button ({ props = {}, children, className = '', onClick = () => {}, type = 'button' }: Props): React.ReactNode {

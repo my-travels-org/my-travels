@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, Stepper, Field } from '@components/index'
-import { FormProps } from '@/types/Form'
+import { FormProps } from '@/types/components/Form'
 import styles from './Form.module.scss'
 
 export default function Form ({

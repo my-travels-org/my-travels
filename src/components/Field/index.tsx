@@ -1,4 +1,4 @@
-import { Props } from '@/types/Field'
+import { Props } from '@/types/components/Field'
 import styles from './Field.module.scss'
 
 export default function Field ({ field, register, errors, className = '' }: Props): JSX.Element {

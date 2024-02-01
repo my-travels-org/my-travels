@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 import { Form } from '@components/index'
 import { userService } from '@services/User'
 import { registerSections, registerSchema, initialValues } from '@constants/RegisterForm'
-import { type CreateUserDTO, type RegisterFieldValues } from '@/types/User'
+import { type CreateUserDTO, type RegisterFieldValues } from '@/types/models/User'
 import styles from './Register.module.scss'
 
 export default function Register (): JSX.Element {

@@ -1,6 +1,6 @@
 @use "@styles/variables";
 
-.toggle{
+.toggle {
   position: absolute;
   background-color: transparent;
   z-index: 1;
@@ -20,125 +20,10 @@
   transform: translateX(100%);
   will-change: transform, visibility;
   z-index: 1;
-  &_nav{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 75%;
-    height: 100%;
-    z-index: 2;
-    background-color: variables.$tertiary-color;
-    will-change: transform, visibility;
-    &_list{
-      padding: 6rem 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      &_element{
-        font-size: 2.3rem;
-        
-        &_link{
-          color: white;
-          &_active{
-            color: variables.$primary-background-color;
-          
-          }
-          &:hover{
-            color: variables.$primary-background-color;
-            transition: all 250ms ease-in-out;
-          }
-        }
-      }
-    }
-  }
-  &_open{
+  &_open {
     width: 100%;
     visibility: visible;
     transform: translateX(0%);
     backdrop-filter: blur(5px);
-  }
-  &_button {
-    position: relative;
-    z-index: 3;
-    visibility: visible;
-    align-self: flex-end;
-    background: none;
-    border: none;
-    width: 3rem;
-    height: 3rem;
-    &_hamburger {
-      position: relative;
-      &::before,
-      &::after,
-      & {
-        width: 3rem;
-        height: 0.3rem;
-        border-radius: 1rem;
-        background-color: variables.$secondary-color;
-        transition: transform 250ms ease-in-out;
-      }
-
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-      }
-
-      &::before {
-        top: 9px;
-      }
-
-      &::after {
-        bottom: 9px;
-      }
-
-      &_open {
-        transform: rotate(0.625turn);
-
-        &::before {
-          transform: rotate(90deg) translateX(-9px);
-        }
-
-        &::after {
-          opacity: 0;
-        }
-      }
-    }
-  }
-
-  &_wrapper{
-    display: grid;
-    position: absolute;
-    width: 70%;
-    height: 100%;
-    right: 0;
-    padding: 3rem;
-    place-content: start end;
-    align-self: flex-end;
-    background-color: red;
-    visibility: hidden;
-    &_open {
-      z-index: 2;
-      visibility: visible;
-    }
-  }
-
-}
-
-@media screen and (min-width: 768px){
-  .aside{
-    &_nav{
-      width: 40%;
-    }
-  }
-}
-@media screen and (min-width: 1024px){
-  .aside{
-    &_nav{
-      width: 30%;
-    }
   }
 }
