@@ -43,11 +43,44 @@
       z-index: 2;
 
       &::before {
-        transform: rotate(90deg) translateX(-9px);
+        transform: rotate(90deg) translateX(-0.9rem);
       }
 
       &::after {
         opacity: 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    width: 4rem;
+    height: 4rem;
+    &_hamburger {
+      &::before,
+      &::after,
+      & {
+        width: 4rem;
+        height: 0.4rem;
+      }
+
+      &::before {
+        top: 1.2rem;
+      }
+
+      &::after {
+        bottom: 1.2rem;
+      }
+
+      &_open {
+        width: 4rem;
+        transform: rotate(0.625turn);
+        z-index: 2;
+
+        &::before {
+          transform: rotate(90deg) translateX(-1.2rem);
+        }
       }
     }
   }

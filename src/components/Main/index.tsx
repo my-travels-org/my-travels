@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 
 import SonnerContext from '@/app/ToastProvider'
 import { Header, Footer } from '@components/index'
+import styles from './Main.module.scss'
 
 export default function Main ({ children }: { children: React.ReactNode }): JSX.Element {
   const pathname = usePathname()
@@ -11,7 +12,7 @@ export default function Main ({ children }: { children: React.ReactNode }): JSX.
   return (
     <>
       {showElements && <Header />}
-      <main>
+      <main className={styles.main}>
         <SonnerContext />
         {children}
       </main>

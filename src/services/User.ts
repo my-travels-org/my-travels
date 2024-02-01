@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { type LoginUserDTO, type CreateUserDTO, User } from '@/types/User'
+import { type LoginUserDTO, type CreateUserDTO, User } from '@/types/models/User'
 
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_API ?? ''
 

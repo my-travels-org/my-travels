@@ -1,4 +1,4 @@
-import { Props } from '@/types/Stepper'
+import { Props } from '@/types/components/Stepper'
 import { Button, Field } from '@components/index'
 import styles from './Stepper.module.scss'
 

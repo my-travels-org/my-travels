@@ -9,6 +9,7 @@ import Hamburger from './Hamburger'
 import Header from './Header'
 import Loader from './Loader'
 import Login from './Login'
+import Navbar from './Navbar'
 import Register from './Register'
 import ScrollBar from './ScrollBar'
 import Viewer from './Viewer'
@@ -21,4 +22,4 @@ import Search from './Search'
 import Questions from './Questions'
 import Proximamente from './Proximamente'
 
-export { AboutUs, Aside, Button, Carousel, Conditions, Home, Hamburger, Field, Form, Footer, Header, Loader, Login, Proximamente, Questions, Register, Search, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }
+export { AboutUs, Aside, Button, Carousel, Conditions, Home, Hamburger, Field, Form, Footer, Header, Loader, Login, Navbar, Proximamente, Questions, Register, Search, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }

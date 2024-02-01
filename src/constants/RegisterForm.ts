@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-import { Section } from '@/types/Form'
+import { Section } from '@/types/components/Form'
 import { required, email, positive, integer } from '@constants/YupErrors'
 
 export const registerSections: Section[] = [

@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 import { Form } from '@components/index'
 import { loginSections, loginSchema } from '@constants/LoginForm'
 import styles from './Login.module.scss'
-import { LoginUserDTO } from '@/types/User'
+import { LoginUserDTO } from '@/types/models/User'
 
 export default function Login (): JSX.Element {
   const { data: session, status } = useSession()

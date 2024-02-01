@@ -1,5 +1,5 @@
 import styles from './Hamburger.module.scss'
-import { HamburgerProps } from '@/types/Hamburger'
+import { HamburgerProps } from '@/types/components/Hamburger'
 
 export default function Hamburger ({ value, toggle }: HamburgerProps): JSX.Element {
   return (
