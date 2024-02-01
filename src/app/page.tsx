@@ -1,5 +1,5 @@
-import { Dashboard } from '@components/index'
+import Home from '@components/Home'
 
 export default function DashboardPage (): JSX.Element {
-  return <Dashboard />
+  return <Home />
 }

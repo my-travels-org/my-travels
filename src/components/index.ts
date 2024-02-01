@@ -1,6 +1,7 @@
 import Aside from './Aside'
 import Button from './Button'
-import Dashboard from './Dashboard'
+import Carousel from './Carousel'
+import Home from './Home'
 import Field from './Field'
 import Footer from './Footer'
 import Form from './Form'
@@ -20,5 +21,4 @@ import Search from './Search'
 import Questions from './Questions'
 import Proximamente from './Proximamente'
 
-
-export { Button, Dashboard, Hamburger, Aside, Field, Form, Footer, Header, Loader, Login, Register, Stepper, ScrollBar, Viewer, StarRating, MultipleOption, AboutUs, Conditions, Search, Questions, Proximamente }
+export { AboutUs, Aside, Button, Carousel, Conditions, Home, Hamburger, Field, Form, Footer, Header, Loader, Login, Proximamente, Questions, Register, Search, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }
