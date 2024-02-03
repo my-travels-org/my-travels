@@ -12,7 +12,7 @@ export default function Footer ({ sections }: FooterProps): JSX.Element {
             <div key={title} className={styles.subContainer}>
               <h4>{title}</h4>
               {links.map(({ name, path }) => (
-                <Link key={path} href={path}>{name}</Link>
+                <Link key={name} href={path}>{name}</Link>
               ))}
             </div>
           ))
