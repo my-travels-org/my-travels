@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import useToggle from '@/hooks/useToggle'
-import { links } from '@/constants/Links'
+import { navbarLinks } from '@/constants/Links'
 import styles from './Navbar.module.scss'
 
 export default function Navbar (): JSX.Element {
@@ -14,7 +14,7 @@ export default function Navbar (): JSX.Element {
     <nav className={styles.nav}>
       <ul className={styles.nav_list}>
         {
-      links.map(({ name, path }) => {
+      navbarLinks.map(({ name, path }) => {
         return (
           <li key={path} className={styles.nav_list_element}>
             <Link href={path} className={`${styles.nav_list_element_link} ${pathname === path ? styles.nav_list_element_link_active : ''}`} onClick={() => toggle()}>
