@@ -1,39 +1,25 @@
 import Link from 'next/link'
+
+import { FooterProps } from '@/types/components/Footer'
 import styles from './Footer.module.scss'
 
-export default function Footer (): JSX.Element {
+export default function Footer ({ sections }: FooterProps): JSX.Element {
   return (
     <footer className={styles.footer}>
-      <div className={`conatiner ${styles.content}`}> 
-        <nav className={styles.navigation}>
-          <div className={styles.subContainer}>
-            <h4>Empresa</h4>
-            <Link href="/">Inicio</Link>
-            <Link href="/info_footer/aboutUs">Nosotros</Link>
-            <Link href="/enConstruccionPage">Contacto</Link>
-          </div>
+      <nav className={styles.navigation}>
+        {
+          sections.map(({ links, title }) => (
+            <div key={title} className={styles.subContainer}>
+              <h4>{title}</h4>
+              {links.map(({ name, path }) => (
+                <Link key={path} href={path}>{name}</Link>
+              ))}
+            </div>
+          ))
+        }
+      </nav>
 
-          <div className={styles.subContainer}>
-            <h4>Ayuda</h4>
-            <Link href="/info_footer/questions">Preguntas frecuentes</Link>
-            <Link href="/enConstruccionPage">Soporte</Link>
-            <Link href="/info_footer/terms-and-conditions">Terminos y Condiciones</Link>
-          </div>
-
-          <div className={styles.subContainer}>
-            <h4>Social</h4>
-            <Link href="/enConstruccionPage">Facebook</Link>
-            <Link href="/enConstruccionPage">Twitter</Link>
-            <Link href="/enConstruccionPage">Instagram</Link>
-          </div>
-
-          
-            
-            
-        </nav>
-
-        <p className={styles.copyRight}>@ 2024 MyTravels Todos los derechos reservados </p>
-      </div>
+      <p className={styles.copyright}>@ 2024 MyTravels Todos los derechos reservados </p>
     </footer>
   )
 }

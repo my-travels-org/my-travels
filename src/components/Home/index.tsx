@@ -2,18 +2,16 @@
 
 import Link from 'next/link'
 
+import { Carousel } from '@/components/index'
 import { carousel } from '@/constants/Carousel'
 import styles from './Home.module.scss'
-import { Carousel } from '@/components/index'
 
 export default function Home (): JSX.Element {
   return (
     <section className={styles.home}>
       <section className={styles.home_welcome}>
         <h1 className={styles.home_welcome_title}>Bienvenido/a</h1>
-        <div className={styles.home_welcome_text}>
-          <p className={styles.home_welcome_text_line}>Descubre los secretos de México con MyTravels. Déjate llevar por nuestras recomendaciones y descubre nuevos destinos.</p>
-        </div>
+        <p className={styles.home_welcome_text}>Descubre los secretos de México con MyTravels. Déjate llevar por nuestras recomendaciones y descubre nuevos destinos.</p>
       </section>
       <section className={styles.home_carousel}>
         {

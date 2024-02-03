@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: variables.$normal-size-mobile;
   background-color: variables.$primary-background-color;
   color: variables.$primary-color;
 }
@@ -23,10 +23,21 @@ ul {
 a {
   text-decoration: none;
   color: variables.$secondary-color;
+  font-size: variables.$link-big-size-mobile;
 }
 
-[class*="firstContainer"] {
-  max-width: 120rem;
-  margin: 0 auto;
-  width: 95%;
+h1 {
+  font-size: variables.$h1-size-mobile;
+}
+
+h2 {
+  font-size: variables.$h2-size-mobile;
+}
+
+h3 {
+  font-size: variables.$h3-size-mobile;
+}
+
+h4 {
+  font-size: variables.$h4-size-mobile;
 }
