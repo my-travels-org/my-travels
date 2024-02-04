@@ -6,7 +6,7 @@ import styles from './Carousel.module.scss'
 export default function Carousel ({ carousel }: CarouselProps): JSX.Element {
   const { title, description, images } = carousel
   return (
-    <article className={styles.carousel} style={{ gridArea: carousel.title }}>
+    <article className={styles.carousel} style={{ gridArea: carousel.gridArea }}>
       <h2 className={styles.carousel_title}>{title}</h2>
       <span className={styles.carousel_description}>{description}</span>
       <Image
