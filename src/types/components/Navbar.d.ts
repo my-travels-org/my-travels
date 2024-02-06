@@ -1,5 +1,3 @@
-import { Link } from '../Constants'
-
 export interface NavbarProps {
-  links: Link[]
+  toggle?: (value?: boolean) => void
 }

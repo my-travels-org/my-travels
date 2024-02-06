@@ -1,0 +1,27 @@
+@use "@styles/variables";
+
+.pagination{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  justify-self: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  &_button{
+    width: 5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: variables.$secondary-background-color;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.6rem;
+    font-weight: 700;
+    &:hover{
+      background-color: #e0e0e0;
+    }
+    &_active{
+      background-color: #e0e0e0;
+    }
+  }
+}
