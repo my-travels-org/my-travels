@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-const handler = NextAuth({
+export const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -42,10 +42,11 @@ const handler = NextAuth({
     maxAge: 60 * 60
   },
   callbacks: {
-    async jwt ({ token, user }) {
+    async jwt ({ token, user, }) {
       if (user !== undefined) {
         token.user = user
       }
+      console.log("-> ", token.json)
       return token
     },
     async session ({ session, token }) {

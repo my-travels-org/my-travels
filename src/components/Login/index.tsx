@@ -28,11 +28,12 @@ export default function Login (): JSX.Element {
       toast.error(res?.error)
     } else setIsLoggedIn(true)
   }
+  
 
   useEffect(() => {
     if (status === 'authenticated') {
       if (isLoggedIn) {
-        toast.success(`Bienvenido, ${session.user.nombre}`)
+        toast.success(`Bienvenido, ${session.user?.name}`)
       }
       router.push('/')
     }

@@ -1,0 +1,44 @@
+@use "@styles/variables.scss";
+
+.userDropdown {
+    border-left: 2rem;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .userButton {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+  }
+  .userButton span{
+    color:#fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    
+  }
+
+  .userButton span:hover{
+    color: variables.$secondary-color;
+  }
+  
+  .dropdownContent {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border: 1rem;
+    border-radius: 1rem;
+
+  }
+  
+  .dropdownContent div {
+    padding: 8px;
+    cursor: pointer;
+  }
+  .option:hover {
+	color: variables.$primary-color;
+}

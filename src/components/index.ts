@@ -21,5 +21,7 @@ import Conditions from './Conditions'
 import Search from './Search'
 import Questions from './Questions'
 import Proximamente from './Proximamente'
+import UserProfile from './UserProfile'
+import UserDropdown from './UserDropdown'
 
-export { AboutUs, Aside, Button, Carousel, Conditions, Home, Hamburger, Field, Form, Footer, Header, Loader, Login, Navbar, Proximamente, Questions, Register, Search, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }
+export { AboutUs, Aside, Button, Carousel, Conditions, Home, Hamburger, Field, Form, Footer, Header, Loader, Login, Navbar, Proximamente, Questions, Register, Search, Stepper, ScrollBar, Viewer, StarRating, MultipleOption, UserProfile, UserDropdown }

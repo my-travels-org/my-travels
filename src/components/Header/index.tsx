@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-
+import { useSession } from 'next-auth/react'
 import { Aside, Navbar } from '@components/index'
 import useWindowSize from '@/hooks/useWindowSize'
 
@@ -9,7 +9,6 @@ import styles from './Header.module.scss'
 
 export default function Header (): JSX.Element {
   const { widthSize } = useWindowSize()
-  // const { status } = useSession()
   return (
     <header className={styles.header}>
       <Link href='/'>
