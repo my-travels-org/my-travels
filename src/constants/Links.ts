@@ -4,23 +4,28 @@ import { FooterLinks } from '@/types/components/Footer'
 export const navbarLinks: Link[] = [
   {
     name: 'Inicio',
-    path: '/'
+    path: '/',
+    isProtected: false
   },
   {
     name: 'Categorías',
-    path: '/categories'
+    path: '/categories',
+    isProtected: false
   },
   {
     name: 'Para ti',
-    path: '/for-you'
+    path: '/for-you',
+    isProtected: true
   },
   {
     name: 'Descubre',
-    path: '/discover'
+    path: '/discover',
+    isProtected: true
   },
   {
     name: 'Mis viajes',
-    path: '/my-travels'
+    path: '/my-travels',
+    isProtected: true
   }
 ]
 

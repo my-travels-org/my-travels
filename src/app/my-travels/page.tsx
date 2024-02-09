@@ -1,15 +1,15 @@
 import AccessDenied from '@/components/AccessDenied'
-import { getServerSession } from 'next-auth'
+import Travels from '@/components/Travels'
+import { getServerSession } from 'next-auth/next'
+import { travels } from '@constants/Travels'
 
 export default async function MyTravelsPage (): Promise<JSX.Element> {
   const session = await getServerSession()
-  return (session === null)
+  return (session !== null)
     ? (
       <AccessDenied />
       )
     : (
-      <section>
-        <h2>Ny travels</h2>
-      </section>
+      <Travels travels={travels} />
       )
 }

@@ -1,0 +1,17 @@
+.container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: inherit;
+  &_add{
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  &_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

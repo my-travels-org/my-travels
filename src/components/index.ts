@@ -21,5 +21,35 @@ import Conditions from './Conditions'
 import Search from './Search'
 import Questions from './Questions'
 import Proximamente from './Proximamente'
+import Travels from './Travels'
+import Card from './Card'
+import Pagination from './Pagination'
 
-export { AboutUs, Aside, Button, Carousel, Conditions, Home, Hamburger, Field, Form, Footer, Header, Loader, Login, Navbar, Proximamente, Questions, Register, Search, Stepper, ScrollBar, Viewer, StarRating, MultipleOption }
+export {
+  AboutUs,
+  Aside,
+  Button,
+  Carousel,
+  Conditions,
+  Home,
+  Hamburger,
+  Field,
+  Form,
+  Footer,
+  Header,
+  Loader,
+  Login,
+  Navbar,
+  Proximamente,
+  Questions,
+  Register,
+  Search,
+  Stepper,
+  ScrollBar,
+  Viewer,
+  StarRating,
+  MultipleOption,
+  Travels,
+  Card,
+  Pagination
+}

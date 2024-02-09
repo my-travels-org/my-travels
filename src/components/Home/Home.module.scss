@@ -134,6 +134,11 @@
 
 @media screen and (min-width: 1920px) {
   .home{
+    &_carousel{
+      width: 56.5%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
     &_faq{
       &_wrapper{
         width: 50%;

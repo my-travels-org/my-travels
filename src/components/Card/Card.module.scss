@@ -1,0 +1,10 @@
+@use "@styles/variables";
+
+.card{
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1.5rem;
+  border-radius: 2rem;
+  background-color: variables.$secondary-background-color;
+}

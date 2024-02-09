@@ -11,7 +11,7 @@ export default function Aside (): JSX.Element {
         {value && (
           <button type='button' className={styles.toggle} onClick={() => toggle()} />
         )}
-        <Navbar />
+        <Navbar toggle={toggle} />
       </aside>
       <Hamburger value={value} toggle={toggle} />
     </>

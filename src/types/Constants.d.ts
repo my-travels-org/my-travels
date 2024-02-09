@@ -1,6 +1,7 @@
 export interface Link {
   name: string
   path: string
+  isProtected: boolean
 }
 
 export interface Carousel {
