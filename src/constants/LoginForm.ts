@@ -7,8 +7,8 @@ export const loginSections: Section[] = [
   {
     title: 'Iniciar sesión',
     fields: [
-      { id: 'email', label: 'Correo electrónico', type: 'email' },
-      { id: 'password', label: 'Contraseña', type: 'password' }
+      { id: 'email', label: 'Correo electrónico', type: 'email', required: true },
+      { id: 'password', label: 'Contraseña', type: 'password', required: true }
     ]
   }
 ]

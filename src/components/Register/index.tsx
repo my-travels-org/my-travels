@@ -20,14 +20,13 @@ export default function Register (): JSX.Element {
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
     setIsSubmitted(true)
-    const { name, lastname, surname, email, password, maritalStatus, city, birthdate, activity1, activity2, activity3 } = data
+    const { name, lastname, surname, email, password, city, birthdate, activity1, activity2, activity3 } = data
     const payload: CreateUserDTO = {
       nombre: name,
       apellido_p: lastname,
       apellido_m: surname,
       correo: email,
       password,
-      estado_civil: maritalStatus,
       ciudad: city,
       fecha_nacimiento: birthdate.toISOString().slice(0, 10),
       actividad1: activity1,
