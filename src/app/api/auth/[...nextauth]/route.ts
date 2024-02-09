@@ -1,7 +1,7 @@
-import NextAuth from 'next-auth/'
+import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-const handler = NextAuth({
+export default NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -50,11 +50,9 @@ const handler = NextAuth({
     },
     async session ({ session, token }) {
       const expires = session.expires
-      session = token.user as any
+      session = token.user
       session.expires = expires
       return session
     }
   }
 })
-
-export { handler as GET, handler as POST }
