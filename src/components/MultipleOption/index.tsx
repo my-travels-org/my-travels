@@ -1,8 +1,6 @@
 'use client'
 
-
 import styles from './MultipleOption.module.scss'
-
 
 export interface ViewerProps {
   value: string
@@ -10,17 +8,14 @@ export interface ViewerProps {
   id_2: number
 }
 
-export default function MultipleOption (value :  ViewerProps[]): JSX.Element {
-  
-  return(
+export default function MultipleOption (value: ViewerProps[]): JSX.Element {
+  return (
 
-      
     <div className={styles.container}>
-      { value?.length && value.map((val, counter) => (
+      {value.length > 0 && value.map((val, counter) => (
         <span key={counter} className={styles.text}>{val.value} </span>
       ))}
     </div>
-      
-     
-    )
+
+  )
 }

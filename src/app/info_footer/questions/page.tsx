@@ -1,10 +1,9 @@
-import {  Questions } from "@/components";
-const questions = () => {
+import { Questions } from '@/components'
+const questions = (): JSX.Element => {
+  return (
+    <Questions />
 
-    return(
-        <Questions/>
-        
-    );
+  )
 }
 
-export default questions;
+export default questions

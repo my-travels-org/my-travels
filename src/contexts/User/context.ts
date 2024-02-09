@@ -1,14 +1,13 @@
 'use client'
 
 import { createContext, useContext } from 'react'
-import { type UserContextType } from '@/types'
 
-const UserContext = createContext<UserContextType>({
+const UserContext = createContext<any>({
   user: undefined,
   login: () => {},
   logout: () => {}
 })
 
-export const useUserContext = (): UserContextType => useContext(UserContext)
+export const useUserContext = (): any => useContext(UserContext)
 
 export default UserContext

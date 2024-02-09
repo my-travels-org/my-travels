@@ -1,7 +1,6 @@
 'use client'
 
 import styles from './Dashboard.module.scss'
-import { useEffect } from 'react'
 
 export default function Dashboard (): JSX.Element {
   return (

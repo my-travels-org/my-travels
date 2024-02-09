@@ -1,10 +1,9 @@
-import {  AboutUs as About } from "@/components";
-const AboutUs = () => {
+import { AboutUs as About } from '@/components'
+const AboutUs = (): JSX.Element => {
+  return (
+    <About />
 
-    return(
-        <About/>
-        
-    );
+  )
 }
 
-export default AboutUs;
+export default AboutUs
