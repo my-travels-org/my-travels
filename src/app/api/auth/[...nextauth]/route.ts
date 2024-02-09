@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth'
+import NextAuth from 'next-auth/'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 const handler = NextAuth({
@@ -50,7 +50,7 @@ const handler = NextAuth({
     },
     async session ({ session, token }) {
       const expires = session.expires
-      session = token.user
+      session = token.user as any
       session.expires = expires
       return session
     }
