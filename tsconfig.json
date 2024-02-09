@@ -29,9 +29,9 @@
       "@services/*": ["services/*"],
       "@shared/*": ["shared/*"],
       "@styles/*": ["styles/*"],
-      "@types/*": ["types/*"],
+      "@type1s/*": ["types/*"],
       "@utils/*": ["utils/*"],
-    }
+    },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
