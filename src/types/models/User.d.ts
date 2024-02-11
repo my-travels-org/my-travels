@@ -41,7 +41,7 @@ export interface infoUser{
   correo?: string,
   created_at?: string,
   estado_civil?: string,
-  fecha_nacimiento?: string,
+  fecha_nacimiento?: date,
   id?: number
   nombre?: string,
   updated_at?: string

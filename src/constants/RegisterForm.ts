@@ -61,3 +61,14 @@ export const registerSchema = yup
     activity2: yup.number().typeError(positive).positive().integer(integer).required(required),
     activity3: yup.number().typeError(positive).positive().integer(integer).required(required)
   })
+
+
+  export const resetUserSchema = yup
+  .object({
+    nombre: yup.string().required(required),
+    apellidoP: yup.string().required(required),
+    apellidoM: yup.string().required(required),
+    correo: yup.string().email(email).required(required),
+    ciudad: yup.string().required(required),
+    fechaNacimiento: yup.date().required(required),
+  })
