@@ -4,7 +4,6 @@ export interface CreateUserDTO {
   apellido_m: string
   correo: string
   password: string
-  estado_civil: string
   ciudad: string
   fecha_nacimiento: string
   actividad1: number

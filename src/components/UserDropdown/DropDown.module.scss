@@ -14,8 +14,8 @@
 
 .dropDownMenu {
     position: absolute;
-    top: 100px;
-    right: 85px;
+    top: 70px;
+    right: 30px;
     background-color: variables.$secondary-background-color;
     border-radius: 2rem;
     padding: 10px 20px;
@@ -79,6 +79,7 @@
 .option{
     max-width: 100px;
     margin-left: 10px;
+    font-size: 16px;
     transition: var(--speed);
     color: black;
 }

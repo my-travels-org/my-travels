@@ -1,7 +1,6 @@
 import useToggle from '@/hooks/useToggle'
 import styles from './Aside.module.scss'
 import { Hamburger, Navbar } from '@components/index'
-import { links } from '@/constants/Links'
 
 export default function Aside (): JSX.Element {
   const { value, toggle } = useToggle()
@@ -12,7 +11,7 @@ export default function Aside (): JSX.Element {
         {value && (
           <button type='button' className={styles.toggle} onClick={() => toggle()} />
         )}
-        <Navbar links={links} />
+        <Navbar toggle={toggle} />
       </aside>
       <Hamburger value={value} toggle={toggle} />
     </>

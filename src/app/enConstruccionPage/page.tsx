@@ -1,8 +1,8 @@
-import React from 'react';
-import {Proximamente} from '@/components';
+import React from 'react'
+import { Proximamente } from '@/components'
 
-const enConstruccionPage = () => {
-  return <Proximamente />;
-};
+const enConstruccionPage = (): JSX.Element => {
+  return <Proximamente />
+}
 
-export default enConstruccionPage;
+export default enConstruccionPage

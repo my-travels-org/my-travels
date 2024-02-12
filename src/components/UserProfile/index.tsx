@@ -45,7 +45,7 @@ const UserProfile = () => {
       ciudad: ciudad,
       correo: correo,
       fecha_nacimiento: fechaNacimiento.toISOString().slice(0, 10),
-      id: userInfo.id?,
+      id: userInfo.id,
       nombre: nombre,
     }
 

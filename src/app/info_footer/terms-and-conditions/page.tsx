@@ -1,10 +1,9 @@
-import {Conditions} from '@/components'
+import { Conditions } from '@/components'
 
 export default function TermsAndConditionsPage (): JSX.Element {
-    return (
-      <section>
-        <Conditions/>
-      </section>
-    )
-  }
-  
+  return (
+    <section>
+      <Conditions />
+    </section>
+  )
+}

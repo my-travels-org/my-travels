@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 import styles from './Proximamente.module.scss'
 
-const Proximamente = () => {
+const Proximamente = (): JSX.Element => {
   return (
     <div className={styles.proximamenteContainer}>
       <h1>Próximamente</h1>
     </div>
-  );
-};
+  )
+}
 
-export default Proximamente;
+export default Proximamente

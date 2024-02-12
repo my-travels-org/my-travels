@@ -10,6 +10,12 @@ import Link from 'next/link';
 const UserDropdown = ({ userName,userLastName, onLogout }: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  let avatarName ="";
+  /*if(userName !== 'undefined' && userLastName !== 'undefined' ){
+     avatarName = userName[0] + userLastName[0] || "";
+  }*/
+  
+
   let menuRef = useRef();
 
   useEffect(() => {
@@ -32,7 +38,8 @@ const UserDropdown = ({ userName,userLastName, onLogout }: any) => {
     <div ref={menuRef}>
 
     <div className={styles.menuTrigger}   onClick={() =>{setIsOpen(!isOpen)} }>
-      <Avatar className={styles.Avatar} >{userName[0] + userLastName[0]}</Avatar>
+    
+      <Avatar className={styles.Avatar} >{avatarName}</Avatar>
 
       <div className={`${styles.dropDownMenu} ${isOpen? styles.dropDownMenuActive : styles.dropDownMenuInactive }`}>
         <h3 className={styles.userName}>{userName +" "+ userLastName}</h3>

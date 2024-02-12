@@ -1,10 +1,18 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   padding: 0 1rem;
   display: flex;
+  min-height: 8rem;
   justify-content: space-between;
   align-items: center;
   background-image: linear-gradient(to right, rgb(0 0 0 / 0.8), rgb(0 0 0 / 0.7)), url("/header.jpg");
   background-size: cover;
+
+  &_navbar{
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
@@ -20,12 +28,20 @@
 @media (min-width: 1024px) {
   .header {
     gap: 3rem;
+    &_aside{
+      display: none;
+    }
+    &_navbar{
+      width: 100%;
+      display: flex;
+    }
   }
 }
 
 @media (min-width: 1440px) {
   .header {
     gap: 0;
-    padding: 3rem 2rem;
+    padding: 1rem 2rem;
+    height: min-content;
   }
 }

@@ -14,10 +14,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     &_element {
-      font-size: 2.3rem;
-
       &_link {
         color: white;
         &_active {
@@ -45,16 +43,10 @@
     align-items: flex-start;
     background-color: transparent;
     &_list {
+      padding: 0;
       width: 100%;
       flex-direction: row;
       justify-content: space-evenly;
-      &_element {
-        &_link {
-          &_title {
-            font-size: 3.2rem;
-          }
-        }
-      }
     }
   }
 }
@@ -62,29 +54,11 @@
 @media screen and (min-width: 1440px) {
   .nav {
     width: 80%;
-    &_list {
-      &_element {
-        &_link {
-          &_title {
-            font-size: 3.6rem;
-          }
-        }
-      }
-    }
   }
 }
 
 @media screen and (min-width: 2560px) {
   .nav {
     width: 70%;
-    &_list {
-      &_element {
-        &_link {
-          &_title {
-            font-size: 4.2rem;
-          }
-        }
-      }
-    }
   }
 }

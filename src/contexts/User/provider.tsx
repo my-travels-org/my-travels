@@ -3,16 +3,12 @@
 import { useState } from 'react'
 
 import UserContext from './context'
-import {
-  type User,
-  type UserContextProviderProps,
-  type AppState
-} from '@/types'
+import { User } from '@/types/models/User'
 
 export default function UserContextProvider ({
   children
-}: UserContextProviderProps): JSX.Element {
-  const [user, setUser] = useState<AppState['user']>(undefined)
+}: { children: React.ReactNode }): JSX.Element {
+  const [user, setUser] = useState<User | undefined>(undefined)
 
   const login = (user: User): void => {
     setUser(user)

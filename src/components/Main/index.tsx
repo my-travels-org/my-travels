@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 
 import SonnerContext from '@/app/ToastProvider'
 import { Header, Footer } from '@components/index'
+import { footerLinks } from '@/constants/Links'
 import styles from './Main.module.scss'
 
 export default function Main ({ children }: { children: React.ReactNode }): JSX.Element {
@@ -16,7 +17,7 @@ export default function Main ({ children }: { children: React.ReactNode }): JSX.
         <SonnerContext />
         {children}
       </main>
-      {showElements && <Footer />}
+      {showElements && <Footer sections={footerLinks} />}
 
     </>
   )
