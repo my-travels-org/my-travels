@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 
 import { usePathname } from 'next/navigation'
 
@@ -23,8 +23,8 @@ export default function Navbar (): JSX.Element {
 
  
   const handleLogout = () => {
-    // 
-    console.log('Cerrar Sesión');
+
+    signOut({ callbackUrl: 'http://localhost:3000/api/auth/signout' });
   };
 
   return (
@@ -44,7 +44,7 @@ export default function Navbar (): JSX.Element {
       })
     }
    
-      <UserDropdown username={userInfo.nombre+" " + userInfo.apellido_p + userInfo.apellido_m} onLogout={handleLogout} />
+      <UserDropdown userName={userInfo.nombre} userLastName={userInfo.apellido_p} onLogout={handleLogout} />
       
     
     </ul>
