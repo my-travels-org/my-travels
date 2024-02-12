@@ -46,3 +46,13 @@ export interface infoUser{
   nombre?: string,
   updated_at?: string
 }
+
+export interface updateUser{
+  apellido_m?: string,
+  apellido_p?: string,
+  ciudad?: string,
+  correo?: string,
+  fecha_nacimiento?: date,
+  id?: number
+  nombre?: string,
+}

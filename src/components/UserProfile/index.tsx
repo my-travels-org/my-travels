@@ -5,7 +5,11 @@ import { useState } from 'react';
 import { useSession, getSession } from 'next-auth/react';
 import { infoUser } from '@/types/models/User'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { toast } from 'sonner'
+
 import { useForm } from 'react-hook-form';
+import { userService } from '@services/User'
+import {type updateUser} from '@/types/models/User'
 import {resetUserSchema} from '@constants/RegisterForm'
 import styles from './UserProfile.module.scss'
 
@@ -33,7 +37,35 @@ const UserProfile = () => {
   });
 
   const onSubmit = (data) => {
+    const { nombre, apellidoP, apellidoM, correo, ciudad, fechaNacimiento} = data
+    
+    const payload:  updateUser={
+      apellido_m: apellidoM,
+      apellido_p: apellidoP,
+      ciudad: ciudad,
+      correo: correo,
+      fecha_nacimiento: fechaNacimiento.toISOString().slice(0, 10),
+      id: userInfo.id?,
+      nombre: nombre,
+    }
+
     console.log(data)
+    toast.promise(userService.update(payload), {
+      loading: 'Actualizando información del usuario...',
+      success: async () => {
+        /*await signIn('credentials', {
+          email,
+          password,
+          redirect: false
+        })
+        router.push('/')*/
+        return 'información actualizada con éxito'
+      },
+      error: (err: any) => {
+        const errors = Object.values(JSON.parse(err.response.data)).join(', ')
+        return `Ocurrió un error al intentar actualizar la información: ${errors}`
+      }
+    })
   }
 
   return (

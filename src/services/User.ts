@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { type LoginUserDTO, type CreateUserDTO, User } from '@/types/models/User'
+import { type LoginUserDTO, type CreateUserDTO, User, updateUser } from '@/types/models/User'
 
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_API ?? ''
 
@@ -12,7 +12,12 @@ const login = async (user: LoginUserDTO): Promise<any> => {
   return await axios.post('http://127.0.0.1:8000/api/auth/login', user)
 }
 
+const update = async (user: updateUser): Promise<any> => {
+  return await axios.post(`${baseUrl}/auth/register`, user)
+}
+
 export const userService = {
   create,
-  login
+  login,
+  update,
 }
