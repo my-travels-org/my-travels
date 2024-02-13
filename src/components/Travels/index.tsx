@@ -33,6 +33,7 @@ export default function Travels ({ travels }: TravelsProps): JSX.Element {
         elementsPerPage={elementsPerPage}
         currentPage={currentPage}
         handlePageChange={handleChangePage}
+        className={styles.container_pagination}
       />
     </section>
   )
