@@ -1,8 +1,7 @@
-import { Activities } from './../types/Activities.d';
 import * as yup from 'yup'
 
-import { Section } from '@/types'
-import { required, email, positive, integer } from '@constants/YupErrors'
+import { Section } from '@/types/components/Form'
+import { required, positive, integer } from '@constants/YupErrors'
 
 export const registerSections: Section[] = [
   {
@@ -29,8 +28,8 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'image', label: 'Fotos de tú aventura', type: 'text', required: true },
-      
+      { id: 'image', label: 'Fotos de tú aventura', type: 'text', required: true }
+
     ],
     title: 'imagenes'
   },
@@ -44,7 +43,6 @@ export const registerSections: Section[] = [
   }
 ]
 
-
 export const initialValues = {
   name: 'test',
   state: 'test',
@@ -53,14 +51,14 @@ export const initialValues = {
   resenia: 'test',
   rate: 0,
   spent: 0,
-  zoneType: 0, 
-  motive: 0, 
+  zoneType: 0,
+  motive: 0,
   climate: 0,
   activities: 0,
-  image: "test",
-  lodgingName: "test",
-  coordinates: "test",
-  lodgingType: 0,
+  image: 'test',
+  lodgingName: 'test',
+  coordinates: 'test',
+  lodgingType: 0
 }
 
 export const registerTripSchema = yup
@@ -79,5 +77,5 @@ export const registerTripSchema = yup
     image: yup.string().required(required),
     lodgingName: yup.string().required(required),
     coordinates: yup.string().required(required),
-    lodgingType: yup.number().typeError(positive).positive().integer(integer).required(required),
+    lodgingType: yup.number().typeError(positive).positive().integer(integer).required(required)
   })

@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { signIn, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
 import { Form } from '@components/index'
-import { userService } from '@services/User'
 import { registerSections, registerTripSchema, initialValues } from '@constants/RegisterTrip'
 import { type CreateTripDTO, type RegisterFieldValues } from '@/types/Trip'
 import styles from './Register.module.scss'
+import { reviewService } from '@/services/Reviews'
 
 export default function NewTrip2 (): JSX.Element {
   const { status } = useSession()
@@ -20,37 +20,29 @@ export default function NewTrip2 (): JSX.Element {
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
     setIsSubmitted(true)
-    const { name, state, city, date, resenia, rate, spent, zoneType, motive, climate, activities, imagenes, lodgingName,coordinates,lodgingType } = data
+    const { name, state, city, date, resenia, rate, spent, zoneType, motive, climate, activities, imagenes, lodgingName, coordinates, lodgingType } = data
     const payload: CreateTripDTO = {
       nombre: name,
       estado: state,
       ciudad: city,
       fecha: date.toString().slice(0, 10),
-      resenia: resenia,
+      resenia,
       calificacin: rate,
       cantidadGastada: spent,
-      tipoZona: zoneType, 
-      motivo: motive, 
+      tipoZona: zoneType,
+      motivo: motive,
       clima: climate,
       actividades: activities,
-      imagenes: imagenes,
+      imagenes,
       nombreHospedaje: lodgingName,
       coordenadas: coordinates,
-      tipoHospedaje: lodgingType,
-      
+      tipoHospedaje: lodgingType
+
     }
 
-    toast.promise(userService.create(payload), {
+    toast.promise(reviewService.create(payload), {
       loading: 'Registrando usuario...',
-      success: async () => {
-        await signIn('credentials', {
-          email,
-          password,
-          redirect: false
-        })
-        router.push('/')
-        return 'Usuario registrado con éxito'
-      },
+      success: () => 'Viaje registrado con éxito',
       error: (err: any) => {
         const errors = Object.values(JSON.parse(err.response.data)).join(', ')
         setIsSubmitted(false)
@@ -64,12 +56,8 @@ export default function NewTrip2 (): JSX.Element {
   }
 
   useEffect(() => {
-    router.prefetch('/')
+    router.prefetch('/register-trip')
   }, [])
-
-  useEffect(() => {
-    if (status === 'authenticated') router.replace('/')
-  }, [status])
 
   return (
     <section className={styles.register}>
@@ -78,7 +66,6 @@ export default function NewTrip2 (): JSX.Element {
           <>
             <h1 className={styles.register_title}>Cuentanos tu aventura.</h1>
             <Form
-            
               sections={registerSections}
               submitButton='Registrarme'
               onSubmit={handleSubmit}
