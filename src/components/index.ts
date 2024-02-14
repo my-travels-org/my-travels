@@ -23,6 +23,7 @@ import Questions from './Questions'
 import Proximamente from './Proximamente'
 import Travels from './Travels'
 import Card from './Card'
+import CreateTrip from './CreateTrip'
 import Pagination from './Pagination'
 
 export {
@@ -30,6 +31,7 @@ export {
   Aside,
   Button,
   Carousel,
+  CreateTrip,
   Conditions,
   Home,
   Hamburger,

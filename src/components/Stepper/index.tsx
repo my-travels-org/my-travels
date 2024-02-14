@@ -3,6 +3,15 @@ import { Button, Field } from '@components/index'
 import styles from './Stepper.module.scss'
 
 export default function Stepper ({ fields, title, step, maxSteps, errors, register, handleStep }: Props): JSX.Element {
+  const handleClick = (step: number): void => {
+    handleStep(step)
+    const options: ScrollToOptions = {
+      left: 0,
+      top: 0
+    }
+    window.scrollTo(options)
+  }
+
   return (
     <div className={styles.stepper}>
       <h4 className={styles.stepper_title}>{title}</h4>
@@ -20,7 +29,7 @@ export default function Stepper ({ fields, title, step, maxSteps, errors, regist
           <Button
             type='button'
             className={`${styles.stepper_buttons_btn} ${styles.stepper_button_btn_back}`}
-            onClick={() => handleStep(-1)}
+            onClick={() => handleClick(-1)}
           >
             Anterior
           </Button>
@@ -29,7 +38,7 @@ export default function Stepper ({ fields, title, step, maxSteps, errors, regist
           <Button
             type='button'
             className={`${styles.stepper_buttons_btn} ${styles.stepper_buttons_btn_next}`}
-            onClick={() => handleStep(1)}
+            onClick={() => handleClick(1)}
             props={{ disabled: fields.some((field) => errors[field.id]) }}
           >
             Siguiente

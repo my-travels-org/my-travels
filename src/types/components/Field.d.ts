@@ -6,6 +6,7 @@ export interface Field {
   props?: {
     [key: string]: any
   }
+  customField?: 'file'
 }
 
 export interface Props {

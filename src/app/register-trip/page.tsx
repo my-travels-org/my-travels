@@ -1,7 +1,7 @@
-import NewTrip2 from '@/components/NewTrip2'
+import CreateTrip from '@/components/CreateTrip'
 
 export default function RegisterTrip (): JSX.Element {
   return (
-    <NewTrip2 />
+    <CreateTrip />
   )
 }

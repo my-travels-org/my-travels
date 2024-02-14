@@ -8,10 +8,10 @@ import { toast } from 'sonner'
 import { Form } from '@components/index'
 import { registerSections, registerTripSchema, initialValues } from '@constants/RegisterTrip'
 import { type CreateTripDTO, type RegisterFieldValues } from '@/types/Trip'
-import styles from './Register.module.scss'
+import styles from './CreateTrip.module.scss'
 import { reviewService } from '@/services/Reviews'
 
-export default function NewTrip2 (): JSX.Element {
+export default function CreateTrip (): JSX.Element {
   const { status } = useSession()
   const router = useRouter()
 
@@ -20,20 +20,20 @@ export default function NewTrip2 (): JSX.Element {
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
     setIsSubmitted(true)
-    const { name, state, city, date, resenia, rate, spent, zoneType, motive, climate, activities, imagenes, lodgingName, coordinates, lodgingType } = data
+    const { name, state, city, date, review, rate, spent, typeZone, motive, climate, activities, images, lodgingName, coordinates, lodgingType } = data
     const payload: CreateTripDTO = {
       nombre: name,
       estado: state,
       ciudad: city,
       fecha: date.toString().slice(0, 10),
-      resenia,
+      resenia: review,
       calificacin: rate,
       cantidadGastada: spent,
-      tipoZona: zoneType,
+      tipoZona: typeZone,
       motivo: motive,
       clima: climate,
       actividades: activities,
-      imagenes,
+      imagenes: images,
       nombreHospedaje: lodgingName,
       coordenadas: coordinates,
       tipoHospedaje: lodgingType
@@ -41,7 +41,7 @@ export default function NewTrip2 (): JSX.Element {
     }
 
     toast.promise(reviewService.create(payload), {
-      loading: 'Registrando usuario...',
+      loading: 'Registrando viaje...',
       success: () => 'Viaje registrado con éxito',
       error: (err: any) => {
         const errors = Object.values(JSON.parse(err.response.data)).join(', ')

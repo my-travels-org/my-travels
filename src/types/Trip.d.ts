@@ -11,7 +11,7 @@ export interface CreateTripDTO {
   motivo: number
   clima: number
   actividades: number
-  imagenes: string
+  imagenes: File[]
   nombreHospedaje: string
   coordenadas: string
   tipoHospedaje: number
@@ -26,14 +26,14 @@ export interface RegisterFieldValues {
   state: string
   city: string
   date: string
-  resenia: string
+  review: string
   rate: number
   spent: number
-  zoneType: number
+  typeZone: number
   motive: number
   climate: number
   activities: number
-  imagenes: string
+  images: File[]
   lodgingName: string
   coordinates: string
   lodgingType: number

@@ -70,9 +70,7 @@ export default function Form ({
                           register={register}
                           errors={errors}
                         />
-
                       </div>
-
                     ))
                   )}
             </Fragment>
