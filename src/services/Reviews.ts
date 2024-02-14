@@ -8,15 +8,12 @@ const getAll = async (): Promise<AxiosResponse<GetResponseReviews>> => {
   return await axios.get(`${baseUrl}/review/viewReviews/1`)
 }
 
-const getOne = async ({id} : any): Promise<AxiosResponse<GetResponseOneReview>> => {
-
-  return await axios.get(`${baseUrl}/review/viewReview/${id}`)
+const getOne = async ({ id }: any): Promise<AxiosResponse<GetResponseOneReview>> => {
+  return await axios.get(`${baseUrl}/review/viewReview/${id as string}`)
 }
-
- 
 
 export const reviewService = {
   getAll,
   getOne
-  
+
 }

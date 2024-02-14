@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-const handler = NextAuth({
+export default NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -25,8 +25,6 @@ const handler = NextAuth({
           },
           body: JSON.stringify({ correo, password })
         })
-
-        console.log(res)
 
         if (!res.ok) {
           throw new Error('Credenciales inválidas.')
@@ -58,5 +56,3 @@ const handler = NextAuth({
     }
   }
 })
-
-export { handler as GET, handler as POST }

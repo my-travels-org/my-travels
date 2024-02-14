@@ -11,13 +11,13 @@
     &_title {
       text-align: center;
       font-size: 3.4rem;
-      color: variables.$primary-green-color;
+      color: variables.$primary-color;
     }
   }
   &_description {
     margin-bottom: 30px;
     text-align: center;
-    color: variables.$primary-blue-color;
+    color: variables.$secondary-color;
   }
   &_form {
     display: flex;
@@ -33,7 +33,10 @@
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        text-align: center;
+        &_link{
+          text-align: center;
+          font-size: variables.$link-normal-size-mobile;
+        }
       }
     }
   }

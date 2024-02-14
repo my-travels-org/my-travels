@@ -1,4 +1,4 @@
-import { Props } from '@/types/Field'
+import { Props } from '@/types/components/Field'
 import styles from './Field.module.scss'
 import Chip from "@mui/material/Chip";
 

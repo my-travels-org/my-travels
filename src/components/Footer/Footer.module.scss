@@ -1,0 +1,59 @@
+@use "@styles/variables";
+
+.footer {
+	background-color: variables.$secondary-background-color;
+	padding: 3rem 2rem;
+}
+
+.navigation {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 3rem;
+	justify-content: center;
+}
+
+.navigation a {
+	font-size: 2.4rem;
+	font-weight: 600rem;
+}
+
+.navigation a:hover {
+	color: variables.$primary-color;
+}
+
+.copyright {
+	font-size: 2rem;
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.subContainer {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	text-align: left;
+	justify-items: center;
+}
+
+.subContainer a {
+	padding: 1.5rem 0;
+}
+
+.subContainer h4 {
+	font-size: 2.8rem;
+}
+
+@media (min-width: 768px) {
+	.footer{
+		padding: 3rem 0;
+	}
+	.content {
+		display: flex;
+		flex-direction: column;
+	}
+	.navigation {
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+}

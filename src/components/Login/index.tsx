@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 import { Form } from '@components/index'
 import { loginSections, loginSchema } from '@constants/LoginForm'
 import styles from './Login.module.scss'
-import { LoginUserDTO } from '@/types/User'
+import { LoginUserDTO } from '@/types/models/User'
 
 export default function Login (): JSX.Element {
   const { data: session, status } = useSession()
@@ -61,11 +61,9 @@ export default function Login (): JSX.Element {
             />
             <div className={styles.login_form_links}>
               <span className={styles.login_form_links_element}>
-                ¿No tienes una cuenta? <Link href='/register'>Regístrate</Link>
+                ¿No tienes una cuenta? <Link className={styles.login_form_links_element_link} href='/register'>Regístrate</Link>
               </span>
-              <span>
-                <Link className={styles.login_form_links_element} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
-              </span>
+              <Link className={styles.login_form_links_element_link} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
             </div>
           </div>
         </section>

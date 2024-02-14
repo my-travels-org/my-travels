@@ -1,6 +1,6 @@
 'use client'
 
-import { UseToggleReturn } from '@/types/UseToggle'
+import { UseToggleReturn } from '@/types/hooks/UseToggle'
 import { useState } from 'react'
 
 export default function useToggle (): UseToggleReturn {

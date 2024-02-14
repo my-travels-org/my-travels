@@ -1,0 +1,64 @@
+@use "@styles/variables";
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  height: 100%;
+  z-index: 2;
+  background-color: variables.$tertiary-color;
+  will-change: transform, visibility;
+  &_list {
+    padding: 6rem 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    &_element {
+      &_link {
+        color: white;
+        &_active {
+          color: variables.$primary-background-color;
+        }
+        &:hover {
+          color: variables.$primary-background-color;
+          transition: all 250ms ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .nav {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .nav {
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: transparent;
+    &_list {
+      padding: 0;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-evenly;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .nav {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .nav {
+    width: 70%;
+  }
+}

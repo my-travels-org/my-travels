@@ -4,7 +4,6 @@ export interface CreateUserDTO {
   apellido_m: string
   correo: string
   password: string
-  estado_civil: string
   ciudad: string
   fecha_nacimiento: string
   actividad1: number
@@ -27,7 +26,6 @@ export interface RegisterFieldValues {
   surname: string
   email: string
   password: string
-  maritalStatus: string // should be an enum
   city: string
   birthdate: Date
   activity1: number // should be an enum

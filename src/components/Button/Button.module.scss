@@ -5,9 +5,10 @@
   padding: 1rem;
   border-radius: 2rem;
   border: none;
-  background-color: variables.$secondary-blue-color;
+  background-color: variables.$tertiary-color;
   color: white;
   font-family: inherit;
+  font-size: inherit;
   cursor: pointer;
   &:disabled{
     opacity: 0.5;

@@ -1,0 +1,17 @@
+.container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 4rem;
+  &_add{
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  &_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
