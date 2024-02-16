@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, Stepper, Field } from '@components/index'
 import { FormProps } from '@/types/components/Form'
+import { components } from '@/constants/CustomFields'
 import styles from './Form.module.scss'
 
 export default function Form ({
@@ -18,7 +19,9 @@ export default function Form ({
   initialValues = {},
   isStepper = false,
   currentStep = 0,
-  handleStep = (_step: number): void => {}
+  handleStep = (_step: number): void => {},
+  customFieldsStateSetter: setter,
+  customFieldsData: data
 }: FormProps): JSX.Element {
   const {
     reset,
@@ -30,7 +33,9 @@ export default function Form ({
     mode: 'onChange'
   })
 
-  const onSubmit = (data: any): void => handleFormSubmit(data)
+  const onSubmit = (data: any): void => {
+    handleFormSubmit(data)
+  }
 
   useEffect(() => {
     if (Object.keys(initialValues).length === 0) return
@@ -58,19 +63,29 @@ export default function Form ({
                       handleStep={handleStep}
                       register={register}
                       errors={errors}
+                      customFieldsStateSetter={setter}
+                      customFieldsData={data}
                     />
                   </div>
                   )
                 : (
                     fields.map((field) => (
-                      <div key={`${title}-${field.id}`} className={styles.form_container_section}>
-                        <Field
-                          key={field.id}
-                          field={field}
-                          register={register}
-                          errors={errors}
-                        />
-                      </div>
+                      field.customField !== undefined
+                        ? (
+                          <div key={`${title}-${field.id}`} className={styles.form_container_section}>
+                            {components[field.customField]({ ...field.customFieldProps, setter, data })}
+                          </div>
+                          )
+                        : (
+                          <div key={`${title}-${field.id}`} className={styles.form_container_section}>
+                            <Field
+                              key={field.id}
+                              field={field}
+                              register={register}
+                              errors={errors}
+                            />
+                          </div>
+                          )
                     ))
                   )}
             </Fragment>

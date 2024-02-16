@@ -7,4 +7,6 @@ export type Props = Omit<FieldProps, 'field'> & {
   step: number
   maxSteps: number
   handleStep: (step: number) => void
+  customFieldsStateSetter?: Dispatch<SetStateAction<any>>
+  customFieldsData?: Partial<CustomFieldsState>
 }

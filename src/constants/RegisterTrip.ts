@@ -2,6 +2,7 @@ import * as yup from 'yup'
 
 import { Section } from '@/types/components/Form'
 import { required, positive, integer } from '@constants/YupErrors'
+import { CustomField } from '@/types/CustomField'
 
 export const registerSections: Section[] = [
   {
@@ -11,7 +12,7 @@ export const registerSections: Section[] = [
       { id: 'city', label: 'Ciudad', type: 'text', required: true },
       { id: 'date', label: 'Fecha de visita', type: 'date', required: true },
       { id: 'review', label: 'Reseña', type: 'text', required: true },
-      { id: 'rate', label: 'Calificacion otorgada ', type: 'number', required: true },
+      { id: 'rate', label: 'Calificacion otorgada ', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'rate' } },
       { id: 'spent', label: 'Cantidad de dinero gastado aproximadamente', type: 'number', required: true } // should be type: select
 
     ],
@@ -19,7 +20,7 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'zoneType', label: 'Tipo de zona', type: 'multiple', required: true },
+      { id: 'zoneType', label: 'Tipo de zona', type: 'text', required: true },
       { id: 'motive', label: 'Motivo de visita', type: 'number', required: true },
       { id: 'climate', label: 'Tipo de clima', type: 'number', required: true },
       { id: 'activities', label: 'Actividades realizadas', type: 'number', required: true }
@@ -28,10 +29,22 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'images', label: 'Fotos de tu aventura', type: 'text', required: true, customField: 'file' }
-
+      {
+        id: 'images',
+        label: 'Fotos de tu aventura',
+        type: 'text',
+        required: true,
+        customField: CustomField.File,
+        customFieldProps: {
+          id: 'images',
+          buttonName: 'Subir imágenes',
+          accept: 'image/*',
+          multiple: true,
+          previewFiles: true
+        }
+      }
     ],
-    title: 'imagenes'
+    title: 'Imágenes'
   },
   {
     fields: [
@@ -49,7 +62,6 @@ export const initialValues = {
   city: 'test',
   date: '1111-11-11',
   review: 'test',
-  rate: 0,
   spent: 0,
   zoneType: 0,
   motive: 0,
@@ -67,7 +79,6 @@ export const registerTripSchema = yup
     city: yup.string().required(required),
     date: yup.string().required(required),
     review: yup.string().required(required),
-    rate: yup.number().typeError(positive).positive().required(required),
     spent: yup.number().typeError(positive).positive().required(required),
     zoneType: yup.number().typeError(positive).positive().integer(integer).required(required),
     motive: yup.number().typeError(positive).positive().integer(integer).required(required),

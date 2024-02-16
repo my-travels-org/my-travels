@@ -7,18 +7,26 @@ import { toast } from 'sonner'
 
 import { Form } from '@components/index'
 import { registerSections, registerTripSchema, initialValues } from '@constants/RegisterTrip'
-import { type CreateTripDTO, type RegisterFieldValues } from '@/types/Trip'
-import styles from './CreateTrip.module.scss'
+import { RegisterTripFieldValues, type CreateTripDTO } from '@/types/Trip'
+import styles from './CreateTripForm.module.scss'
 import { reviewService } from '@/services/Reviews'
+import { CustomFieldsState } from '@/types/states/CustomField'
 
-export default function CreateTrip (): JSX.Element {
+export default function CreateTripForm (): JSX.Element {
   const { status } = useSession()
   const router = useRouter()
 
+  const [customFieldsData, setCustomFieldsData] = useState<CustomFieldsState>(
+    {
+      images: null,
+      starRating: 0
+    }
+  )
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [step, setStep] = useState(0)
 
-  const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
+  const handleSubmit = async (data: RegisterTripFieldValues): Promise<any> => {
+    console.log(customFieldsData)
     setIsSubmitted(true)
     const { name, state, city, date, review, rate, spent, typeZone, motive, climate, activities, images, lodgingName, coordinates, lodgingType } = data
     const payload: CreateTripDTO = {
@@ -37,16 +45,14 @@ export default function CreateTrip (): JSX.Element {
       nombreHospedaje: lodgingName,
       coordenadas: coordinates,
       tipoHospedaje: lodgingType
-
     }
 
     toast.promise(reviewService.create(payload), {
       loading: 'Registrando viaje...',
       success: () => 'Viaje registrado con éxito',
-      error: (err: any) => {
-        const errors = Object.values(JSON.parse(err.response.data)).join(', ')
+      error: () => {
         setIsSubmitted(false)
-        return `Ocurrió un error al intentar registrar: ${errors}`
+        return 'Ocurrió un error al intentar registrar el viaje'
       }
     })
   }
@@ -56,7 +62,7 @@ export default function CreateTrip (): JSX.Element {
   }
 
   useEffect(() => {
-    router.prefetch('/register-trip')
+    router.prefetch('/my-travels/add-travel')
   }, [])
 
   return (
@@ -67,7 +73,7 @@ export default function CreateTrip (): JSX.Element {
             <h1 className={styles.register_title}>Cuentanos tu aventura.</h1>
             <Form
               sections={registerSections}
-              submitButton='Registrarme'
+              submitButton='Registrar viaje'
               onSubmit={handleSubmit}
               schema={registerTripSchema}
               className={styles.register_form}
@@ -76,6 +82,8 @@ export default function CreateTrip (): JSX.Element {
               isStepper
               currentStep={step}
               handleStep={handleStep}
+              customFieldsStateSetter={setCustomFieldsData}
+              customFieldsData={customFieldsData}
             />
           </>
         )}

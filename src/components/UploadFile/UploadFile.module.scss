@@ -1,0 +1,25 @@
+@use "@styles/variables";
+
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  &_input{
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    font-size: 1.6rem;
+    text-align: center;
+    background-color: variables.$tertiary-color;
+    color: white;
+    cursor: pointer;
+  }
+  &_preview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}

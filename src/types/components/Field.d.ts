@@ -1,12 +1,17 @@
+import { CustomField } from '../CustomField'
+
 export interface Field {
-  type: string
+  type?: string
   id: string
   label: string
   required: boolean
   props?: {
     [key: string]: any
   }
-  customField?: 'file'
+  customField?: CustomField
+  customFieldProps?: {
+    [key: string]: any
+  }
 }
 
 export interface Props {

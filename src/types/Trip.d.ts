@@ -21,7 +21,7 @@ export interface Trip extends CreateTripDTO {
   id: number
 }
 
-export interface RegisterFieldValues {
+export interface RegisterTripFieldValues {
   name: string
   state: string
   city: string

@@ -1,8 +1,19 @@
 import { Props } from '@/types/components/Stepper'
 import { Button, Field } from '@components/index'
 import styles from './Stepper.module.scss'
+import { components } from '@/constants/CustomFields'
 
-export default function Stepper ({ fields, title, step, maxSteps, errors, register, handleStep }: Props): JSX.Element {
+export default function Stepper ({
+  fields,
+  title,
+  step,
+  maxSteps,
+  errors,
+  register,
+  handleStep,
+  customFieldsStateSetter: setter,
+  customFieldsData: data
+}: Props): JSX.Element {
   const handleClick = (step: number): void => {
     handleStep(step)
     const options: ScrollToOptions = {
@@ -16,13 +27,21 @@ export default function Stepper ({ fields, title, step, maxSteps, errors, regist
     <div className={styles.stepper}>
       <h4 className={styles.stepper_title}>{title}</h4>
       {fields.map((field) => (
-        <Field
-          key={field.id}
-          field={field}
-          register={register}
-          className={styles.stepper_field}
-          errors={errors}
-        />
+        field.customField !== undefined
+          ? (
+            <div key={`${title}-${field.id}`} className={styles.form_container_section}>
+              {components[field.customField]({ ...field.customFieldProps, setter, data })}
+            </div>
+            )
+          : (
+            <Field
+              key={field.id}
+              field={field}
+              register={register}
+              className={styles.stepper_field}
+              errors={errors}
+            />
+            )
       ))}
       <div className={styles.stepper_buttons}>
         {step > 0 && (

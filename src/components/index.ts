@@ -23,15 +23,16 @@ import Questions from './Questions'
 import Proximamente from './Proximamente'
 import Travels from './Travels'
 import Card from './Card'
-import CreateTrip from './CreateTrip'
+import CreateTripForm from './CreateTripForm'
 import Pagination from './Pagination'
+import UploadFile from './UploadFile'
 
 export {
   AboutUs,
   Aside,
   Button,
   Carousel,
-  CreateTrip,
+  CreateTripForm,
   Conditions,
   Home,
   Hamburger,
@@ -53,5 +54,6 @@ export {
   MultipleOption,
   Travels,
   Card,
-  Pagination
+  Pagination,
+  UploadFile
 }

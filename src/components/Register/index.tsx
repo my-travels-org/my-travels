@@ -45,10 +45,9 @@ export default function Register (): JSX.Element {
         router.push('/')
         return 'Usuario registrado con éxito'
       },
-      error: (err: any) => {
-        const errors = Object.values(JSON.parse(err.response.data)).join(', ')
+      error: async () => {
         setIsSubmitted(false)
-        return `Ocurrió un error al intentar registrar: ${errors}`
+        return 'Ocurrió un error al intentar registrar'
       }
     })
   }

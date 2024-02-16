@@ -1,3 +1,5 @@
+@use "@styles/variables";
+
 .container{
   position: relative;
   display: flex;
@@ -8,6 +10,14 @@
     gap: 1.5rem;
     display: flex;
     flex-direction: column;
+    &_link{
+      padding: 1rem;
+      border-radius: 1.5rem;
+      font-size: 1.6rem;
+      text-align: center;
+      background-color: variables.$tertiary-color;
+      color: white;
+    }
   }
   &_wrapper{
     display: flex;
