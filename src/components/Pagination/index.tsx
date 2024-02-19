@@ -4,7 +4,13 @@ import { PaginationProps } from '@/types/components/Pagination'
 import styles from './Pagination.module.scss'
 import { useWindowSize } from '@/hooks'
 
-export default function Pagination ({ count, elementsPerPage, currentPage, handlePageChange }: PaginationProps): JSX.Element {
+export default function Pagination ({
+  count,
+  elementsPerPage,
+  currentPage,
+  handlePageChange,
+  className = ''
+}: PaginationProps): JSX.Element {
   const { widthSize } = useWindowSize()
 
   const maxButtons = widthSize >= 768 ? 7 : 3
@@ -30,7 +36,7 @@ export default function Pagination ({ count, elementsPerPage, currentPage, handl
   }
 
   return (
-    <div className={styles.pagination}>
+    <div className={`${styles.pagination} ${className}`}>
       <button
         className={styles.pagination_button}
         onClick={() => handleClick(currentPage - 1)}

@@ -3,4 +3,5 @@ export interface PaginationProps {
   currentPage: number
   elementsPerPage: number
   handlePageChange: (page: number) => void
+  className?: string
 }
