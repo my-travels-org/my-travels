@@ -18,24 +18,20 @@ export default function Navbar ({ toggle }: NavbarProps): JSX.Element {
   //const { toggle } = useToggle()
   const pathname = usePathname()
 
-  const { data: session, status } = useSession()
+  
   // const filteredNavbarLinks = navbarLinks.filter(({ isProtected }) =>
   //   (status === 'authenticated' && isProtected) ||
   //   (status === 'unauthenticated' && !isProtected)
   // )
   
-  const   userInfo:infoUser = session?.user || {};
-
- 
-  const handleLogout = () => {
-
-    signOut({ callbackUrl: 'http://localhost:3000/api/auth/signout' });
-  };
+  
 
   return (
     <nav className={styles.nav}>
       <ul className={styles.nav_list}>
+        
         {
+
       navbarLinks.map(({ name, path }) => {
         return (
           <li key={path} className={styles.nav_list_element}>
@@ -57,7 +53,7 @@ export default function Navbar ({ toggle }: NavbarProps): JSX.Element {
       })
     }
    
-      <UserDropdown userName={userInfo.nombre} userLastName={userInfo.apellido_p} onLogout={handleLogout} />
+      
       
     
     </ul>

@@ -1,12 +1,20 @@
 @use "@styles/variables.scss";
 
 .menuTrigger{
+    
     overflow: hidden;
     cursor: pointer;
-}
-.Avatar {
-    position: absolute;
     
+    height: 90px;
+    width: 90px;
+    padding: 1rem;
+    visibility: visible;
+    
+    
+}
+
+
+.Avatar {
     height: 60px;
     width: 60px;
     border-radius: 50%;
@@ -14,8 +22,8 @@
 
 .dropDownMenu {
     position: absolute;
-    top: 70px;
-    right: 30px;
+    top: 70%;
+    right: 25px;
     background-color: variables.$secondary-background-color;
     border-radius: 2rem;
     padding: 10px 20px;
@@ -82,4 +90,12 @@
     font-size: 16px;
     transition: var(--speed);
     color: black;
+}
+@media (max-width: 1024px) {
+    .Avatar{
+      
+        
+
+
+    }
 }

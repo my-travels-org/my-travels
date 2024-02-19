@@ -62,13 +62,6 @@ const UserDropdown = ({ userName,userLastName, onLogout }: any) => {
   );
 };
 
-function DropDownItem(props){
-  return(
-    <li className={styles.dropDownItem}>
-      <FontAwesomeIcon icon={props.iconName}/>
-      <Link className={styles.option} href= {`${props.referencia}`} onClick={props.inetAction}>{props.text}</Link>
-    </li>
-  )
-}
+
 
 export default UserDropdown;
