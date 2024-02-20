@@ -69,10 +69,18 @@ export default function Form ({
                   </div>
                   )
                 : (
-                    fields.map((field) => (
+                    fields.map(({ showLabel = true, ...field }) => (
                       field.customField !== undefined
                         ? (
                           <div key={`${title}-${field.id}`} className={styles.form_container_section}>
+                            {showLabel !== undefined && showLabel && (
+                              <label
+                                htmlFor={field.id}
+                                style={{ cursor: 'pointer' }}
+                              >
+                                {field.label}
+                              </label>
+                            )}
                             {components[field.customField]({ ...field.customFieldProps, setter, data })}
                           </div>
                           )

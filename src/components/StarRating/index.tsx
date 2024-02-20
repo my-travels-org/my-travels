@@ -1,25 +1,41 @@
-import React from 'react'
+'use client'
+
+import { useState } from 'react'
+
 import styles from './StarRating.module.scss'
-import Image from 'next/image'
+import { Star, FilledStar } from '@/components/index'
+import { StarRatingProps } from '@/types/components/StarRating'
 
-const StarRating = ({ rating }: { rating: number }): JSX.Element => {
-  // Calcula el número de estrellas llenas
+export default function StarRating ({ data, setter }: StarRatingProps): JSX.Element {
+  const [rating, setRating] = useState(0)
+  const [hoveredStar, setHoveredStar] = useState<number | null>(null)
 
-  const starsFilled = Math.round(rating / 2)
-
-  // Genera un array de estrellas basado en el número de estrellas llenas
-  const stars = Array.from({ length: 5 }, (_, index) => (
-    <div
-      key={index}
-      className={styles.star}
-    >
-      {index < starsFilled ? <Image src='/yellowStar.svg' width={25} height={25} alt='30' /> : <Image src='/grayStar.ico' width={25} height={25} alt='30' />}
-
+  return (
+    <div className={styles.rating}>
+      <div className={styles.rating_wrapper}>
+        {Array.from({ length: 5 }, (_, index) => (
+          <span
+            key={`star-${index + 1}`}
+            onClick={() => setRating(index + 1)}
+            onMouseEnter={() => setHoveredStar(index + 1)}
+            onMouseLeave={() => setHoveredStar(null)}
+          >
+            {
+              rating > index
+                ? (
+                  <FilledStar />
+                  )
+                : hoveredStar !== null && hoveredStar > index
+                  ? (
+                    <FilledStar />
+                    )
+                  : (
+                    <Star />
+                    )
+            }
+          </span>
+        ))}
+      </div>
     </div>
-
-  ))
-
-  return <div className={styles.rating}>{stars}</div>
+  )
 }
-
-export default StarRating

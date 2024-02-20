@@ -26,10 +26,18 @@ export default function Stepper ({
   return (
     <div className={styles.stepper}>
       <h4 className={styles.stepper_title}>{title}</h4>
-      {fields.map((field) => (
+      {fields.map(({ showLabel = true, ...field }) => (
         field.customField !== undefined
           ? (
-            <div key={`${title}-${field.id}`} className={styles.form_container_section}>
+            <div key={`${title}-${field.id}`} className={styles.stepper_field}>
+              {showLabel !== undefined && showLabel && (
+                <label
+                  htmlFor={field.id}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {field.label}
+                </label>
+              )}
               {components[field.customField]({ ...field.customFieldProps, setter, data })}
             </div>
             )

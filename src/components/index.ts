@@ -11,8 +11,6 @@ import Loader from './Loader'
 import Login from './Login'
 import Navbar from './Navbar'
 import Register from './Register'
-import ScrollBar from './ScrollBar'
-import Viewer from './Viewer'
 import Stepper from './Stepper'
 import StarRating from './StarRating'
 import MultipleOption from './MultipleOption'
@@ -26,6 +24,8 @@ import Card from './Card'
 import CreateTripForm from './CreateTripForm'
 import Pagination from './Pagination'
 import UploadFile from './UploadFile'
+import Star from './Star'
+import FilledStar from './FilledStar'
 
 export {
   AboutUs,
@@ -48,12 +48,12 @@ export {
   Register,
   Search,
   Stepper,
-  ScrollBar,
-  Viewer,
   StarRating,
   MultipleOption,
   Travels,
   Card,
   Pagination,
-  UploadFile
+  UploadFile,
+  Star,
+  FilledStar
 }

@@ -1,18 +1,14 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-export default NextAuth({
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       id: 'credentials',
       credentials: {
-        email: { label: 'Email', type: 'text', placeholder: 'jsmith' },
-        password: {
-          label: 'Password',
-          type: 'password',
-          placeholder: '******'
-        }
+        email: {},
+        password: {}
       },
       async authorize (credentials) {
         const correo = credentials?.email
@@ -56,3 +52,5 @@ export default NextAuth({
     }
   }
 })
+
+export { handler as GET, handler as POST }

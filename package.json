@@ -31,6 +31,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.45.4",
+    "sharp": "^0.33.2",
     "sonner": "0.6.2",
     "typescript": "5.1.6",
     "yup": "1.2.0"

@@ -1,13 +1,13 @@
+import { HTMLAttributes, InputHTMLAttributes } from 'react'
 import { CustomField } from '../CustomField'
 
 export interface Field {
   type?: string
   id: string
   label: string
+  showLabel?: boolean
   required: boolean
-  props?: {
-    [key: string]: any
-  }
+  props?: HTMLAttributes<InputHTMLAttributes>
   customField?: CustomField
   customFieldProps?: {
     [key: string]: any

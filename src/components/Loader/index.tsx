@@ -1,7 +1,10 @@
+import { LoaderProps } from '@/types/components/Loader'
 import styles from './Loader.module.scss'
 
-export default function Loader (): JSX.Element {
+export default function Loader ({ className = '' }: LoaderProps): JSX.Element {
   return (
-    <div className={styles.loader} />
+    <section className={`${styles.container} ${className}`}>
+      <div className={styles.loader} />
+    </section>
   )
 }

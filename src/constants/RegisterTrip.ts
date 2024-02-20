@@ -1,18 +1,18 @@
 import * as yup from 'yup'
 
 import { Section } from '@/types/components/Form'
-import { required, positive, integer } from '@constants/YupErrors'
+import { required, positive, number } from '@constants/YupErrors'
 import { CustomField } from '@/types/CustomField'
 
 export const registerSections: Section[] = [
   {
     fields: [
-      { id: 'name', label: 'Nombre', type: 'text', required: true },
+      { id: 'name', label: 'Lugar visitado', type: 'text', required: true },
       { id: 'state', label: 'Estado', type: 'text', required: true },
       { id: 'city', label: 'Ciudad', type: 'text', required: true },
       { id: 'date', label: 'Fecha de visita', type: 'date', required: true },
-      { id: 'review', label: 'Reseña', type: 'text', required: true },
-      { id: 'rate', label: 'Calificacion otorgada ', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'rate' } },
+      { id: 'review', label: 'Reseña', required: true, customField: CustomField.TextArea },
+      { id: 'rate', label: 'Puntuación', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'rate' } },
       { id: 'spent', label: 'Cantidad de dinero gastado aproximadamente', type: 'number', required: true } // should be type: select
 
     ],
@@ -79,12 +79,12 @@ export const registerTripSchema = yup
     city: yup.string().required(required),
     date: yup.string().required(required),
     review: yup.string().required(required),
-    spent: yup.number().typeError(positive).positive().required(required),
-    zoneType: yup.number().typeError(positive).positive().integer(integer).required(required),
-    motive: yup.number().typeError(positive).positive().integer(integer).required(required),
-    climate: yup.number().typeError(positive).positive().integer(integer).required(required),
-    activities: yup.number().typeError(positive).positive().integer(integer).required(required),
+    spent: yup.number().typeError(number).positive(positive).required(required),
+    zoneType: yup.number().typeError(number).positive().typeError(number).required(required),
+    motive: yup.number().typeError(positive).positive().required(required),
+    climate: yup.number().typeError(positive).positive().required(required),
+    activities: yup.number().typeError(positive).positive().required(required),
     lodgingName: yup.string().required(required),
     coordinates: yup.string().required(required),
-    lodgingType: yup.number().typeError(positive).positive().integer(integer).required(required)
+    lodgingType: yup.number().typeError(positive).positive().required(required)
   })

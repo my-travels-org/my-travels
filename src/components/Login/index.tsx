@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
-import { Form } from '@components/index'
+import { Form, Loader } from '@components/index'
 import { loginSections, loginSchema } from '@constants/LoginForm'
 import styles from './Login.module.scss'
 import { LoginUserDTO } from '@/types/models/User'
@@ -39,35 +39,32 @@ export default function Login (): JSX.Element {
   }, [status, isLoggedIn])
 
   useEffect(() => {
-    router.prefetch('')
+    router.prefetch('/login')
   }, [])
 
   return (
-    <>
-      {status === 'unauthenticated' && (
-        <section className={styles.login}>
-          <div className={styles.login_left}>
-            <h1 className={styles.login_left_title}>Bienvenido a MyTravels.</h1>
-          </div>
-          <div className={styles.login_form}>
-            <span className={styles.login_description}>
-              <strong>Inicia sesión con tu correo y contraseña.</strong>
-            </span>
-            <Form
-              sections={loginSections}
-              submitButton='Iniciar sesión'
-              onSubmit={handleSubmit}
-              schema={loginSchema}
-            />
-            <div className={styles.login_form_links}>
-              <span className={styles.login_form_links_element}>
-                ¿No tienes una cuenta? <Link className={styles.login_form_links_element_link} href='/register'>Regístrate</Link>
-              </span>
-              <Link className={styles.login_form_links_element_link} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
-            </div>
-          </div>
-        </section>
-      )}
-    </>
+    <section className={styles.login}>
+      <div className={styles.login_left}>
+        <h1 className={styles.login_left_title}>Bienvenido a MyTravels.</h1>
+      </div>
+      <div className={styles.login_form}>
+        <span className={styles.login_description}>
+          <strong>Inicia sesión con tu correo y contraseña.</strong>
+        </span>
+        <Form
+          sections={loginSections}
+          submitButton='Iniciar sesión'
+          onSubmit={handleSubmit}
+          schema={loginSchema}
+        />
+        <div className={styles.login_form_links}>
+          <span className={styles.login_form_links_element}>
+            ¿No tienes una cuenta? <Link className={styles.login_form_links_element_link} href='/register'>Regístrate</Link>
+          </span>
+          <Link className={styles.login_form_links_element_link} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
+        </div>
+      </div>
+      {(status === 'loading') && <Loader className={styles.loader} />}
+    </section>
   )
 }
