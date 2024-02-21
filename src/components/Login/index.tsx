@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
@@ -12,31 +12,30 @@ import styles from './Login.module.scss'
 import { LoginUserDTO } from '@/types/models/User'
 
 export default function Login (): JSX.Element {
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const router = useRouter()
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-
   const handleSubmit = async (values: LoginUserDTO): Promise<void> => {
-    const res = await signIn('credentials', {
+    toast.promise(signIn('credentials', {
       email: values.email,
       password: values.password,
       redirect: false
+    }), {
+      loading: 'Iniciando sesión...',
+      success: () => {
+        return 'Bienvenido a MyTravels.'
+      },
+      error: async (error) => {
+        return error.toString()
+      }
     })
-
-    if (res?.error !== null) {
-      toast.error(res?.error)
-    } else setIsLoggedIn(true)
   }
 
   useEffect(() => {
     if (status === 'authenticated') {
-      if (isLoggedIn) {
-        toast.success(`Bienvenido, ${session.user.nombre}`)
-      }
       router.push('/')
     }
-  }, [status, isLoggedIn])
+  }, [status])
 
   useEffect(() => {
     router.prefetch('/login')
@@ -64,7 +63,7 @@ export default function Login (): JSX.Element {
           <Link className={styles.login_form_links_element_link} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
         </div>
       </div>
-      {(status === 'loading') && <Loader className={styles.loader} />}
+      {(status === 'loading' || status === 'authenticated') && <Loader className={styles.loader} />}
     </section>
   )
 }
