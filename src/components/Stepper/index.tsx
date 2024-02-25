@@ -12,9 +12,12 @@ export default function Stepper ({
   register,
   handleStep,
   customFieldsStateSetter: setter,
-  customFieldsData: data
+  customFieldsData: data,
+  setError,
+  clearErrors
 }: Props): JSX.Element {
   const handleClick = (step: number): void => {
+    if (errors.length > 0) return
     handleStep(step)
     const options: ScrollToOptions = {
       left: 0,
@@ -38,7 +41,12 @@ export default function Stepper ({
                   {field.label}
                 </label>
               )}
-              {components[field.customField]({ ...field.customFieldProps, setter, data })}
+              {components[field.customField]({ ...field.customFieldProps, setter, data, setError, clearErrors })}
+              {(errors[field.id] !== undefined) && (
+                <span className={styles.error}>
+                  {errors[field.id]?.message as string}
+                </span>
+              )}
             </div>
             )
           : (

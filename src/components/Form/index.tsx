@@ -27,6 +27,8 @@ export default function Form ({
     reset,
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schema),
@@ -63,6 +65,8 @@ export default function Form ({
                       handleStep={handleStep}
                       register={register}
                       errors={errors}
+                      setError={setError}
+                      clearErrors={clearErrors}
                       customFieldsStateSetter={setter}
                       customFieldsData={data}
                     />
@@ -81,7 +85,12 @@ export default function Form ({
                                 {field.label}
                               </label>
                             )}
-                            {components[field.customField]({ ...field.customFieldProps, setter, data })}
+                            {components[field.customField]({ ...field.customFieldProps, setter, data, setError, clearErrors })}
+                            {(errors[field.id] !== undefined) && (
+                              <span className={styles.error}>
+                                {errors[field.id]?.message as string}
+                              </span>
+                            )}
                           </div>
                           )
                         : (

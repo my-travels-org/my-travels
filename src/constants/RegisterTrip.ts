@@ -11,8 +11,8 @@ export const registerSections: Section[] = [
       { id: 'state', label: 'Estado', type: 'text', required: true },
       { id: 'city', label: 'Ciudad', type: 'text', required: true },
       { id: 'date', label: 'Fecha de visita', type: 'date', required: true },
-      { id: 'review', label: 'Reseña', required: true, customField: CustomField.TextArea },
-      { id: 'rate', label: 'Puntuación', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'rate' } },
+      { id: 'review', label: 'Reseña', required: true, customField: CustomField.TextArea, customFieldProps: { id: 'review' } },
+      { id: 'rate', label: 'Puntuación', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'starRating' } },
       { id: 'spent', label: 'Cantidad de dinero gastado aproximadamente', type: 'number', required: true } // should be type: select
 
     ],

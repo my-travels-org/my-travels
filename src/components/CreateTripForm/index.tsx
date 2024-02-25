@@ -19,7 +19,8 @@ export default function CreateTripForm (): JSX.Element {
   const [customFieldsData, setCustomFieldsData] = useState<CustomFieldsState>(
     {
       images: null,
-      starRating: 0
+      starRating: 0,
+      review: ''
     }
   )
   const [isSubmitted, setIsSubmitted] = useState(false)

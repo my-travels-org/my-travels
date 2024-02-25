@@ -1,0 +1,11 @@
+@use "@styles/variables";
+
+.textarea{
+  padding: 1.5rem;
+  resize: vertical;
+  min-height: 12rem;
+  max-height: 18rem;
+  background-color: variables.$secondary-background-color;
+  border: none;
+  border-radius: 1rem;
+}
