@@ -21,13 +21,15 @@ export interface Trip extends CreateTripDTO {
   id: number
 }
 
+export type EditTripDTO = Partial<CreateTripDTO>
+
 export interface RegisterTripFieldValues {
   name: string
   state: string
   city: string
   date: string
   review: string
-  rate: number
+  starRating: number
   spent: number
   typeZone: number
   motive: number
@@ -38,3 +40,5 @@ export interface RegisterTripFieldValues {
   coordinates: string
   lodgingType: number
 }
+
+export type EditTripFieldValues = Partial<RegisterTripFieldValues>

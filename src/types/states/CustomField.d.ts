@@ -1,5 +1,5 @@
 export interface CustomFieldsState {
-  images: FileList | null
+  images?: FileList
   starRating: number
   review: string
 }

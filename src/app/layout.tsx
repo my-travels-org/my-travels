@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { Archivo } from 'next/font/google'
 
+import Loading from './Loading'
 import AuthProvider from './AuthProvider'
-
 import '@styles/global.scss'
 import Main from '@/components/Main'
+import LoaderContextProvider from '@/contexts/Loader/provider'
 
 const archivo = Archivo({ subsets: ['latin'] })
 
@@ -22,11 +23,15 @@ export default function RootLayout ({
   return (
     <AuthProvider>
       <html lang='en'>
-        <body className={archivo.className}>
-          <Main>
-            {children}
-          </Main>
-        </body>
+        <LoaderContextProvider>
+          <body className={archivo.className}>
+            <Loading>
+              <Main>
+                {children}
+              </Main>
+            </Loading>
+          </body>
+        </LoaderContextProvider>
       </html>
     </AuthProvider>
   )

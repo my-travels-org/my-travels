@@ -21,7 +21,7 @@ export default function StarRating ({ id, data, setter }: StarRatingProps): JSX.
     if (data[element] !== undefined) {
       setRating(data[element] as number)
     }
-  }, [])
+  }, [data])
 
   return (
     <div className={styles.rating}>

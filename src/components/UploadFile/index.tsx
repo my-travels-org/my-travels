@@ -16,7 +16,7 @@ export default function UploadFile ({
   setter,
   data
 }: UploadFileProps): JSX.Element {
-  const [files, setFiles] = useState<FileList | null>(null)
+  const [files, setFiles] = useState<FileList>()
 
   useEffect(() => {
     const element = id as keyof typeof data
@@ -48,7 +48,7 @@ export default function UploadFile ({
       {
         files !== null && previewFiles && (
           <ul className={styles.container_preview}>
-            {Array.from(files).map((file, i) => (
+            {files !== undefined && Array.from(files).map((file, i) => (
               <li key={i}>
                 {
                   file.type.includes('image')

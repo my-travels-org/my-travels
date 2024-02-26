@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 import styles from './TextArea.module.scss'
 import { TextAreaProps } from '@/types/components/TextArea'
@@ -15,7 +15,7 @@ export default function TextArea ({ data, id, setter, setError, clearErrors }: T
       setValue(data[element] as string)
       if (data[element] !== '') setHasBeenEdited(true)
     }
-  }, [])
+  }, [data])
 
   useEffect(() => {
     if (!hasBeenEdited) return
@@ -24,16 +24,18 @@ export default function TextArea ({ data, id, setter, setError, clearErrors }: T
     } else clearErrors(id)
   }, [value, hasBeenEdited])
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const handleChange = (e: FormEvent<HTMLTextAreaElement>): void => {
     const element = id as keyof typeof data
-    setter({ ...data, [element]: e.target.value })
-    setValue(e.target.value)
+    const { value } = e.currentTarget
+    setter({ ...data, [element]: value })
+    setValue(value)
     setHasBeenEdited(true)
+    e.currentTarget.scrollTop = e.currentTarget.scrollHeight
   }
 
   return (
     <>
-      <textarea id={id} className={styles.textarea} onChange={handleChange} value={value} />
+      <textarea id={id} className={styles.textarea} onInput={(e) => handleChange(e)} value={value} />
     </>
   )
 }

@@ -1,7 +1,7 @@
-import CreateTripForm from '@/components/CreateTripForm'
+import TripForm from '@/components/TripForm'
 
-export default function RegisterTrip (): JSX.Element {
+export default function AddTravelPage (): JSX.Element {
   return (
-    <CreateTripForm />
+    <TripForm />
   )
 }

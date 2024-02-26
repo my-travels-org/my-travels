@@ -12,7 +12,7 @@ export const registerSections: Section[] = [
       { id: 'city', label: 'Ciudad', type: 'text', required: true },
       { id: 'date', label: 'Fecha de visita', type: 'date', required: true },
       { id: 'review', label: 'Reseña', required: true, customField: CustomField.TextArea, customFieldProps: { id: 'review' } },
-      { id: 'rate', label: 'Puntuación', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'starRating' } },
+      { id: 'starRating', label: 'Puntuación', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'starRating' } },
       { id: 'spent', label: 'Cantidad de dinero gastado aproximadamente', type: 'number', required: true } // should be type: select
 
     ],
@@ -62,6 +62,7 @@ export const initialValues = {
   city: 'test',
   date: '1111-11-11',
   review: 'test',
+  starRating: 1,
   spent: 0,
   zoneType: 0,
   motive: 0,

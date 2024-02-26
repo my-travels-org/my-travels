@@ -1,4 +1,4 @@
-import { UseFormClearErrors } from 'react-hook-form'
+import { FieldValues, UseFormClearErrors, UseFormTrigger } from 'react-hook-form'
 import { Props as FieldProps, Field } from './Field'
 
 export type Props = Omit<FieldProps, 'field'> & {
@@ -7,6 +7,7 @@ export type Props = Omit<FieldProps, 'field'> & {
   title: string
   step: number
   maxSteps: number
+  trigger: UseFormTrigger<FieldValues>
   handleStep: (step: number) => void
   customFieldsStateSetter?: Dispatch<SetStateAction<any>>
   customFieldsData?: Partial<CustomFieldsState>

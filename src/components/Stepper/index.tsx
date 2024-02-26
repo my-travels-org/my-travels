@@ -8,6 +8,7 @@ export default function Stepper ({
   title,
   step,
   maxSteps,
+  trigger,
   errors,
   register,
   handleStep,
@@ -16,8 +17,11 @@ export default function Stepper ({
   setError,
   clearErrors
 }: Props): JSX.Element {
-  const handleClick = (step: number): void => {
-    if (errors.length > 0) return
+  const handleClick = async (step: number): Promise<any> => {
+    const ids = fields.map(({ id }) => id)
+    const hasNoErrors = await trigger(ids)
+
+    if (errors.length > 0 || !hasNoErrors) return
     handleStep(step)
     const options: ScrollToOptions = {
       left: 0,
@@ -64,7 +68,7 @@ export default function Stepper ({
           <Button
             type='button'
             className={`${styles.stepper_buttons_btn} ${styles.stepper_button_btn_back}`}
-            onClick={() => handleClick(-1)}
+            onClick={async () => await handleClick(-1)}
           >
             Anterior
           </Button>
@@ -73,7 +77,7 @@ export default function Stepper ({
           <Button
             type='button'
             className={`${styles.stepper_buttons_btn} ${styles.stepper_buttons_btn_next}`}
-            onClick={() => handleClick(1)}
+            onClick={async () => await handleClick(1)}
             props={{ disabled: fields.some((field) => errors[field.id]) }}
           >
             Siguiente

@@ -5,38 +5,36 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
-import { Form } from '@components/index'
-import { registerSections, registerTripSchema, initialValues } from '@constants/RegisterTrip'
-import { RegisterTripFieldValues, type CreateTripDTO } from '@/types/Trip'
-import styles from './CreateTripForm.module.scss'
+import Form from '@components/Form'
 import { reviewService } from '@/services/Reviews'
-import { CustomFieldsState } from '@/types/states/CustomField'
+import { registerSections, registerTripSchema, initialValues as initialValuesConstant } from '@constants/RegisterTrip'
+import styles from './TripForm.module.scss'
+import { type TripFormProps } from '@/types/components/TripForm'
+import { type RegisterTripFieldValues, type CreateTripDTO, EditTripFieldValues } from '@/types/Trip'
 
-export default function CreateTripForm (): JSX.Element {
+export default function TripForm ({ editingElement }: TripFormProps): JSX.Element {
   const { status } = useSession()
   const router = useRouter()
 
-  const [customFieldsData, setCustomFieldsData] = useState<CustomFieldsState>(
-    {
-      images: null,
-      starRating: 0,
-      review: ''
-    }
-  )
+  const [initialValues] = useState<RegisterTripFieldValues | EditTripFieldValues>(editingElement !== undefined
+    ? {
+        ...initialValuesConstant,
+        ...editingElement
+      }
+    : initialValuesConstant)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [step, setStep] = useState(0)
 
   const handleSubmit = async (data: RegisterTripFieldValues): Promise<any> => {
-    console.log(customFieldsData)
     setIsSubmitted(true)
-    const { name, state, city, date, review, rate, spent, typeZone, motive, climate, activities, images, lodgingName, coordinates, lodgingType } = data
+    const { name, state, city, date, review, starRating, spent, typeZone, motive, climate, activities, images, lodgingName, coordinates, lodgingType } = data
     const payload: CreateTripDTO = {
       nombre: name,
       estado: state,
       ciudad: city,
       fecha: date.toString().slice(0, 10),
       resenia: review,
-      calificacin: rate,
+      calificacin: starRating,
       cantidadGastada: spent,
       tipoZona: typeZone,
       motivo: motive,
@@ -83,11 +81,10 @@ export default function CreateTripForm (): JSX.Element {
               isStepper
               currentStep={step}
               handleStep={handleStep}
-              customFieldsStateSetter={setCustomFieldsData}
-              customFieldsData={customFieldsData}
             />
           </>
         )}
     </section>
+
   )
 }
