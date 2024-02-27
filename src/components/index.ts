@@ -26,6 +26,7 @@ import Card from './Card'
 import Pagination from './Pagination'
 import UserProfile from './UserProfile'
 import UserDropdown from './UserDropdown'
+import TripSection from './TripSection'
 
 export {
   AboutUs,
@@ -55,5 +56,6 @@ export {
   Card,
   Pagination,
   UserProfile,
-  UserDropdown
+  UserDropdown,
+  TripSection
 }

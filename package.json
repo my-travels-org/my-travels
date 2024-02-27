@@ -32,7 +32,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "7.45.4",
+    "scrollreveal": "^4.0.9",
     "sonner": "0.6.2",
+    "styled-components": "^6.1.8",
     "typescript": "5.1.6",
     "yup": "1.2.0"
   },

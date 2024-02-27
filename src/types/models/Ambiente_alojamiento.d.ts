@@ -1,5 +1,5 @@
-export interface ambiente_alijamiento {
+export interface ambiente_alojamiento {
   ambiente: string
-  id_destino: number
   id_alojamiento: number
+  id_ambiente: number
 }

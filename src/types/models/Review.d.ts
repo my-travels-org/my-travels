@@ -1,7 +1,7 @@
 import { Climates } from './Climates'
 import { Activities } from './Activities'
 import { Zones } from './Zones'
-import { ambiente_alijamiento } from './Ambiente_alojamiento'
+import { ambiente_alojamiento } from './Ambiente_alojamiento'
 
 export interface GetResponseReviews {
 
@@ -12,24 +12,26 @@ export interface GetResponseOneReview {
   review: Review[]
 }
 
+
 export interface Review {
-  actividades: Activities[]
-  'alojamiento-nombre'?: string
-  'alojamiento-numero'?: number
-  'alojamiento-calle'?: string
-  ambiente_alojamiento?: ambiente_alijamiento[]
-  calificacion_alojamiento?: number
-  climas: Climates[]
-  'destino-calificacion_destino': number
-  'destino-ciudad': string
-  'destino-destino': string
-  'destino-estado': string
-  'destino-fecha_visita': Date
-  'destino-id': number
-  'destino-resenia': string
-  'resenia-id': number
-  'usuario-apellido_m': string
-  'usuario-apellido_p': string
-  'usuario-nombre': string
-  zonas: Zones[]
-}
+  
+      'resenia-id': number
+      'destino-destino': string
+      'destino-estado': string
+      'destino-ciudad': string
+      'destino-calificacion_destino': number
+      'destino-fecha_visita': Date
+      'destino-resenia': string
+      'usuario-nombre': string
+      'usuario-apellido_p': string
+      'usuario-apellido_m': string
+      'calificacion_alojamiento': number
+      'alojamiento-nombre'?: string
+      'alojamiento-calle'?: string
+      'alojamiento-numero'?: number
+      climas: Climates[]
+      actividades: Activities[]
+      zonas: Zones[]
+      ambiente_alojamiento?: ambiente_alojamiento[]
+      
+  }

@@ -5,8 +5,9 @@ import { GetResponseOneReview, GetResponseReviews } from '@/types/models/Review'
 import { CreateTripDTO } from '@/types/Trip'
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_API ?? ''
 
+
 const getAll = async (): Promise<AxiosResponse<GetResponseReviews>> => {
-  return await axios.get(`${baseUrl}/review/viewReviews/1`)
+  return await axios.get(`${baseUrl}/review/viewReviews`)
 }
 
 const getOne = async ({ id }: any): Promise<AxiosResponse<GetResponseOneReview>> => {
