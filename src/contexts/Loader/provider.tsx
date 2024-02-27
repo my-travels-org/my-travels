@@ -8,23 +8,16 @@ export default function LoaderContextProvider ({
   children
 }: { children: React.ReactNode }): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [loadingMessage, setLoadingMessage] = useState<string | undefined>()
 
   const handleLoader = (value: boolean): void => {
     setIsLoading(value)
-  }
-
-  const handleLoadingMessage = (value: string): void => {
-    setLoadingMessage(value)
   }
 
   return (
     <LoaderContext.Provider
       value={{
         isLoading,
-        handleLoader,
-        loadingMessage,
-        handleLoadingMessage
+        handleLoader
       }}
     >
       {children}

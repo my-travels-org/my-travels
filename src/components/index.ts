@@ -26,6 +26,7 @@ import Pagination from './Pagination'
 import UploadFile from './UploadFile'
 import Star from './Star'
 import FilledStar from './FilledStar'
+import IsAccessDenied from './IsAccessDenied'
 
 export {
   AboutUs,
@@ -55,5 +56,6 @@ export {
   Pagination,
   UploadFile,
   Star,
-  FilledStar
+  FilledStar,
+  IsAccessDenied
 }

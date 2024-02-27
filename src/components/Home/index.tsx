@@ -5,8 +5,15 @@ import Link from 'next/link'
 import { Carousel } from '@/components/index'
 import { carousel } from '@/constants/Carousel'
 import styles from './Home.module.scss'
+import { useLoaderContext } from '@/contexts/Loader/context'
+import { useEffect } from 'react'
 
 export default function Home (): JSX.Element {
+  const { isLoading, handleLoader } = useLoaderContext()
+
+  useEffect(() => {
+    handleLoader(false)
+  }, [isLoading])
   return (
     <section className={`${styles.section} ${styles.home}`}>
       <section className={styles.home_welcome}>

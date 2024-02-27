@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
 import Form from '@components/Form'
@@ -13,7 +12,6 @@ import { type TripFormProps } from '@/types/components/TripForm'
 import { type RegisterTripFieldValues, type CreateTripDTO, EditTripFieldValues } from '@/types/Trip'
 
 export default function TripForm ({ editingElement }: TripFormProps): JSX.Element {
-  const { status } = useSession()
   const router = useRouter()
 
   const [initialValues] = useState<RegisterTripFieldValues | EditTripFieldValues>(editingElement !== undefined
@@ -66,24 +64,19 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
 
   return (
     <section className={styles.register}>
-      {status === 'unauthenticated' &&
-        (
-          <>
-            <h1 className={styles.register_title}>Cuentanos tu aventura.</h1>
-            <Form
-              sections={registerSections}
-              submitButton='Registrar viaje'
-              onSubmit={handleSubmit}
-              schema={registerTripSchema}
-              className={styles.register_form}
-              isSubmitDisabled={isSubmitted}
-              initialValues={initialValues}
-              isStepper
-              currentStep={step}
-              handleStep={handleStep}
-            />
-          </>
-        )}
+      <h1 className={styles.register_title}>Cuentanos tu aventura.</h1>
+      <Form
+        sections={registerSections}
+        submitButton='Registrar viaje'
+        onSubmit={handleSubmit}
+        schema={registerTripSchema}
+        className={styles.register_form}
+        isSubmitDisabled={isSubmitted}
+        initialValues={initialValues}
+        isStepper
+        currentStep={step}
+        handleStep={handleStep}
+      />
     </section>
 
   )

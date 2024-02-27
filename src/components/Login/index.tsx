@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
-import { Form, Loader } from '@components/index'
+import { Form } from '@components/index'
 import { loginSections, loginSchema } from '@constants/LoginForm'
 import styles from './Login.module.scss'
 import { LoginUserDTO } from '@/types/models/User'
@@ -33,6 +33,7 @@ export default function Login (): JSX.Element {
 
   useEffect(() => {
     if (status === 'authenticated') {
+      // handleLoader(true)
       router.push('/')
     }
   }, [status])
@@ -63,7 +64,6 @@ export default function Login (): JSX.Element {
           <Link className={styles.login_form_links_element_link} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
         </div>
       </div>
-      {(status === 'loading' || status === 'authenticated') && <Loader className={styles.loader} />}
     </section>
   )
 }
