@@ -1,12 +1,12 @@
-import { CustomField } from '@/types/CustomField'
-import { StarRating, UploadFile } from '@/components'
+import { Dropdown, StarRating, TextArea, UploadFile } from '@/components/CustomFields'
+import { CustomField, CustomFieldProps } from '@/types/CustomField'
 import { UploadFileProps } from '@/types/components/UploadFile'
-import { StarRatingProps } from '@/types/components/StarRating'
 import { TextAreaProps } from '@/types/components/TextArea'
-import TextArea from '@/components/TextArea'
+import { DropdownProps } from '@/types/components/Dropdown'
 
 export const components: { [key in CustomField]: (props: any) => JSX.Element } = {
   [CustomField.File]: (props: UploadFileProps) => <UploadFile {...props} />,
-  [CustomField.StarRating]: (props: StarRatingProps) => <StarRating {...props} />,
-  [CustomField.TextArea]: (props: TextAreaProps) => <TextArea {...props} />
+  [CustomField.StarRating]: (props: CustomFieldProps) => <StarRating {...props} />,
+  [CustomField.TextArea]: (props: TextAreaProps) => <TextArea {...props} />,
+  [CustomField.Dropdown]: (props: DropdownProps) => <Dropdown {...props} />
 }

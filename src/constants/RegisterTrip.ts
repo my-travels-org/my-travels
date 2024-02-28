@@ -20,7 +20,26 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'zoneType', label: 'Tipo de zona', type: 'text', required: true },
+      {
+        id: 'zoneType',
+        label: 'Tipo de zona',
+        required: true,
+        customField: CustomField.Dropdown,
+        customFieldProps: {
+          id: 'zoneType',
+          options: [
+            { label: 'Tropical', value: 1 },
+            { label: 'Húmedo', value: 2 },
+            { label: 'Áspero', value: 3 },
+            { label: 'Test', value: 4 },
+            { label: 'Test', value: 5 },
+            { label: 'Test', value: 6 },
+            { label: 'Test', value: 7 },
+            { label: 'Test', value: 8 }
+          ],
+          isMultiple: true
+        }
+      },
       { id: 'motive', label: 'Motivo de visita', type: 'number', required: true },
       { id: 'climate', label: 'Tipo de clima', type: 'number', required: true },
       { id: 'activities', label: 'Actividades realizadas', type: 'number', required: true }
@@ -64,7 +83,7 @@ export const initialValues = {
   review: 'test',
   starRating: 1,
   spent: 0,
-  zoneType: 0,
+  zoneType: [],
   motive: 0,
   climate: 0,
   activities: 0,

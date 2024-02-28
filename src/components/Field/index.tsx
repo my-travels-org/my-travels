@@ -3,8 +3,7 @@ import styles from './Field.module.scss'
 import Chip from '@mui/material/Chip'
 
 export default function Field ({ field, register, errors, className = '' }: Props): JSX.Element {
-  const { id } = field
-  const { type } = field
+  const { id, type } = field
 
   return (
     <div className={`${styles.field} ${className}`} key={id}>

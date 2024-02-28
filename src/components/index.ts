@@ -12,7 +12,6 @@ import Login from './Login'
 import Navbar from './Navbar'
 import Register from './Register'
 import Stepper from './Stepper'
-import StarRating from './StarRating'
 import MultipleOption from './MultipleOption'
 import AboutUs from './AboutUS'
 import Conditions from './Conditions'
@@ -23,7 +22,6 @@ import Travels from './Travels'
 import Card from './Card'
 import CreateTripForm from './TripForm'
 import Pagination from './Pagination'
-import UploadFile from './UploadFile'
 import Star from './Star'
 import FilledStar from './FilledStar'
 import IsAccessDenied from './IsAccessDenied'
@@ -49,12 +47,10 @@ export {
   Register,
   Search,
   Stepper,
-  StarRating,
   MultipleOption,
   Travels,
   Card,
   Pagination,
-  UploadFile,
   Star,
   FilledStar,
   IsAccessDenied

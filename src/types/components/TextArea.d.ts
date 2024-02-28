@@ -1,9 +1,7 @@
 import { FieldValues, UseFormClearErrors, UseFormSetError } from 'react-hook-form'
+import { CustomFieldProps } from '../CustomField'
 
-export interface TextAreaProps {
-  id: string
-  setter: Dispatch<SetStateAction<CustomFieldsState>>
-  data: Partial<CustomFieldsState>
+export interface TextAreaProps extends CustomFieldProps {
   setError: UseFormSetError<FieldValues>
   clearErrors: UseFormClearErrors<FieldValues>
 }

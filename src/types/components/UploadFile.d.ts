@@ -1,12 +1,8 @@
-import { SetStateAction } from 'react'
-import { CustomFieldsState } from '../states/CustomField'
+import { CustomFieldProps } from '../CustomField'
 
-export interface UploadFileProps {
-  id: string
+export interface UploadFileProps extends CustomFieldProps {
   accept: string
   buttonName?: string
   multiple?: boolean
   previewFiles: boolean
-  setter: Dispatch<SetStateAction<CustomFieldsState>>
-  data: Partial<CustomFieldsState>
 }
