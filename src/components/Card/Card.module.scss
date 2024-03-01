@@ -2,14 +2,21 @@
 
 .card{
   width: 350px;
-  margin: 2.5rem 2rem;
-  height: 500px;
+  margin: 4rem 2rem;
+  height: 610px;
   text-align: start;
   box-shadow: 0 5px 25px 2px rgba(0, 0, 0,0.11 );
   border-radius: 7px;
   cursor: pointer;
   padding: 1rem .8rem ;
   
+}
+@media screen and (max-width: 830px){
+  .card {
+    margin: 2.5rem 0rem;
+    width: 300px;
+    
+  }
 }
 
 
@@ -30,6 +37,7 @@
 }
 
 .destination_name {
+  height: 70px;
   font-size: 2rem bold;
   padding: .9rem 0 2rem 0;
   text-align: center;
@@ -37,11 +45,13 @@
 }
 
 .resenia {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
+  width: 100%;
+  height: 70px;
   text-align: justify;
-  font-weight: 340px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
-  
 }
 
 .info_container {
@@ -51,10 +61,24 @@
   color: #565555 ;
   font-family: Arial, Helvetica, sans-serif;
 }
-
-@media screen and (max-width: 850px) {
-  .card {
-    width: 90%;
-
+.subInfoContainer{
+  margin: 2rem 1rem;
+}
+.infoText {
+  font-size: 1.8rem;
+  &Location {
+    font-size: 1.8rem;
+    height: 40px;
+    
+  }
+  
+  &_icon {
+    padding-right: 1rem;
+  }
+  &Money {
+    font-size: 1.8rem;
+    color:darkgreen ;
   }
 }
+
+

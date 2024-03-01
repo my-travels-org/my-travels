@@ -49,7 +49,6 @@ const UserProfile = () => {
       nombre: nombre,
     }
 
-    console.log(data)
     toast.promise(userService.update(payload), {
       loading: 'Actualizando información del usuario...',
       success: async () => {

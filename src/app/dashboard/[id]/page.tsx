@@ -30,7 +30,7 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
             <div className={styles.container}>
               <h2 className={styles.tittle}>{review['destino-destino']}</h2>
 
-              <div className={styles.image_container}>fotos</div>
+              <div className={styles.image_container}>foto</div>
             </div>
             <div className={styles.container}>
               <h3 className={styles.tittle}>Información de destino</h3>

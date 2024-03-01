@@ -4,13 +4,14 @@ import { Review } from '@/types/models/Review'
 import {Card} from '@components/index'
 import { reviewService } from '@/services/Reviews'
 import styles from './TripSection.module.scss'
+import { number } from 'yup'
 
 
 const TripSection = (): JSX.Element => {
     const [active, setActive] = useState(1);
 
     const [reviews, setReviews] = useState <Review[]>()
-
+   
   useEffect(() => {
     const fetchReviews = async (): Promise<void> => {
       const result = await reviewService.getAll()
@@ -21,14 +22,29 @@ const TripSection = (): JSX.Element => {
     void fetchReviews()
   }, [])
 
+  const filterItems = (index: number) => {
+    setActive(index)
+    const newItems;
+    
+    if(index === 1){  //Mejor Calificados
+        
+    }
+
+    if(index === 2){  //últimos descubrimientos
+
+    }
+    if(index === 3){  //Económicos
+
+    }
+
+  }
+
   
 
     const categories = [
-        "Más populares",
-        "Ultimos descubrimientos",
-        "Playa",
         "Mejor calificados",
-        "Bosque"
+        "últimos descubrimientos",
+        "Económicos"
     ]
 
   return (
@@ -42,7 +58,7 @@ const TripSection = (): JSX.Element => {
                     return (
                         
                         <li className={`${styles.li} ${active === index +1 ? styles.active : ''}`}
-                         onClick={() => setActive(index+1)}>{ctg}</li>
+                         onClick={() => filterItems(index+1)}>{ctg}</li>
                     );
                 })}
             </ul>
