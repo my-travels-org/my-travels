@@ -23,6 +23,7 @@ import Questions from './Questions'
 import Proximamente from './Proximamente'
 import Travels from './Travels'
 import Card from './Card'
+import CardTravel from './CardTravel'
 import Pagination from './Pagination'
 import UserProfile from './UserProfile'
 import UserDropdown from './UserDropdown'
@@ -54,6 +55,7 @@ export {
   MultipleOption,
   Travels,
   Card,
+  CardTravel,
   Pagination,
   UserProfile,
   UserDropdown,

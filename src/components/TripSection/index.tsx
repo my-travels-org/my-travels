@@ -1,49 +1,72 @@
 'use client'
 import React, {useState,useEffect} from 'react'
 import { Review } from '@/types/models/Review'
-import {Card} from '@components/index'
+import { CardTravel, Pagination} from '@components/index'
 import { reviewService } from '@/services/Reviews'
+import usePagination from '@/hooks/usePagination'
 import styles from './TripSection.module.scss'
-import { number } from 'yup'
+
+const elementsPerPage = 32
 
 
 const TripSection = (): JSX.Element => {
-    const [active, setActive] = useState(1);
+    const [active, setActive] = useState(0);
 
     const [reviews, setReviews] = useState <Review[]>()
+
+    const [data,setData] = useState <Review[]>()
+    const { currentPage, handleChangePage } = usePagination()
+
+    
    
+    //hacer que result sea global para poder compartirla con filterItems
   useEffect(() => {
     const fetchReviews = async (): Promise<void> => {
       const result = await reviewService.getAll()
+      setData(result.data.reviews)
       setReviews(result.data.reviews)
       
     }
-
+    
     void fetchReviews()
   }, [])
 
   const filterItems = (index: number) => {
-    setActive(index)
-    const newItems;
-    
+    setActive(index)  
     if(index === 1){  //Mejor Calificados
-        
+      setReviews ( data?.filter((newValue) => newValue['destino-calificacion_destino'] === 5))
     }
 
     if(index === 2){  //últimos descubrimientos
-
+      setReviews ( data?.filter((newValue) => compareDates(new Date(newValue['destino-fecha_visita']))  ))
+        
     }
     if(index === 3){  //Económicos
-
+      //setReviews(data?.filter((newValue) => ))
+      
+      
     }
 
+  }
+
+  function compareDates(date: Date){
+    const x = '03/01/2024';
+    const today = new Date();
+    const diff =   today.getTime() - date.getTime();
+    const days = diff / (1000 * 60 * 60 * 24);
+    if(days <= 250 ){
+      console.log(days)
+      return true
+    }
+    else
+      return false
   }
 
   
 
     const categories = [
         "Mejor calificados",
-        "últimos descubrimientos",
+        "Nuevos destinos",
         "Económicos"
     ]
 
@@ -64,16 +87,22 @@ const TripSection = (): JSX.Element => {
             </ul>
         </div>
         <div className={styles.destinations}>
-          <h1 className={styles.text}>Destinos destacados</h1>
+          <h1 className={styles.text}>{active === 1? "Destinos mejor calificados": active === 2? "Nuevos destinos":"Destinos más económicos" }</h1>
           <div className={styles.tripcard}>
-          {reviews !== undefined && reviews.length > 0 && reviews.map((review, count) => {
+          {reviews !== undefined && reviews.length > 0 && reviews.slice((currentPage * elementsPerPage) - elementsPerPage, currentPage * elementsPerPage).map((review, count) => {
                 return (
-                    <Card review={review} key={count}/>
+                    <CardTravel review={review} key={count}/>
             )
             })}
           </div>
-            
         </div>
+        <Pagination
+            count={80}
+            elementsPerPage={elementsPerPage}
+            currentPage={currentPage}
+            handlePageChange={handleChangePage}
+            className={styles.pagination}
+      />
     </section>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { TravelsProps } from '@/types/components/Travels'
-import { Button, Card, Pagination } from '@components/index'
+import { Button,Card, Pagination } from '@components/index'
 import styles from './Travels.module.scss'
 import usePagination from '@/hooks/usePagination'
 
