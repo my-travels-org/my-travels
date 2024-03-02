@@ -3,17 +3,34 @@ import * as yup from 'yup'
 import { Section } from '@/types/components/Form'
 import { required, positive, number } from '@constants/YupErrors'
 import { CustomField } from '@/types/CustomField'
+import { stateOptions } from './States'
 
 export const registerSections: Section[] = [
   {
     fields: [
-      { id: 'name', label: 'Lugar visitado', type: 'text', required: true },
-      { id: 'state', label: 'Estado', type: 'text', required: true },
-      { id: 'city', label: 'Ciudad', type: 'text', required: true },
-      { id: 'date', label: 'Fecha de visita', type: 'date', required: true },
-      { id: 'review', label: 'Reseña', required: true, customField: CustomField.TextArea, customFieldProps: { id: 'review' } },
-      { id: 'starRating', label: 'Puntuación', required: true, customField: CustomField.StarRating, customFieldProps: { id: 'starRating' } },
-      { id: 'spent', label: 'Cantidad de dinero gastado aproximadamente', type: 'number', required: true } // should be type: select
+      { id: 'name', label: 'Lugar visitado', type: 'text' },
+      {
+        id: 'state',
+        label: 'Estado',
+        customField: CustomField.Dropdown,
+        customFieldProps: {
+          id: 'state',
+          options: stateOptions
+        }
+      },
+      {
+        id: 'city',
+        label: 'Ciudad',
+        customField: CustomField.Dropdown,
+        customFieldProps: {
+          id: 'city',
+          options: stateOptions
+        }
+      },
+      { id: 'date', label: 'Fecha de visita', type: 'date' },
+      { id: 'review', label: 'Reseña', customField: CustomField.TextArea, customFieldProps: { id: 'review' } },
+      { id: 'starRating', label: 'Puntuación', customField: CustomField.StarRating, customFieldProps: { id: 'starRating' } },
+      { id: 'spent', label: 'Cantidad de dinero gastado aproximadamente', type: 'number' } // should be type: select
 
     ],
     title: 'Datos principales'
@@ -23,8 +40,7 @@ export const registerSections: Section[] = [
       {
         id: 'zoneType',
         label: 'Tipo de zona',
-        required: true,
-        customField: CustomField.Dropdown,
+        customField: CustomField.DropdownMultiple,
         customFieldProps: {
           id: 'zoneType',
           options: [
@@ -36,13 +52,12 @@ export const registerSections: Section[] = [
             { label: 'Test', value: 6 },
             { label: 'Test', value: 7 },
             { label: 'Test', value: 8 }
-          ],
-          isMultiple: true
+          ]
         }
       },
-      { id: 'motive', label: 'Motivo de visita', type: 'number', required: true },
-      { id: 'climate', label: 'Tipo de clima', type: 'number', required: true },
-      { id: 'activities', label: 'Actividades realizadas', type: 'number', required: true }
+      { id: 'motive', label: 'Motivo de visita', type: 'number' },
+      { id: 'climate', label: 'Tipo de clima', type: 'number' },
+      { id: 'activities', label: 'Actividades realizadas', type: 'number' }
     ],
     title: 'Seleccion multiple'
   },
@@ -52,7 +67,6 @@ export const registerSections: Section[] = [
         id: 'images',
         label: 'Fotos de tu aventura',
         type: 'text',
-        required: true,
         customField: CustomField.File,
         customFieldProps: {
           id: 'images',
@@ -67,29 +81,23 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'lodgingName', label: 'Nombre del alojamiento', type: 'text', required: true },
-      { id: 'coordinates', label: 'Ubicación del alojamiento', type: 'coordinates', required: true },
-      { id: 'lodgingType', label: 'Ambiente del alojamiento', type: 'number', required: true }
+      { id: 'lodgingName', label: 'Nombre del alojamiento', type: 'text' },
+      { id: 'coordinates', label: 'Ubicación del alojamiento', type: 'coordinates' },
+      { id: 'lodgingType', label: 'Ambiente del alojamiento', type: 'number' }
     ],
     title: 'Alojamiento'
   }
 ]
 
 export const initialValues = {
-  name: 'test',
-  state: 'test',
-  city: 'test',
-  date: '1111-11-11',
-  review: 'test',
-  starRating: 1,
-  spent: 0,
-  zoneType: [],
-  motive: 0,
-  climate: 0,
-  activities: 0,
-  lodgingName: 'test',
-  coordinates: 'test',
-  lodgingType: 0
+  name: 'Viaje',
+  state: 'Jalisco',
+  city: 'Jalisco',
+  date: new Date().toISOString().split('T')[0],
+  review: 'Review',
+  spent: 1500,
+  starRating: 0,
+  zoneType: []
 }
 
 export const registerTripSchema = yup
@@ -99,8 +107,35 @@ export const registerTripSchema = yup
     city: yup.string().required(required),
     date: yup.string().required(required),
     review: yup.string().required(required),
+    starRating: yup.number().typeError(number).min(1, 'La puntuación debe de ser mínimo 1'),
     spent: yup.number().typeError(number).positive(positive).required(required),
-    zoneType: yup.number().typeError(number).positive().typeError(number).required(required),
+    zoneType: yup.array()
+      .of(
+        yup.object().shape({
+          label: yup.string().required('Label is required'),
+          value: yup.number().required('Value is required')
+        })
+      )
+      .required(required),
+    images: yup.array()
+      .of(
+        yup.object().shape({
+          file: yup.mixed()
+            .required('Image is required')
+            .test('fileFormat', 'Unsupported Format', (value: any) => {
+              const validFormats = ['image/jpeg', 'image/png']
+              return value?.type !== undefined
+                ? validFormats.includes(value.type)
+                : false
+            })
+            .test('fileSize', 'File size is too large', (value: any) => {
+              const maxSize = 1024 * 1024 * 2 // 2MB
+              return value?.size !== undefined
+                ? value.size <= maxSize
+                : false
+            })
+        })
+      ).required(required),
     motive: yup.number().typeError(positive).positive().required(required),
     climate: yup.number().typeError(positive).positive().required(required),
     activities: yup.number().typeError(positive).positive().required(required),

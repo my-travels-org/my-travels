@@ -1,8 +1,6 @@
+import { UseFormReturn } from 'react-hook-form'
 import { CustomFieldProps } from '../CustomField'
-import { CustomFieldsState } from '../states/CustomField'
 
 export interface StarRatingProps extends CustomFieldProps {
-  id: string
-  setter: Dispatch<SetStateAction<CustomFieldsState>>
-  data: Partial<CustomFieldsState>
+  formMethods: Pick<UseFormReturn, 'setValue' | 'watch' | 'clearErrors'>
 }

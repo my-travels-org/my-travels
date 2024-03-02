@@ -18,6 +18,7 @@ export const registerSections: Section[] = [
     fields: [
       { id: 'email', label: 'Correo electrónico', type: 'email', required: true },
       { id: 'password', label: 'Contraseña', type: 'password', required: true },
+      { id: 'confirmPassword', label: 'Repite tu contraseña', type: 'password', required: true },
       { id: 'city', label: 'Ciudad', type: 'text', required: true }
     ],
     title: 'Información de contacto'
@@ -33,14 +34,14 @@ export const registerSections: Section[] = [
 ]
 
 export const initialValues = {
-  name: 'test',
-  lastname: 'test',
-  surname: 'test',
-  email: 'test@test',
-  password: 'test12345',
-  maritalStatus: 'test',
-  city: 'test',
-  birthdate: '2021-01-01',
+  name: '',
+  lastname: '',
+  surname: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  city: '',
+  birthdate: '',
   activity1: 1,
   activity2: 1,
   activity3: 1
@@ -54,7 +55,7 @@ export const registerSchema = yup
     surname: yup.string().required(required),
     email: yup.string().email(email).required(required),
     password: yup.string().required(required),
-    maritalStatus: yup.string().required(required),
+    confirmPassword: yup.string().oneOf([yup.ref('password'), undefined], 'Las contraseñas deben coincidir').required(required),
     city: yup.string().required(required),
     birthdate: yup.date().required(required),
     activity1: yup.number().typeError(positive).positive().integer(integer).required(required),

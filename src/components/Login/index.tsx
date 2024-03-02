@@ -16,19 +16,18 @@ export default function Login (): JSX.Element {
   const router = useRouter()
 
   const handleSubmit = async (values: LoginUserDTO): Promise<void> => {
-    toast.promise(signIn('credentials', {
+    const result = await signIn('credentials', {
       email: values.email,
       password: values.password,
       redirect: false
-    }), {
-      loading: 'Iniciando sesión...',
-      success: () => {
-        return 'Bienvenido a MyTravels.'
-      },
-      error: async (error) => {
-        return error.toString()
-      }
     })
+
+    if (result?.ok !== true) {
+      toast.error(result?.error)
+      return
+    }
+    toast.success('Bienvenido a MyTravels.')
+    router.push('/')
   }
 
   useEffect(() => {

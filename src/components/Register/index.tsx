@@ -10,6 +10,7 @@ import { userService } from '@services/User'
 import { registerSections, registerSchema, initialValues } from '@constants/RegisterForm'
 import { type CreateUserDTO, type RegisterFieldValues } from '@/types/models/User'
 import styles from './Register.module.scss'
+import { registerErrors } from '@/constants/ErrorDictionary'
 
 export default function Register (): JSX.Element {
   const { status } = useSession()
@@ -45,10 +46,12 @@ export default function Register (): JSX.Element {
         router.push('/')
         return 'Usuario registrado con éxito'
       },
-      error: async () => {
+      error: async (error: any) => {
+        const errors = Object.keys(JSON.parse(error.response.data))
         setIsSubmitted(false)
-        return 'Ocurrió un error al intentar registrar'
-      }
+        return `Ocurrió un error al intentar registrar: \n${errors.map((key) => registerErrors[key]).join('\n')}`
+      },
+      style: { whiteSpace: 'pre-wrap' }
     })
   }
 

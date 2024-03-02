@@ -1,12 +1,12 @@
 import { HTMLAttributes, InputHTMLAttributes } from 'react'
 import { CustomField } from '../CustomField'
+import { UseFormReturn } from 'react-hook-form'
 
 export interface Field {
   type?: string
   id: string
   label: string
   showLabel?: boolean
-  required: boolean
   props?: HTMLAttributes<InputHTMLAttributes>
   customField?: CustomField
   customFieldProps?: {
@@ -16,7 +16,6 @@ export interface Field {
 
 export interface Props {
   field: Field
-  register: UseFormRegister<any>
-  errors: FieldErrors<any>
+  formMethods: Pick<UseFormReturn, 'register' | 'formState'>
   className?: string
 }

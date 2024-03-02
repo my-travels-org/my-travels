@@ -2,7 +2,7 @@ import { Props } from '@/types/components/Field'
 import styles from './Field.module.scss'
 import Chip from '@mui/material/Chip'
 
-export default function Field ({ field, register, errors, className = '' }: Props): JSX.Element {
+export default function Field ({ field, formMethods: { register, formState: { errors } }, className = '' }: Props): JSX.Element {
   const { id, type } = field
 
   return (

@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -8,7 +8,6 @@ import { Button, Stepper, Field } from '@components/index'
 import { components } from '@/constants/CustomFields'
 import styles from './Form.module.scss'
 import { type FormProps } from '@/types/components/Form'
-import { type CustomFieldsState } from '@/types/states/CustomField'
 
 export default function Form ({
   sections,
@@ -22,36 +21,16 @@ export default function Form ({
   currentStep = 0,
   handleStep = (_step: number): void => {}
 }: FormProps): JSX.Element {
-  const {
-    reset,
-    register,
-    handleSubmit,
-    setError,
-    clearErrors,
-    trigger,
-    formState: { errors }
-  } = useForm({
+  const formMethods = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange'
   })
 
-  const [customFieldsData, setCustomFieldsData] = useState<CustomFieldsState>(
-    () => {
-      const customFields = sections
-        .map(({ fields }) => {
-          return fields
-            .filter(({ customField }) => customField !== undefined)
-            .map(({ id }) => id)
-        }).flat()
-      const data: CustomFieldsState = {
-        ...Object.assign({}, ...customFields.map((id) => ({ [id]: initialValues[id] })))
-      }
-      return data
-    }
-  )
+  const { reset, register, handleSubmit, formState } = formMethods
+  const { errors } = formState
 
   const onSubmit = (data: any): void => {
-    handleFormSubmit({ ...data, ...customFieldsData })
+    handleFormSubmit(data)
   }
 
   useEffect(() => {
@@ -76,15 +55,9 @@ export default function Form ({
                       fields={fields}
                       title={title}
                       step={i}
-                      trigger={trigger}
                       maxSteps={sections.length - 1}
                       handleStep={handleStep}
-                      register={register}
-                      errors={errors}
-                      setError={setError}
-                      clearErrors={clearErrors}
-                      customFieldsStateSetter={setCustomFieldsData}
-                      customFieldsData={customFieldsData}
+                      formMethods={formMethods}
                     />
                   </div>
                   )
@@ -101,7 +74,10 @@ export default function Form ({
                                 {field.label}
                               </label>
                             )}
-                            {components[field.customField]({ ...field.customFieldProps, setter: setCustomFieldsData, data: customFieldsData, setError, clearErrors, initialValue: initialValues[field.id] })}
+                            {components[field.customField]({
+                              ...field.customFieldProps,
+                              formMethods
+                            })}
                             {(errors[field.id] !== undefined) && (
                               <span className={styles.error}>
                                 {errors[field.id]?.message as string}
@@ -114,8 +90,7 @@ export default function Form ({
                             <Field
                               key={field.id}
                               field={field}
-                              register={register}
-                              errors={errors}
+                              formMethods={{ register, formState }}
                             />
                           </div>
                           )

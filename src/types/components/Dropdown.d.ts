@@ -1,7 +1,8 @@
+import { UseFormReturn } from 'react-hook-form'
+import { CustomFieldProps } from '../CustomField'
 import { Option } from '../Option'
-import { TextAreaProps } from './TextArea'
 
-export interface DropdownProps extends TextAreaProps {
+export interface DropdownProps extends CustomFieldProps {
   options: Option[]
-  isMultiple?: boolean
+  formMethods: Pick<UseFormReturn, 'setValue' | 'clearErrors' | 'setError'>
 }

@@ -1,11 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 
 import { UploadFileProps } from '@/types/components/UploadFile'
 import styles from './UploadFile.module.scss'
-import { CustomFieldsState } from '@/types/states/CustomField'
 
 export default function UploadFile ({
   id,
@@ -13,18 +11,16 @@ export default function UploadFile ({
   accept,
   multiple = true,
   previewFiles,
-  setter,
-  data
+  formMethods: { register, watch, setValue }
 }: UploadFileProps): JSX.Element {
-  const [files, setFiles] = useState<FileList>()
+  const { onChange, ...rest } = register(id)
+  const files = watch(id) as FileList
 
-  useEffect(() => {
-    const element = id as keyof typeof data
-    if (data[element] !== undefined) {
-      setFiles(data[element] as FileList)
+  const handleFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    if (e.target.files !== null) {
+      setValue(id, e.target.files)
     }
-  }, [])
-
+  }
   return (
     <div className={styles.container}>
       <input
@@ -33,14 +29,9 @@ export default function UploadFile ({
         accept={accept}
         multiple={multiple}
         hidden
-        onInput={(e) => {
-          const target = e.target as HTMLInputElement
-          const files = target.files
-          if (files !== null) {
-            setter((prev: Partial<CustomFieldsState>) => ({ ...structuredClone(prev), [id]: files }))
-            setFiles(files)
-          }
-        }}
+        onChange={handleFiles}
+        {...rest}
+
       />
       <label htmlFor={id} className={styles.container_input}>
         {buttonName}

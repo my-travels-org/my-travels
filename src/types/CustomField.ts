@@ -1,15 +1,14 @@
-import { Dispatch, SetStateAction } from 'react'
-import { CustomFieldsState } from './states/CustomField'
+import { UseFormReturn } from 'react-hook-form'
 
 export enum CustomField {
   File = 'file',
   StarRating = 'starRating',
   TextArea = 'textArea',
-  Dropdown = 'dropdown'
+  Dropdown = 'dropdown',
+  DropdownMultiple = 'dropdownMultiple'
 }
 
 export interface CustomFieldProps {
   id: string
-  setter: Dispatch<SetStateAction<CustomFieldsState>>
-  data: Partial<CustomFieldsState>
+  formMethods: UseFormReturn
 }

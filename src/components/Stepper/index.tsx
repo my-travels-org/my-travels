@@ -8,15 +8,11 @@ export default function Stepper ({
   title,
   step,
   maxSteps,
-  trigger,
-  errors,
-  register,
   handleStep,
-  customFieldsStateSetter: setter,
-  customFieldsData: data,
-  setError,
-  clearErrors
+  formMethods
 }: Props): JSX.Element {
+  const { register, trigger, formState, clearErrors } = formMethods
+  const errors = formState?.errors ?? {}
   const handleClick = async (step: number): Promise<any> => {
     handleStep(step)
     const options: ScrollToOptions = {
@@ -41,7 +37,7 @@ export default function Stepper ({
                   {field.label}
                 </label>
               )}
-              {components[field.customField]({ ...field.customFieldProps, setter, data, setError, clearErrors })}
+              {components[field.customField]({ ...field.customFieldProps, formMethods })}
               {(errors[field.id] !== undefined) && (
                 <span className={styles.error}>
                   {errors[field.id]?.message as string}
@@ -53,9 +49,8 @@ export default function Stepper ({
             <Field
               key={field.id}
               field={field}
-              register={register}
+              formMethods={{ register, formState }}
               className={styles.stepper_field}
-              errors={errors}
             />
             )
       ))}
@@ -64,7 +59,11 @@ export default function Stepper ({
           <Button
             type='button'
             className={`${styles.stepper_buttons_btn} ${styles.stepper_button_btn_back}`}
-            onClick={async () => await handleClick(-1)}
+            onClick={async () => {
+              const ids = fields.map(({ id }) => id)
+              clearErrors(ids)
+              await handleClick(-1)
+            }}
           >
             Anterior
           </Button>
@@ -76,8 +75,7 @@ export default function Stepper ({
             onClick={async () => {
               const ids = fields.map(({ id }) => id)
               const hasNoErrors = await trigger(ids)
-              if (errors.length > 0 || !hasNoErrors) return
-
+              if (Object.keys(errors).length > 0 || !hasNoErrors) return
               await handleClick(1)
             }}
             props={{ disabled: fields.some((field) => errors[field.id]) }}
