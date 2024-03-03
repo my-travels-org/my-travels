@@ -6,7 +6,7 @@
     color: variables.$secondary-color ;
 }
 .image_container{
-    margin: 6rem ;
+    margin: 3rem ;
     padding: 12rem;
     
 }
@@ -31,13 +31,15 @@
     flex-direction: row;
 }
 .ratingContainer{
+    display:flexbox;
+    justify-content: center;
     flex-direction: column;
     width: 100%;
     margin-left: 4rem;
-    
 }
 .rating {
     height: 20px;
+    width: 100px;
 }
 .reviewInfo{
     display: flex;
@@ -67,6 +69,9 @@
     
     font-size: 2.5rem;
     font-weight:normal;
+}
+.divider {
+    margin: 8rem 0;
 }
 .chip{
     height: 35px;

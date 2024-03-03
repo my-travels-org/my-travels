@@ -5,7 +5,7 @@ import Image from 'next/image'
 const StarRating = ({ rating }: { rating: number }): JSX.Element => {
   // Calcula el número de estrellas llenas
 
-  const starsFilled = Math.round(rating / 2)
+  const starsFilled = Math.round(rating /* / 2*/)
 
   // Genera un array de estrellas basado en el número de estrellas llenas
   const stars = Array.from({ length: 5 }, (_, index) => (

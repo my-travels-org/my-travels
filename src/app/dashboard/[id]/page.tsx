@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import ImageGallery from 'react-image-gallery'
 import "react-image-gallery/styles/scss/image-gallery.scss";
 import { Review } from '@/types/models/Review'
-import {Chip,Rating, Divider} from '@mui/material'
+import {Chip, Divider} from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart} from '@fortawesome/free-solid-svg-icons'
 
@@ -82,7 +82,7 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
               <p className={styles.review}>"{review['destino-resenia']}"</p>
               <div className={styles.infoContainer}>
                 <div className={styles.ratingContainer}>
-                <Rating className={styles.rating} name="size-large"  readOnly value={review['destino-calificacion_destino']} size="large" />
+                <StarRating rating={review['destino-calificacion_destino']} />
                 </div>
                 <div className={styles.reviewInfo}>
 
@@ -103,10 +103,10 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
                 </div>
                 
               </div>
-              <Divider light />
-              <h3 className={styles.subTitle}>Motivo de la visita: </h3>
+              <Divider light className={styles.divider} />
               
-              <p className={styles.subTitle}>Clima: </p>
+              <p
+               className={styles.subTitle}>Clima: </p>
               <div className={styles.multipleOption}>
                 {review.climas.length > 0 && review.climas.map((clima, counter) => (
                   <Chip key={counter} className={styles.chip} label={clima.clima} color="primary" size='medium' />
@@ -127,8 +127,10 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
                 ))}
               </div>
             </div>
-            <div className={styles.container}>
 
+            {
+              review['alojamiento-nombre'] !== null &&
+              <div className={styles.container}>
               <h3 className={styles.title}>Información del Alojamiento</h3>
               <div className={styles.datoHospedajeContainer}>
                     <h3 className={styles.subTitle}>Nombre: </h3>
@@ -139,7 +141,7 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
                     <h4 className={styles.text}>{review['alojamiento-calle']}</h4> 
                   </div>
             
-
+                  <Divider light  className={styles.divider}/>
                   <p className={styles.subTitle}>Tipo de hospedaje:</p>
               <div className={styles.multipleOption}>
                 {review?.ambientes_alojamiento?.length !== undefined && review?.ambientes_alojamiento.length > 0 && review.ambientes_alojamiento.map((ambiente, counter) => (
@@ -147,6 +149,8 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
                 ))}
               </div>
             </div>
+            }
+            
 
           </div>
 
