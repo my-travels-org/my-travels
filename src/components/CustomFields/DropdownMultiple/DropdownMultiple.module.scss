@@ -3,12 +3,12 @@
 .dropdown {
   position: relative;
   width: 100%;
-  &_tags{
+  &_tags {
     margin-top: 1rem;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
-    &_element{
+    &_element {
       display: flex;
       gap: 0.5rem;
       align-items: center;
@@ -31,7 +31,7 @@
       border: 1px solid variables.$secondary-color;
     }
   }
-  &_options{
+  &_options {
     border: 1px solid variables.$secondary-color;
     display: flex;
     flex-direction: column;
@@ -48,23 +48,28 @@
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
     visibility: hidden;
     background-color: variables.$secondary-background-color;
-    transition: visibility 0.15s, opacity 0.15s linear;
-    &_element{
+    transition:
+      visibility 0.15s,
+      opacity 0.15s linear;
+    &_element {
       border-radius: 2rem;
       padding: 1.5rem;
       background-color: variables.$secondary-background-color;
       cursor: pointer;
       transition: background-color 0.15s;
-      &:hover{
+      &:hover,
+      &_focused {
         background-color: variables.$primary-background-color;
       }
     }
-    &_show{
+    &_show {
       visibility: visible;
       opacity: 1;
-      transition: visibility 0.15s, opacity 0.15s linear;
+      transition:
+        visibility 0.15s,
+        opacity 0.15s linear;
     }
-    &_toggleShow{
+    &_toggleShow {
       background: transparent;
       border: none;
       position: absolute;

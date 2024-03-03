@@ -19,6 +19,9 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
   const [showOptions, setShowOptions] = useState(false)
   const [filter, setFilter] = useState('')
 
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
+  const optionsRef = useRef<HTMLLIElement[] | any>(optionsData.map(() => useRef(null)))
+
   const handleSearchChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setFilter(e.currentTarget.value)
     hasBeenEdited.current = true
@@ -43,14 +46,33 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
     setShowOptions(false)
   }
 
-  const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+  const handleKeyPressed = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
       e.preventDefault()
       const values = options
         .filter((el) => el.label.toLowerCase().startsWith(filter.toLowerCase()))
       if (values.length > 0) {
-        handleValueChange(values[0])
+        let value
+        if (focusedOptionIndex >= 0 && focusedOptionIndex < options.length) {
+          value = options[focusedOptionIndex]
+        } else {
+          value = values.at(0)
+        }
+        handleValueChange(value as Option)
       }
+    }
+    if (e.key === 'Tab') {
+      setShowOptions(false)
+      return
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      const nextIndex = focusedOptionIndex + 1 < options.length ? focusedOptionIndex + 1 : 0
+      setFocusedOptionIndex(nextIndex)
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      const prevIndex = focusedOptionIndex - 1 >= 0 ? focusedOptionIndex - 1 : options.length - 1
+      setFocusedOptionIndex(prevIndex)
     }
   }
 
@@ -80,6 +102,16 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
     setError(id, { type: 'min', message: 'Seleccione al menos una opción' })
   }, [dropdownValue])
 
+  useEffect(() => {
+    if (focusedOptionIndex >= 0) {
+      const option = optionsRef.current[focusedOptionIndex].current as HTMLLIElement
+      const optionsContainer = option.parentElement as HTMLUListElement
+      const height = option.getBoundingClientRect().height
+      const finalScrollTop = (option.offsetTop - (height * 2))
+      optionsContainer.scrollTo({ top: finalScrollTop, behavior: 'instant' })
+    }
+  }, [focusedOptionIndex])
+
   return (
     <>
       <div className={styles.dropdown}>
@@ -89,7 +121,7 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
           value={filter}
           onInput={handleSearchChange}
           onFocus={() => setShowOptions(true)}
-          onKeyDown={handleEnterPressed}
+          onKeyDown={handleKeyPressed}
           ref={dropdownElement}
           className={`${styles.dropdown_input} ${showOptions ? styles.dropdown_input_focus : ''}`}
         />
@@ -113,11 +145,12 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
         <ul className={`${styles.dropdown_options} ${showOptions ? styles.dropdown_options_show : ''}`}>
           {options
             .filter((el) => el.label.toLowerCase().startsWith(filter.toLowerCase()))
-            .map(({ label, value }) =>
+            .map(({ label, value }, index) =>
               <li
                 key={value}
                 onClick={() => handleValueChange({ value, label })}
-                className={styles.dropdown_options_element}
+                className={`${styles.dropdown_options_element} ${focusedOptionIndex === index ? styles.dropdown_options_element_focused : ''}`}
+                ref={optionsRef.current[index]}
               >
                 {label}
               </li>
