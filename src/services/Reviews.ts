@@ -18,8 +18,13 @@ const create = async (payload: CreateTripDTO): Promise<AxiosResponse<any>> => {
   return await axios.post(`${baseUrl}/review/createReview`, payload)
 }
 
+const saveOneReview = async({ id }: any): Promise<AxiosResponse<any>> => {
+  return await axios.post(`${baseUrl}/review/saveUserReview/${id as string}`)
+}
+
 export const reviewService = {
   getAll,
   getOne,
-  create
+  create,
+  saveOneReview
 }

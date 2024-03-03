@@ -1,7 +1,7 @@
 import { Climates } from './Climates'
 import { Activities } from './Activities'
 import { Zones } from './Zones'
-import { ambiente_alojamiento } from './Ambiente_alojamiento'
+import { ambientes_alojamiento } from './Ambientes_alojamiento'
 
 export interface GetResponseReviews {
 
@@ -19,6 +19,7 @@ export interface Review {
       'destino-destino': string
       'destino-estado': string
       'destino-ciudad': string
+      "destino-cantidad_gastada": number,
       'destino-calificacion_destino': number
       'destino-fecha_visita': Date
       'destino-resenia': string
@@ -32,6 +33,6 @@ export interface Review {
       climas: Climates[]
       actividades: Activities[]
       zonas: Zones[]
-      ambiente_alojamiento?: ambiente_alojamiento[]
+      ambientes_alojamiento?: ambientes_alojamiento[]
       
   }

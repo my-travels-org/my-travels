@@ -18,7 +18,7 @@ export default function Header (): JSX.Element {
  
   const handleLogout = () => {
 
-    signOut({ callbackUrl: 'http://localhost:3000/api/auth/signout' });
+    //signOut({ callbackUrl: '/api/auth/signout' });
   };
 
   let dropDown = null

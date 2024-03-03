@@ -1,12 +1,14 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
+import ImageGallery from 'react-image-gallery'
+import "react-image-gallery/styles/scss/image-gallery.scss";
 import { Rating, Divider } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faMoneyCheckDollar, faLocationDot, faCalendarDays} from '@fortawesome/free-solid-svg-icons'
-
-import {Button} from '@components/index'
-import { CardProps } from '@/types/components/Card'
+import {  faMoneyCheckDollar, faLocationDot, faCalendarDays, faHeart, faRightToBracket} from '@fortawesome/free-solid-svg-icons'
+import { reviewService } from '@/services/Reviews'
+import {useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { Review } from '@/types/models/Review'
 
 import styles from './CardTravel.module.scss'
@@ -15,25 +17,63 @@ import styles from './CardTravel.module.scss'
 export interface ViewerProps {
   review: Review
 }
+const images = [
+  {
+    original: "https://picsum.photos/id/13/1000/600/",
+    thumbnail: "https://picsum.photos/id/13/250/150/",
+  },
+  {
+    original: "https://picsum.photos/id/1018/1000/600/",
+    thumbnail: "https://picsum.photos/id/1018/250/150/",
+  },
+  {
+    original: "https://picsum.photos/id/1015/1000/600/",
+    thumbnail: "https://picsum.photos/id/1015/250/150/",
+  },
+  {
+    original: "https://picsum.photos/id/1019/1000/600/",
+    thumbnail: "https://picsum.photos/id/1019/250/150/",
+  },
+];
 
 
 export default function CardTravel ({ review }: ViewerProps): JSX.Element {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  const saveReview = async (id: number): Promise<void> => {
+    
+    if (status === 'authenticated') {
+        const response = await reviewService.saveOneReview(id)
+        console.log(response)
+    }
+    else{
+      router.push('/register')
+    }
+    
+  
+  }
   
   return (
-    /*<article className={`${styles.card} ${className}`} style={{ ...style }}>
-      {children}
-    </article>*/
+   
     <div className={styles.card}>
 
-      <Link key={review['resenia-id']} href={`/dashboard/${review['resenia-id']}`}>
+     
         <div className={styles.img_container}> 
-        <Image className={styles.img} width={250} height={250} alt='30' src='/RepresentativeImage.jpg'  />
+        <ImageGallery 
+                  items={images} 
+                  autoPlay={false} 
+                  showPlayButton={false}
+                  showFullscreenButton={false}
+                  disableArrowKeys={true}
+                  
+                  />
         </div>
 
         <div className={styles.info_container}>
 
           {review['alojamiento-nombre'] !== null
-          ? <h3 className={styles.destination_name}>  {`${review['destino-destino']}, ${review['alojamiento-nombre']} `}</h3>
+          ? <h3 className={styles.destination_name}>  {`${review['destino-destino']} - ${review['alojamiento-nombre']} `}</h3>
             : <h3 className={styles.destination_name}>{review['destino-destino']} </h3>}
           
           <div className={styles.info}>
@@ -48,16 +88,23 @@ export default function CardTravel ({ review }: ViewerProps): JSX.Element {
             </div>
 
             <div className={styles.subInfoContainer}>
-            <p className={styles.infoTextMoney}>  <FontAwesomeIcon className={styles.infoText_icon} icon={faMoneyCheckDollar}/>{"MXN$3,500"}</p> 
+            <p className={styles.infoTextMoney}>  <FontAwesomeIcon className={styles.infoText_icon} icon={faMoneyCheckDollar}/>{`MXN$${review['destino-cantidad_gastada']}`}</p> 
             </div>
           </div>
           <Divider light />
           
+          <div className={styles.buttonsContainer}>
+          <button className={styles.button}> <FontAwesomeIcon className={styles.infoText_icon} icon={faHeart} onClick={() => saveReview(review['resenia-id'])}/>Guardar</button>
+          
+          <Link key={review['resenia-id']} href={`/dashboard/${review['resenia-id']}`}>
+            <button className={styles.button}><FontAwesomeIcon className={styles.infoText_icon} icon={faRightToBracket}/>Ver más</button>
+          </Link>
+          </div>
           
           </div>
 
 
-      </Link>
+      
     </div>
 
 

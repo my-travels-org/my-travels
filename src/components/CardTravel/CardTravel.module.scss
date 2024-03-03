@@ -7,7 +7,6 @@
   text-align: start;
   box-shadow: 0 5px 25px 2px rgba(0, 0, 0,0.11 );
   border-radius: 7px;
-  cursor: pointer;
   padding: 1rem .8rem ;
   
 }
@@ -17,6 +16,7 @@
     width: 300px;
     
   }
+  
 }
 
 
@@ -47,9 +47,10 @@
 .resenia {
   font-size: 1.8rem;
   width: 100%;
-  height: 70px;
+  height: 60px;
+  margin-bottom: 10px;
   text-align: justify;
-  white-space: nowrap;
+  
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -68,7 +69,8 @@
   font-size: 1.8rem;
   &Location {
     font-size: 1.8rem;
-    height: 40px;
+    height: 30px;
+    
     
   }
   
@@ -81,4 +83,30 @@
   }
 }
 
+.buttonsContainer {
+  width: 90%;
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+  
+  
+}
+.button{
+  margin: 2rem 1rem;
+  height: 40px;
+  width: 120px;
+  border-radius: 1rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border: 0.3rem solid variables.$secondary-color;
+  background-color: variables.$primary-background-color ;
+  box-sizing: content-box;
+}
+
+.button:hover {
+  background-color: variables.$secondary-color;
+  color: #ffff;
+  transition: 0.3s ease-in-out;
+}
 
