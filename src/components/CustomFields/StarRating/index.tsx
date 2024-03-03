@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import styles from './StarRating.module.scss'
 import { Star, FilledStar } from '@/components/index'
@@ -16,6 +16,11 @@ export default function StarRating ({ id, formMethods: { setValue, watch, clearE
 
   const [hoveredStar, setHoveredStar] = useState<number | null>(null)
   const rating = watch(id)
+
+  useEffect(() => {
+    if (rating !== undefined) return
+    setValue(id, 0)
+  }, [])
 
   return (
     <div className={styles.rating}>

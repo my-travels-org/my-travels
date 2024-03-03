@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import { UploadFileProps } from '@/types/components/UploadFile'
 import styles from './UploadFile.module.scss'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function UploadFile ({
   id,
@@ -16,8 +16,10 @@ export default function UploadFile ({
 }: UploadFileProps): JSX.Element {
   const registerData = register(id)
   const files = watch(id) as File[]
+  const hasBeenEdited = useRef(false)
 
   useEffect(() => {
+    if (!hasBeenEdited.current) return
     if (files === undefined) {
       setError(id, { type: 'required', message: 'No se encontró el valor' })
     }

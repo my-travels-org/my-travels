@@ -4,14 +4,20 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './DropdownMultiple.module.scss'
 import { Option } from '@/types/Option'
 import { DropdownMultipleProps } from '@/types/components/DropdownMultiple'
+import IconClose from '@/components/IconClose'
 
-export default function DropdownMultiple ({ id, options: optionsData, formMethods: { setValue, clearErrors, setError, watch } }: DropdownMultipleProps): JSX.Element {
+export default function DropdownMultiple ({ id, options: optionsData, formMethods: { setValue, clearErrors, setError, watch, formState: { errors } } }: DropdownMultipleProps): JSX.Element {
+  const dropdownValue: Option[] = watch(id) ?? []
   const hasBeenEdited = useRef(false)
-  const [options, setOptions] = useState<Option[]>(optionsData.sort((a, b) => a.label.localeCompare(b.label)))
+  const dropdownElement = useRef<HTMLInputElement>(null)
+  const [options, setOptions] = useState<Option[]>(
+    optionsData
+      .filter((el) => !dropdownValue?.some((value) => value.value === el.value))
+      .sort((a, b) => a.label.localeCompare(b.label))
+
+  )
   const [showOptions, setShowOptions] = useState(false)
   const [filter, setFilter] = useState('')
-
-  const dropdownValue = watch(id) as Option[]
 
   const handleSearchChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setFilter(e.currentTarget.value)
@@ -29,6 +35,8 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
             .sort((a, b) => a.label.localeCompare(b.label))
         )
         setValue(id, values)
+        setFilter('')
+        dropdownElement.current?.blur()
       }
     }
     hasBeenEdited.current = true
@@ -37,17 +45,11 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
 
   const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === 'Enter') {
+      e.preventDefault()
       const values = options
         .filter((el) => el.label.toLowerCase().startsWith(filter.toLowerCase()))
       if (values.length > 0) {
-        const aux = structuredClone(dropdownValue)
-        const value = values.at(0)
-
-        aux.push(value as Option)
-        setValue(id, aux)
-        setFilter('')
-      } else {
-        e.preventDefault()
+        handleValueChange(values[0])
       }
     }
   }
@@ -55,20 +57,28 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
   useEffect(() => {
     if (!hasBeenEdited.current) return
 
-    if (dropdownValue.length === 0) {
-      setError(id, { type: 'required', message: 'Este campo es requerido' })
-    } else {
-      const value = optionsData.find((el) => el.label.toLowerCase() === filter.toLowerCase())
-      if (value !== undefined || filter === '') {
-        const arr = structuredClone(dropdownValue)
-        arr.push(value as Option)
-        clearErrors(id)
-        setValue(id, arr)
-        return
-      }
-      setError(id, { type: 'notFound', message: 'No se encontró el valor' })
+    const data: Option[] = watch(id) ?? []
+    const value = optionsData.find((el) => el.label.toLowerCase() === filter.toLowerCase())
+    if (value !== undefined && data.find((el) => el.value === value.value) === undefined) {
+      clearErrors(id)
+      handleValueChange(value)
+      return
     }
-  }, [dropdownValue, filter])
+    if (filter !== '') {
+      setError(id, { type: 'notFound', message: 'No se encontró el valor' })
+    } else {
+      clearErrors(id)
+    }
+  }, [filter])
+
+  useEffect(() => {
+    if (!hasBeenEdited.current) return
+    if (dropdownValue.length > 0) {
+      clearErrors(id)
+      return
+    }
+    setError(id, { type: 'min', message: 'Seleccione al menos una opción' })
+  }, [dropdownValue])
 
   return (
     <>
@@ -80,6 +90,7 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
           onInput={handleSearchChange}
           onFocus={() => setShowOptions(true)}
           onKeyDown={handleEnterPressed}
+          ref={dropdownElement}
           className={`${styles.dropdown_input} ${showOptions ? styles.dropdown_input_focus : ''}`}
         />
         <ul className={styles.dropdown_tags}>
@@ -89,10 +100,12 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
               onClick={() => {
                 setOptions((prev) => [...prev, option].sort((a, b) => a.label.localeCompare(b.label)))
                 setValue(id, (dropdownValue).filter((el) => el.value !== option.value))
+                hasBeenEdited.current = true
               }}
               key={i}
             >
               {option.label}
+              <IconClose className={styles.dropdown_tags_element_remove} />
             </li>
 
           ))}

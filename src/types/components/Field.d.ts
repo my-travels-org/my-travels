@@ -1,4 +1,4 @@
-import { HTMLAttributes, InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes } from 'react'
 import { CustomField } from '../CustomField'
 import { UseFormReturn } from 'react-hook-form'
 
@@ -7,7 +7,7 @@ export interface Field {
   id: string
   label: string
   showLabel?: boolean
-  props?: HTMLAttributes<InputHTMLAttributes>
+  props?: InputHTMLAttributes<HTMLInputElement>
   customField?: CustomField
   customFieldProps?: {
     [key: string]: any
