@@ -6,5 +6,5 @@ export interface UploadFileProps extends CustomFieldProps {
   buttonName?: string
   multiple?: boolean
   previewFiles: boolean
-  formMethods: Pick<UseFormReturn, 'register' | 'watch' | 'setError'>
+  formMethods: Pick<UseFormReturn, 'register' | 'watch' | 'setError' | 'setValue' | 'clearErrors'>
 }

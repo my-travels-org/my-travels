@@ -12,18 +12,31 @@ export default function UploadFile ({
   accept,
   multiple = true,
   previewFiles,
-  formMethods: { register, watch, setError }
+  formMethods: { register, watch, setError, setValue, clearErrors }
 }: UploadFileProps): JSX.Element {
-  const registerData = register(id)
+  const { onChange, ...rest } = register(id)
   const files = watch(id) as File[]
   const hasBeenEdited = useRef(false)
 
   useEffect(() => {
     if (!hasBeenEdited.current) return
-    if (files === undefined) {
-      setError(id, { type: 'required', message: 'No se encontró el valor' })
+    if (files.length === 0) {
+      setError(id, { type: 'required', message: 'Sube por lo menos una imagen' })
+    } else {
+      clearErrors(id)
     }
+
+    console.log(files)
   }, [files])
+
+  const handleFileChanges = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    hasBeenEdited.current = true
+    if (e.target.files !== null) {
+      const files = Array.from(e.target.files)
+
+      setValue(id, files)
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -33,7 +46,8 @@ export default function UploadFile ({
         accept={accept}
         multiple={multiple}
         hidden
-        {...registerData}
+        onChange={handleFileChanges}
+        {...rest}
 
       />
       <label htmlFor={id} className={styles.container_input}>

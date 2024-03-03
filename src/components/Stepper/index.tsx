@@ -23,7 +23,7 @@ export default function Stepper ({
   }
 
   const values = watch()
-  console.log(values)
+  console.log({ values, errors })
   return (
     <div className={styles.stepper}>
       <h4 className={styles.stepper_title}>{title}</h4>

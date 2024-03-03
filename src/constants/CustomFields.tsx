@@ -9,8 +9,8 @@ import DropdownMultiple from '@/components/CustomFields/DropdownMultiple'
 
 export const components: { [key in CustomField]: (props: any) => JSX.Element } = {
   [CustomField.File]: (props: UploadFileProps) => {
-    const { register, watch, setError } = props.formMethods
-    return <UploadFile {...props} formMethods={{ register, watch, setError }} />
+    const { register, watch, setError, setValue, clearErrors } = props.formMethods
+    return <UploadFile {...props} formMethods={{ register, watch, setError, setValue, clearErrors }} />
   },
   [CustomField.StarRating]: (props: StarRatingProps) => {
     const { setValue, watch, clearErrors } = props.formMethods

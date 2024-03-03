@@ -9,17 +9,17 @@ import { reviewService } from '@/services/Reviews'
 import { registerSections, registerTripSchema, initialValues as initialValuesConstant } from '@constants/RegisterTrip'
 import styles from './TripForm.module.scss'
 import { type TripFormProps } from '@/types/components/TripForm'
-import { type RegisterTripFieldValues, type CreateTripDTO, EditTripFieldValues } from '@/types/Trip'
+import { type RegisterTripFieldValues, type CreateTripDTO, EditTripDTO } from '@/types/Trip'
 
 export default function TripForm ({ editingElement }: TripFormProps): JSX.Element {
   const router = useRouter()
 
-  const [initialValues] = useState<RegisterTripFieldValues | EditTripFieldValues>(editingElement !== undefined
+  const initialValues: CreateTripDTO | EditTripDTO = editingElement !== undefined
     ? {
         ...initialValuesConstant,
         ...editingElement
       }
-    : initialValuesConstant)
+    : initialValuesConstant
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [step, setStep] = useState(0)
 

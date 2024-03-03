@@ -110,13 +110,14 @@ export const initialValues = {
   starRating: 1,
   spent: 1500,
   zoneType: [
-    // { label: 'Tropical', value: 1 }
+    { label: 'Tropical', value: 1 }
   ],
-  // motive: 1,
-  // climate: 1
+  motive: 1,
+  climate: 1,
   activities: [
-    // { label: '1', value: 1 }
-  ]
+    { label: '1', value: 1 }
+  ],
+  images: []
 }
 
 export const registerTripSchema = yup
@@ -146,6 +147,10 @@ export const registerTripSchema = yup
         })
       )
       .min(1, 'Seleccione al menos una opción'),
+    images: yup.array()
+      .of(
+        yup.mixed()
+      ).min(1, 'Sube por lo menos una imagen'),
     lodgingName: yup.string().required(required),
     coordinates: yup.string().required(required),
     lodgingType: yup.number().typeError(positive).positive().required(required)
