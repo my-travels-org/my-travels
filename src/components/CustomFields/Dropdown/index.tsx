@@ -19,6 +19,20 @@ export default function Dropdown ({ id, options, formMethods: { setValue, clearE
     setShowOptions(false)
   }
 
+  const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter') {
+      const values = options
+        .filter((el) => el.label.toLowerCase().startsWith(filter.toLowerCase()))
+      if (values.length > 0) {
+        const value = values.at(0)?.label
+        setValue(id, value)
+        setFilter(value as string)
+      } else {
+        e.preventDefault()
+      }
+    }
+  }
+
   useEffect(() => {
     if (filter === '') {
       setError(id, { type: 'required', message: 'Este campo es requerido' })
@@ -26,6 +40,7 @@ export default function Dropdown ({ id, options, formMethods: { setValue, clearE
       const value = options.find((el) => el.label.toLowerCase() === filter.toLowerCase())
       if (value != null) {
         clearErrors(id)
+        setValue(id, value.label)
         return
       }
       setError(id, { type: 'required', message: 'No se encontró el valor' })
@@ -38,8 +53,10 @@ export default function Dropdown ({ id, options, formMethods: { setValue, clearE
         <input
           id={id}
           type='text'
+          autoComplete='false'
           value={filter}
           onInput={handleSearchChange}
+          onKeyDown={handleEnterPressed}
           onFocus={() => setShowOptions(true)}
           className={`${styles.dropdown_input} ${showOptions ? styles.dropdown_input_focus : ''}`}
         />

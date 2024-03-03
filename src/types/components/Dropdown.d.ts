@@ -4,5 +4,5 @@ import { Option } from '../Option'
 
 export interface DropdownProps extends CustomFieldProps {
   options: Option[]
-  formMethods: Pick<UseFormReturn, 'setValue' | 'clearErrors' | 'setError'>
+  formMethods: Pick<UseFormReturn, 'setValue' | 'clearErrors' | 'setError' | 'watch'>
 }

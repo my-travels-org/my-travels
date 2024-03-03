@@ -35,6 +35,23 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
     setShowOptions(false)
   }
 
+  const handleEnterPressed = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter') {
+      const values = options
+        .filter((el) => el.label.toLowerCase().startsWith(filter.toLowerCase()))
+      if (values.length > 0) {
+        const aux = structuredClone(dropdownValue)
+        const value = values.at(0)
+
+        aux.push(value as Option)
+        setValue(id, aux)
+        setFilter('')
+      } else {
+        e.preventDefault()
+      }
+    }
+  }
+
   useEffect(() => {
     if (!hasBeenEdited.current) return
 
@@ -42,8 +59,11 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
       setError(id, { type: 'required', message: 'Este campo es requerido' })
     } else {
       const value = optionsData.find((el) => el.label.toLowerCase() === filter.toLowerCase())
-      if (value != null || filter === '') {
+      if (value !== undefined || filter === '') {
+        const arr = structuredClone(dropdownValue)
+        arr.push(value as Option)
         clearErrors(id)
+        setValue(id, arr)
         return
       }
       setError(id, { type: 'notFound', message: 'No se encontró el valor' })
@@ -59,6 +79,7 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
           value={filter}
           onInput={handleSearchChange}
           onFocus={() => setShowOptions(true)}
+          onKeyDown={handleEnterPressed}
           className={`${styles.dropdown_input} ${showOptions ? styles.dropdown_input_focus : ''}`}
         />
         <ul className={styles.dropdown_tags}>

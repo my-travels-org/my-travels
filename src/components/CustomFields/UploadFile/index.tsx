@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import { UploadFileProps } from '@/types/components/UploadFile'
 import styles from './UploadFile.module.scss'
+import { useEffect } from 'react'
 
 export default function UploadFile ({
   id,
@@ -11,16 +12,17 @@ export default function UploadFile ({
   accept,
   multiple = true,
   previewFiles,
-  formMethods: { register, watch, setValue }
+  formMethods: { register, watch, setError }
 }: UploadFileProps): JSX.Element {
-  const { onChange, ...rest } = register(id)
-  const files = watch(id) as FileList
+  const registerData = register(id)
+  const files = watch(id) as File[]
 
-  const handleFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if (e.target.files !== null) {
-      setValue(id, e.target.files)
+  useEffect(() => {
+    if (files === undefined) {
+      setError(id, { type: 'required', message: 'No se encontró el valor' })
     }
-  }
+  }, [files])
+
   return (
     <div className={styles.container}>
       <input
@@ -29,8 +31,7 @@ export default function UploadFile ({
         accept={accept}
         multiple={multiple}
         hidden
-        onChange={handleFiles}
-        {...rest}
+        {...registerData}
 
       />
       <label htmlFor={id} className={styles.container_input}>

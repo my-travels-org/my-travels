@@ -11,7 +11,7 @@ export default function Stepper ({
   handleStep,
   formMethods
 }: Props): JSX.Element {
-  const { register, trigger, formState, clearErrors } = formMethods
+  const { register, trigger, formState, clearErrors, watch } = formMethods
   const errors = formState?.errors ?? {}
   const handleClick = async (step: number): Promise<any> => {
     handleStep(step)
@@ -22,6 +22,8 @@ export default function Stepper ({
     window.scrollTo(options)
   }
 
+  const values = watch()
+  console.log(values)
   return (
     <div className={styles.stepper}>
       <h4 className={styles.stepper_title}>{title}</h4>

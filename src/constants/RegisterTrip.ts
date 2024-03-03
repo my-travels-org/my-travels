@@ -91,8 +91,6 @@ export const registerSections: Section[] = [
 
 export const initialValues = {
   name: 'Viaje',
-  state: 'Jalisco',
-  city: 'Jalisco',
   date: new Date().toISOString().split('T')[0],
   review: 'Review',
   spent: 1500,
@@ -117,25 +115,27 @@ export const registerTripSchema = yup
         })
       )
       .required(required),
-    images: yup.array()
-      .of(
-        yup.object().shape({
-          file: yup.mixed()
-            .required('Image is required')
-            .test('fileFormat', 'Unsupported Format', (value: any) => {
-              const validFormats = ['image/jpeg', 'image/png']
-              return value?.type !== undefined
-                ? validFormats.includes(value.type)
-                : false
-            })
-            .test('fileSize', 'File size is too large', (value: any) => {
-              const maxSize = 1024 * 1024 * 2 // 2MB
-              return value?.size !== undefined
-                ? value.size <= maxSize
-                : false
-            })
-        })
-      ).required(required),
+    // images: yup.array()
+    //   .of(
+    //     yup.object().shape({
+    //       file: yup.mixed()
+    //         .required('Image is required')
+    //         .test('fileFormat', 'Unsupported Format', (value: any) => {
+    //           const validFormats = ['image/jpeg', 'image/png']
+    //           return value?.type !== undefined
+    //             ? validFormats.includes(value.type)
+    //             : false
+    //         })
+    //         .test('fileSize', 'File size is too large', (value: any) => {
+    //           const maxSize = 1024 * 1024 * 2 // 2MB
+    //           return value?.size !== undefined
+    //             ? value.size <= maxSize
+    //             : false
+    //         })
+    //     })
+    //   ).required(required),
+    images:
+        yup.mixed().required(),
     motive: yup.number().typeError(positive).positive().required(required),
     climate: yup.number().typeError(positive).positive().required(required),
     activities: yup.number().typeError(positive).positive().required(required),
