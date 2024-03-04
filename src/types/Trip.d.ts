@@ -11,7 +11,7 @@ export interface CreateTripDTO {
   motivo: number
   clima: number
   actividades: number
-  imagenes: string
+  imagenes: File[]
   nombreHospedaje: string
   coordenadas: string
   tipoHospedaje: number
@@ -21,20 +21,24 @@ export interface Trip extends CreateTripDTO {
   id: number
 }
 
-export interface RegisterFieldValues {
+export type EditTripDTO = Partial<CreateTripDTO>
+
+export interface RegisterTripFieldValues {
   name: string
   state: string
   city: string
   date: string
-  resenia: string
-  rate: number
+  review: string
+  starRating: number
   spent: number
-  zoneType: number
+  typeZone: number
   motive: number
   climate: number
   activities: number
-  imagenes: string
+  images: File[]
   lodgingName: string
   coordinates: string
   lodgingType: number
 }
+
+export type EditTripFieldValues = Partial<RegisterTripFieldValues>

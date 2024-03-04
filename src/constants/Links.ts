@@ -39,7 +39,7 @@ export const footerLinks: FooterLinks[] = [
       },
       {
         name: 'Nosotros',
-        path: '/info_footer/aboutUs'
+        path: '/about-us'
       },
       {
         name: 'Contacto',
@@ -52,7 +52,7 @@ export const footerLinks: FooterLinks[] = [
     links: [
       {
         name: 'Preguntas frecuentes',
-        path: '/info_footer/questions'
+        path: '/questions'
       },
       {
         name: 'Soporte',
@@ -60,7 +60,7 @@ export const footerLinks: FooterLinks[] = [
       },
       {
         name: 'Términos y Condiciones',
-        path: '/info_footer/terms-and-conditions'
+        path: '/terms-and-conditions'
       }
     ]
   },

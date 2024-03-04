@@ -5,22 +5,22 @@ import { usePathname } from 'next/navigation'
 import { navbarLinks } from '@/constants/Links'
 import styles from './Navbar.module.scss'
 import { NavbarProps } from '@/types/components/Navbar'
-// import { useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 export default function Navbar ({ toggle }: NavbarProps): JSX.Element {
-  // const { status } = useSession()
+  const { status } = useSession()
   const pathname = usePathname()
 
-  // const filteredNavbarLinks = navbarLinks.filter(({ isProtected }) =>
-  //   (status === 'authenticated' && isProtected) ||
-  //   (status === 'unauthenticated' && !isProtected)
-  // )
+  const filteredNavbarLinks = navbarLinks.filter(({ isProtected }) =>
+    (status === 'authenticated' && isProtected) ||
+    (!isProtected)
+  )
 
   return (
     <nav className={styles.nav}>
       <ul className={styles.nav_list}>
         {
-      navbarLinks.map(({ name, path }) => {
+      filteredNavbarLinks.map(({ name, path }) => {
         return (
           <li key={path} className={styles.nav_list_element}>
             <Link

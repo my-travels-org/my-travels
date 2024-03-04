@@ -5,8 +5,17 @@ import Link from 'next/link'
 import { Carousel } from '@/components/index'
 import { carousel } from '@/constants/Carousel'
 import styles from './Home.module.scss'
+import { useLoaderContext } from '@/contexts/Loader/context'
+import { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function Home (): JSX.Element {
+  const { status } = useSession()
+  const { isLoading, handleLoader } = useLoaderContext()
+
+  useEffect(() => {
+    handleLoader(false)
+  }, [isLoading])
   return (
     <section className={`${styles.section} ${styles.home}`}>
       <section className={styles.home_welcome}>
@@ -23,7 +32,7 @@ export default function Home (): JSX.Element {
       <section className={`${styles.section} ${styles.home_travels}`}>
         <h2 className={styles.home_travels_title}>Sube viajes</h2>
         <p className={styles.home_travels_text}>Comparte la belleza de México con el mundo. Ayúdanos a descubrir y revelar cada rincón de este país lleno de maravillas.</p>
-        <Link href='/login' className={styles.home_travels_button}>Comienza ahora</Link>
+        <Link href={status === 'authenticated' ? '/my-travels' : '/login'} className={styles.home_travels_button}>Comienza ahora</Link>
       </section>
       <section className={`${styles.section} ${styles.home_faq}`}>
         <h2 className={styles.home_faq_title}>Preguntas frecuentes</h2>
