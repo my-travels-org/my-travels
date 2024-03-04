@@ -9,6 +9,6 @@
   align-items: center;
   gap: 2rem;
   &_loader{
-    height: auto;
+    height: auto !important;
   }
 }

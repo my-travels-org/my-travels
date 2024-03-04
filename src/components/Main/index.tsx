@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
-import SonnerContext from '@/app/ToastProvider'
 import { Header, Footer, IsAccessDenied } from '@components/index'
 import { footerLinks } from '@/constants/Links'
 import { routeProtectionStatus } from '@/constants/ProtectedRoutes'
@@ -19,7 +18,6 @@ export default function Main ({ children }: { children: React.ReactNode }): JSX.
     <>
       {showElements && <Header />}
       <main className={styles.main}>
-        <SonnerContext />
         {(isProtected && status === 'authenticated') || !isProtected ? children : <IsAccessDenied />}
       </main>
       {showElements && <Footer sections={footerLinks} />}

@@ -1,8 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
-export const runtime = 'edge'
-
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -16,7 +14,7 @@ const handler = NextAuth({
         const correo = credentials?.email
         const password = credentials?.password
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API as string}/auth/login`, {
+        const res = await fetch(`${process.env.NEXTAUTH_URL as string}/api/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

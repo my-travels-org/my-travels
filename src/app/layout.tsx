@@ -6,6 +6,7 @@ import AuthProvider from './AuthProvider'
 import '@styles/global.scss'
 import Main from '@/components/Main'
 import LoaderContextProvider from '@/contexts/Loader/provider'
+import SonnerContext from '@/app/ToastProvider'
 
 const archivo = Archivo({ subsets: ['latin'] })
 
@@ -23,15 +24,16 @@ export default function RootLayout ({
   return (
     <AuthProvider>
       <html lang='en'>
-        <LoaderContextProvider>
-          <body className={archivo.className}>
+        <body className={archivo.className}>
+          <SonnerContext />
+          <LoaderContextProvider>
             <Loading>
               <Main>
                 {children}
               </Main>
             </Loading>
-          </body>
-        </LoaderContextProvider>
+          </LoaderContextProvider>
+        </body>
       </html>
     </AuthProvider>
   )

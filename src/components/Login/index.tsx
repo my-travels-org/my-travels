@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
@@ -10,12 +10,18 @@ import { Form } from '@components/index'
 import { loginSections, loginSchema } from '@constants/LoginForm'
 import styles from './Login.module.scss'
 import { LoginUserDTO } from '@/types/models/User'
+import { useLoaderContext } from '@/contexts/Loader/context'
 
 export default function Login (): JSX.Element {
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+
+  const { handleLoader } = useLoaderContext()
   const { status } = useSession()
   const router = useRouter()
 
   const handleSubmit = async (values: LoginUserDTO): Promise<void> => {
+    setHasSubmitted(true)
+    handleLoader(true)
     const result = await signIn('credentials', {
       email: values.email,
       password: values.password,
@@ -23,19 +29,23 @@ export default function Login (): JSX.Element {
     })
 
     if (result?.ok !== true) {
+      handleLoader(false)
       toast.error(result?.error)
+      setHasSubmitted(false)
       return
     }
-    toast.success('Bienvenido a MyTravels.')
-    router.push('/')
+    handleLoader(false)
+    setTimeout(() => {
+      toast.success('Bienvenido a MyTravels.')
+      router.push('/')
+    }, 0)
   }
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      // handleLoader(true)
+    if (status === 'authenticated' && !hasSubmitted) {
       router.push('/')
     }
-  }, [status])
+  }, [status, hasSubmitted])
 
   useEffect(() => {
     router.prefetch('/login')
