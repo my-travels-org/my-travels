@@ -1,5 +1,13 @@
 @use '@styles/variables';
 
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+}
+
 .loader{
   width: 60px;
   height: 60px;
@@ -14,13 +22,13 @@
   &::before{
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(0deg, #f0c 0%, #80f 100%);
+    background-image: linear-gradient(0deg, variables.$primary-color 0%, variables.$secondary-color 100%);
   }
 
   &::after{
     width: 85%;
     height: 85%;
-    background-color: variables.$primary-background-color;
+    background: variables.$primary-background-color;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

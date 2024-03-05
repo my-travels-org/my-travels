@@ -11,10 +11,7 @@ import Loader from './Loader'
 import Login from './Login'
 import Navbar from './Navbar'
 import Register from './Register'
-import ScrollBar from './ScrollBar'
-import Viewer from './Viewer'
 import Stepper from './Stepper'
-import StarRating from './StarRating'
 import MultipleOption from './MultipleOption'
 import AboutUs from './AboutUS'
 import Conditions from './Conditions'
@@ -28,12 +25,17 @@ import Pagination from './Pagination'
 import UserProfile from './UserProfile'
 import UserDropdown from './UserDropdown'
 import TripSection from './TripSection'
+import CreateTripForm from './TripForm'
+import Star from './Star'
+import FilledStar from './FilledStar'
+import IsAccessDenied from './IsAccessDenied'
 
 export {
   AboutUs,
   Aside,
   Button,
   Carousel,
+  CreateTripForm,
   Conditions,
   Home,
   Hamburger,
@@ -49,9 +51,6 @@ export {
   Register,
   Search,
   Stepper,
-  ScrollBar,
-  Viewer,
-  StarRating,
   MultipleOption,
   Travels,
   Card,
@@ -59,5 +58,8 @@ export {
   Pagination,
   UserProfile,
   UserDropdown,
-  TripSection
+  TripSection,
+  Star,
+  FilledStar,
+  IsAccessDenied
 }

@@ -1,3 +1,4 @@
+// import { SetStateAction } from 'react'
 import { Field } from './Field'
 
 export interface Section {
@@ -7,8 +8,8 @@ export interface Section {
 export interface FormProps {
   sections: Section[]
   schema: yup.ObjectSchema<any>
-  submitButton?: string
   onSubmit: (values) => any
+  submitButton?: string
   className?: string
   isSubmitDisabled?: boolean
   initialValues?: {
