@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { navbarLinks } from '@/constants/Links'
 import styles from './Navbar.module.scss'
 import { NavbarProps } from '@/types/components/Navbar'
-import { useSession } from 'next-auth/react'
+
 
 import { infoUser } from '@/types/models/User'
 import {UserDropdown} from '@components/index'

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart} from '@fortawesome/free-solid-svg-icons'
 
 import { reviewService } from '@/services/Reviews'
-import { StarRating } from '@components/index'
+import  StarRating  from '@components/StarRating'
 import {useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import styles from './dashboard.module.scss'

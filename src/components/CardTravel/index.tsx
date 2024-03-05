@@ -1,4 +1,5 @@
 'use client'
+import { toast } from 'sonner'
 import Link from 'next/link'
 import Image from 'next/image'
 import ImageGallery from 'react-image-gallery'
@@ -43,12 +44,12 @@ export default function CardTravel ({ review }: ViewerProps): JSX.Element {
 
   const saveReview = async (id: number): Promise<void> => {
     
-    if (status === 'authenticated') {
-        const response = await reviewService.saveOneReview(id)
-        console.log(response)
+     if (status === 'authenticated') {
+        const response = await reviewService.saveOneReview({id, user: session})
+        
     }
     else{
-      router.push('/register')
+      toast.error("Necesitas iniciar sesión")
     }
     
   
@@ -94,7 +95,10 @@ export default function CardTravel ({ review }: ViewerProps): JSX.Element {
           <Divider light />
           
           <div className={styles.buttonsContainer}>
-          <button className={styles.button}> <FontAwesomeIcon className={styles.infoText_icon} icon={faHeart} onClick={() => saveReview(review['resenia-id'])}/>Guardar</button>
+          <button type='button' className={styles.button} onClick={() => {
+             console.log("debug")
+             saveReview(review['resenia-id'])
+             }}> <FontAwesomeIcon className={styles.infoText_icon} icon={faHeart} />Guardar</button>
           
           <Link key={review['resenia-id']} href={`/dashboard/${review['resenia-id']}`}>
             <button className={styles.button}><FontAwesomeIcon className={styles.infoText_icon} icon={faRightToBracket}/>Ver más</button>
