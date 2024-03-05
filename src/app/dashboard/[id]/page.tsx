@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart} from '@fortawesome/free-solid-svg-icons'
 
 import { reviewService } from '@/services/Reviews'
-import  StarRating  from '@components/StarRating'
+import  StarRating  from '@components/CustomFields/StarRating'
 import {useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import styles from './dashboard.module.scss'
@@ -82,7 +82,7 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
               <p className={styles.review}>"{review['destino-resenia']}"</p>
               <div className={styles.infoContainer}>
                 <div className={styles.ratingContainer}>
-                <StarRating rating={review['destino-calificacion_destino']} />
+                {/* <StarRating rating={review['destino-calificacion_destino']} /> */}
                 </div>
                 <div className={styles.reviewInfo}>
 
