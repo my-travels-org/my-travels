@@ -13,8 +13,8 @@ const elementsPerPage = 32
 const TripSection = (): JSX.Element => {
   
     const [active, setActive] = useState(0);
-    const [reviews, setReviews] = useState <Review[]>()
-    const [data,setData] = useState <Review[]>()
+    const [reviews, setReviews] = useState <Review[]>([])
+    const [data,setData] = useState <Review[]>([])
     const { currentPage, handleChangePage } = usePagination()
 
   useEffect(() => {
@@ -31,15 +31,15 @@ const TripSection = (): JSX.Element => {
   const filterItems = (index: number) => {
     setActive(index)  
     if(index === 1){  //Mejor Calificados
-      setReviews ( data?.filter((newValue) => newValue['destino-calificacion_destino'] === 5))
+      setReviews ( data.filter((newValue) => newValue['destino-calificacion_destino'] === 5))
     }
 
     if(index === 2){  //últimos descubrimientos
-      setReviews ( data?.filter((newValue) => compareDates(new Date(newValue['destino-fecha_visita']))  )) 
+      setReviews ( data.filter((newValue) => compareDates(new Date(newValue['destino-fecha_visita']))  )) 
     }
     if(index === 3){  //Económicos
       console.log()
-      setReviews(data?.filter((newValue) => newValue['destino-cantidad_gastada'] < 5000.00))
+      setReviews(data.filter((newValue) => newValue['destino-cantidad_gastada'] < 5000.00))
     }
   }
 
@@ -98,7 +98,7 @@ const TripSection = (): JSX.Element => {
           </div>
         </div>
         <Pagination
-            count={80}
+            count={reviews.length}
             elementsPerPage={elementsPerPage}
             currentPage={currentPage}
             handlePageChange={handleChangePage}
