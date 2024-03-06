@@ -39,7 +39,10 @@ export default function PlacesAutocomplete ({ setSelected }: PlaceAutocompletePr
   }
 
   return (
-    <Combobox onSelect={handleSelect}>
+    <Combobox onSelect={(e) => {
+      void handleSelect(e)
+    }}
+    >
       <ComboboxInput
         value={value}
         onChange={(e) => setValue(e.target.value)}

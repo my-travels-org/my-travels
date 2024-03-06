@@ -95,7 +95,7 @@ export const registerSections: Section[] = [
   {
     fields: [
       { id: 'lodgingName', label: 'Nombre del alojamiento', type: 'text' },
-      { id: 'coordinates', label: 'Ubicación del alojamiento', type: 'coordinates' },
+      { id: 'coordinates', label: 'Ubicación del alojamiento', customField: CustomField.Map, customFieldProps: { id: 'coordinates' } },
       { id: 'lodgingType', label: 'Ambiente del alojamiento', type: 'number' }
     ],
     title: 'Alojamiento'

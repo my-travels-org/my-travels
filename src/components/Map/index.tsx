@@ -9,6 +9,7 @@ import {
 
 import styles from './Map.module.scss'
 import PlacesAutocomplete from '../PlacesAutocomplete'
+import { MapProps } from '@/types/components/Map'
 
 const libraries: any[] = ['places' as any]
 const mapOptions: google.maps.MapOptions = {
@@ -20,9 +21,9 @@ const mapOptions: google.maps.MapOptions = {
   mapTypeId: 'roadmap'
 }
 
-export default function Map (): JSX.Element {
+export default function Map ({ id, formMethods: { setValue, watch }, viewOnly = false }: MapProps): JSX.Element {
   const [selected, setSelected] = useState<google.maps.LatLngLiteral | null>(null)
-  const [centerCoordinates, setCenterCoordinates] =
+  const [centerCoordinates] =
     useState<google.maps.LatLngLiteral>({
       lat: 20.687147577506487,
       lng: -103.35057863540375
@@ -39,9 +40,10 @@ export default function Map (): JSX.Element {
   return isLoaded
     ? (
       <>
-        <div className='places-container'>
-          <PlacesAutocomplete setSelected={setSelected} />
-        </div>
+        {!viewOnly &&
+          <div className='places-container'>
+            <PlacesAutocomplete setSelected={setSelected} />
+          </div>}
         <GoogleMap
           options={mapOptions}
           zoom={14}
@@ -52,10 +54,10 @@ export default function Map (): JSX.Element {
           {selected != null && (
             <Marker
               position={selected}
+              onClick={(e) => console.log(e)}
             />
           )}
         </GoogleMap>
-
       </>
       )
     : (

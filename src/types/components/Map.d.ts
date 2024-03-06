@@ -1,21 +1,7 @@
-export interface PropertiesMapProps {
-  viewProperty: (id: number) => void
-  editProperty: (id: number) => void
-}
-export interface MapProps {
-  polygons: google.maps.LatLngLiteral[]
-  addCoordinate: (coordinate: google.maps.LatLngLiteral) => void
-  updateCoordinate: (
-    coordinate: google.maps.LatLngLiteral,
-    index: number,
-  ) => void
-  removeLastCoordinate: () => void
-  getCenter: (
-    polygon?: google.maps.LatLngLiteral[],
-  ) => google.maps.LatLngLiteral
-}
+import { UseFormReturn } from 'react-hook-form'
+import { CustomFieldProps } from '../CustomField'
 
-export interface UpdatePolygonsProps {
-  e: google.maps.MapMouseEvent
-  index: number
+export interface MapProps extends CustomFieldProps {
+  formMethods: Pick<UseFormReturn, 'watch' | 'setValue'>
+  viewOnly?: boolean
 }

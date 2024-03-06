@@ -6,6 +6,8 @@ import { DropdownProps } from '@/types/components/Dropdown'
 import { StarRatingProps } from '@/types/components/StarRating'
 import { DropdownMultipleProps } from '@/types/components/DropdownMultiple'
 import DropdownMultiple from '@/components/CustomFields/DropdownMultiple'
+import { MapProps } from '@/types/components/Map'
+import Map from '@/components/Map'
 
 export const components: { [key in CustomField]: (props: any) => JSX.Element } = {
   [CustomField.File]: (props: UploadFileProps) => {
@@ -27,5 +29,9 @@ export const components: { [key in CustomField]: (props: any) => JSX.Element } =
   [CustomField.DropdownMultiple]: (props: DropdownMultipleProps) => {
     const { setValue, clearErrors, setError, watch } = props.formMethods
     return <DropdownMultiple {...props} formMethods={{ clearErrors, setValue, setError, watch }} />
+  },
+  [CustomField.Map]: (props: MapProps) => {
+    const { setValue, watch } = props.formMethods
+    return <Map {...props} formMethods={{ setValue, watch }} />
   }
 }
