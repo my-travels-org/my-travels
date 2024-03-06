@@ -13,14 +13,12 @@ export default function Dropdown ({ id, options: optionsData, formMethods: { set
 
   const [showOptions, setShowOptions] = useState(false)
   const [filter, setFilter] = useState('')
-  const [options, setOptions] = useState<Option[]>(dependsOnValue === undefined ? optionsData as Option[] : dependsOnValue !== '' ? (optionsData as Record<string, string[]>)[dependsOnValue].map((el) => ({ label: el, value: el })) : [])
-  const optionsRef = dependsOn === undefined
-    ? useRef<HTMLLIElement[] | any>(
-      (optionsData as Option[])
-        .map(() => useRef(null)))
-    : useRef<HTMLLIElement[]>([])
-
-  const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
+  const [options, setOptions] = useState<Option[]>(
+    dependsOnValue === undefined
+      ? optionsData as Option[]
+      : dependsOnValue !== ''
+        ? (optionsData as Record<string, string[]>)[dependsOnValue].map((el) => ({ label: el, value: el }))
+        : [])
 
   const filteredOptions = dependsOn === undefined
     ? (options)
@@ -53,27 +51,12 @@ export default function Dropdown ({ id, options: optionsData, formMethods: { set
       e.preventDefault()
 
       if (filteredOptions.length > 0) {
-        let value
-        if (focusedOptionIndex >= 0 && focusedOptionIndex < filteredOptions.length) {
-          value = (filteredOptions[focusedOptionIndex]).label
-        } else {
-          value = (filteredOptions.at(0) as Option)?.label
-        }
+        const value = (filteredOptions[0]).label
         handleValueChange({ label: value })
       }
     }
     if (e.key === 'Tab') {
       setShowOptions(false)
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      const nextIndex = focusedOptionIndex + 1 < filteredOptions.length ? focusedOptionIndex + 1 : 0
-      setFocusedOptionIndex(nextIndex)
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      const prevIndex = focusedOptionIndex - 1 >= 0 ? focusedOptionIndex - 1 : filteredOptions.length - 1
-      setFocusedOptionIndex(prevIndex)
     }
   }
 
@@ -85,8 +68,6 @@ export default function Dropdown ({ id, options: optionsData, formMethods: { set
     }
     const data = (optionsData as Record<string, string[]>)[dependsOnValue].map((el) => ({ label: el, value: el }))
     setOptions(data)
-    const elements = document.querySelector(`#dropdown-${id}`)?.childNodes as NodeListOf<HTMLLIElement>
-    optionsRef.current = Array.from(elements)
   }, [dependsOnValue])
 
   useEffect(() => {
@@ -108,18 +89,6 @@ export default function Dropdown ({ id, options: optionsData, formMethods: { set
     }
   }, [dropdownValue, filter])
 
-  useEffect(() => {
-    if (focusedOptionIndex >= 0) {
-      const option = dependsOn !== undefined ? optionsRef.current[focusedOptionIndex] : optionsRef.current[focusedOptionIndex].current
-      console.log(option)
-      console.log(optionsRef)
-      // const optionsContainer = document.querySelector(`#dropdown-${id}`) as HTMLUListElement
-      // const height = option.getBoundingClientRect().height
-      // const finalScrollTop = (option.offsetTop - (height * 2))
-      // optionsContainer.scrollTo({ top: finalScrollTop, behavior: 'instant' })
-    }
-  }, [focusedOptionIndex])
-
   return (
     <>
       <div className={styles.dropdown}>
@@ -136,12 +105,11 @@ export default function Dropdown ({ id, options: optionsData, formMethods: { set
         />
         <ul className={`${styles.dropdown_options} ${showOptions ? styles.dropdown_options_show : ''}`} id={`dropdown-${id}`}>
           {filteredOptions
-            .map(({ label, value }, index) =>
+            .map(({ label, value }) =>
               <li
                 key={value}
                 onClick={() => handleValueChange({ label })}
-                className={`${styles.dropdown_options_element} ${focusedOptionIndex === index ? styles.dropdown_options_element_focused : ''}`}
-                ref={dependsOn === undefined ? optionsRef.current[index] : undefined}
+                className={styles.dropdown_options_element}
               >
                 {label}
               </li>
