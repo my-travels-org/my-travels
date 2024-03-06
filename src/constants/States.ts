@@ -79,7 +79,7 @@ export const citiesByState: Record<string, string[]> = {
     'Tenabo'
   ],
   Chiapas: [
-    '0 de Noviembre',
+    '20 de Noviembre',
     'Acacoyagua',
     'Acala',
     'Acapetahua',

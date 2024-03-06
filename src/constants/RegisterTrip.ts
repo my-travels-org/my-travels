@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import { Section } from '@/types/components/Form'
 import { required, positive, number } from '@constants/YupErrors'
 import { CustomField } from '@/types/CustomField'
-import { stateOptions } from './States'
+import { citiesByState, stateOptions } from './States'
 
 export const registerSections: Section[] = [
   {
@@ -24,7 +24,8 @@ export const registerSections: Section[] = [
         customField: CustomField.Dropdown,
         customFieldProps: {
           id: 'city',
-          options: stateOptions
+          options: citiesByState,
+          dependsOn: 'state'
         }
       },
       { id: 'date', label: 'Fecha de visita', type: 'date', props: { max: new Date().toISOString().split('T')[0] } },

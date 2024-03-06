@@ -6,7 +6,7 @@ import { Option } from '@/types/Option'
 import { DropdownMultipleProps } from '@/types/components/DropdownMultiple'
 import IconClose from '@/components/IconClose'
 
-export default function DropdownMultiple ({ id, options: optionsData, formMethods: { setValue, clearErrors, setError, watch, formState: { errors } } }: DropdownMultipleProps): JSX.Element {
+export default function DropdownMultiple ({ id, options: optionsData, formMethods: { setValue, clearErrors, setError, watch } }: DropdownMultipleProps): JSX.Element {
   const dropdownValue: Option[] = watch(id) ?? []
   const hasBeenEdited = useRef(false)
   const dropdownElement = useRef<HTMLInputElement>(null)
@@ -41,6 +41,8 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
         setFilter('')
         dropdownElement.current?.blur()
       }
+    } else {
+      setValue(id, [])
     }
     hasBeenEdited.current = true
     setShowOptions(false)

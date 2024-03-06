@@ -25,7 +25,7 @@ export const components: { [key in CustomField]: (props: any) => JSX.Element } =
     return <Dropdown {...props} formMethods={{ clearErrors, setValue, setError, watch }} />
   },
   [CustomField.DropdownMultiple]: (props: DropdownMultipleProps) => {
-    const { setValue, clearErrors, setError, watch, formState } = props.formMethods
-    return <DropdownMultiple {...props} formMethods={{ clearErrors, setValue, setError, watch, formState }} />
+    const { setValue, clearErrors, setError, watch } = props.formMethods
+    return <DropdownMultiple {...props} formMethods={{ clearErrors, setValue, setError, watch }} />
   }
 }
