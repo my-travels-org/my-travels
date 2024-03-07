@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { CarouselProps } from '@/types/components/Carousel'
 import styles from './Carousel.module.scss'
-import Card from '../Card'
+import Card from '../CardTravel'
 
 export default function Carousel ({ carousel }: CarouselProps): JSX.Element {
   const { title, description, images } = carousel

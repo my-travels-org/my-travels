@@ -19,8 +19,10 @@ import Questions from './Questions'
 import Proximamente from './Proximamente'
 import Travels from './Travels'
 import Card from './Card'
-import CreateTripForm from './TripForm'
+import CardTravel from './CardTravel'
 import Pagination from './Pagination'
+import TripSection from './TripSection'
+import CreateTripForm from './TripForm'
 // import UserProfile from './UserProfile'
 import UserDropdown from './UserDropdown'
 import Star from './Star'
@@ -50,10 +52,12 @@ export {
   Stepper,
   Travels,
   Card,
+  CardTravel,
   Pagination,
   // UserProfile,
   UserDropdown,
   Star,
   FilledStar,
-  IsAccessDenied
+  IsAccessDenied,
+  TripSection
 }

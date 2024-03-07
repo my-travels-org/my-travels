@@ -20,7 +20,6 @@ export default function Navbar ({ toggle }: NavbarProps): JSX.Element {
   return (
     <nav className={styles.nav}>
       <ul className={styles.nav_list}>
-
         {
       filteredNavbarLinks.map(({ name, path }) => {
         return (
