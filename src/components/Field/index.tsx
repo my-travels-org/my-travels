@@ -4,6 +4,12 @@ import styles from './Field.module.scss'
 export default function Field ({ field, formMethods: { register, formState: { errors } }, className = '' }: Props): JSX.Element {
   const { id, props, ...rest } = field
 
+  const handleEnterKeyPressed = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+    }
+  }
+
   return (
     <div className={`${styles.field} ${className}`} key={id}>
       <label
@@ -18,6 +24,7 @@ export default function Field ({ field, formMethods: { register, formState: { er
         {...props}
         {...register(id)}
         id={id}
+        onKeyDown={handleEnterKeyPressed}
         className={styles.field_input}
       />
 

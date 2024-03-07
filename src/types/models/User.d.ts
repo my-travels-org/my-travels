@@ -1,3 +1,5 @@
+import { Option } from '../Option'
+
 export interface CreateUserDTO {
   nombre: string
   apellido_p: string
@@ -28,9 +30,7 @@ export interface RegisterFieldValues {
   password: string
   city: string
   birthdate: Date
-  activity1: number // should be an enum
-  activity2: number // should be an enum
-  activity3: number // should be an enum
+  activities: Option[]
 }
 
 export interface updateUser {

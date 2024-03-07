@@ -34,6 +34,21 @@ const states = [
   'Zacatecas'
 ]
 
+const activities = [
+  'Agricultura',
+  'Alpinismo',
+  'Apuesta',
+  'Caida libre',
+  'Caminata',
+  'Camping',
+  'Caza',
+  'Degustación',
+  'Ganadería',
+  'Natación',
+  'Pesca',
+  'Senderismo'
+]
+
 export const citiesByState: Record<string, string[]> = {
   Aguascalientes: [
     'Aguascalientes',
@@ -2552,7 +2567,4 @@ export const stateOptions: Option[] = states.map(state => ({
   value: state
 }))
 
-// export const cityOptions: Option[] = citiesByState.map(city => ({
-//   label: city,
-//   value: city
-// }))
+export const activitiesOptions: Option[] = activities.map((activity, index) => ({ label: activity, value: index + 1 }))

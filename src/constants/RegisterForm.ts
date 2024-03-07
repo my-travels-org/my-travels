@@ -2,6 +2,8 @@ import * as yup from 'yup'
 
 import { Section } from '@/types/components/Form'
 import { required, email } from '@constants/YupErrors'
+import { CustomField } from '@/types/CustomField'
+import { activitiesOptions } from './FormOptions'
 
 export const registerSections: Section[] = [
   {
@@ -22,6 +24,12 @@ export const registerSections: Section[] = [
       { id: 'city', label: 'Ciudad', type: 'text' }
     ],
     title: 'Información de contacto'
+  },
+  {
+    fields: [
+      { id: 'activities', label: 'Actividades', customField: CustomField.DropdownMultiple, customFieldProps: { id: 'activities', options: activitiesOptions } }
+    ],
+    title: 'Otros datos'
   }
 ]
 
@@ -33,8 +41,8 @@ export const initialValues = {
   password: '',
   confirmPassword: '',
   city: '',
-  birthdate: ''
-
+  birthdate: '',
+  activities: []
 }
 
 export const registerSchema = yup
@@ -46,7 +54,16 @@ export const registerSchema = yup
     password: yup.string().required(required),
     confirmPassword: yup.string().oneOf([yup.ref('password'), undefined], 'Las contraseñas deben coincidir').required(required),
     city: yup.string().required(required),
-    birthdate: yup.date().required(required)
+    birthdate: yup.date().typeError('Debe de ser una fecha válida').required(required),
+    activities: yup.array()
+      .of(
+        yup.object().shape({
+          value: yup.string().required('Value is required'),
+          label: yup.string().required('Label is required')
+        })
+      )
+      .min(3, 'Seleccione al menos tres opciones')
+      .max(3, 'Seleccione máximo tres opciones')
   })
 
 export const resetUserSchema = yup

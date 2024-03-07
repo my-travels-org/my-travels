@@ -6,11 +6,9 @@ import { signIn, useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
 import { Form } from '@components/index'
-import { userService } from '@services/User'
 import { registerSections, registerSchema, initialValues } from '@constants/RegisterForm'
 import { type CreateUserDTO, type RegisterFieldValues } from '@/types/models/User'
 import styles from './Register.module.scss'
-import { registerErrors } from '@/constants/ErrorDictionary'
 
 export default function Register (): JSX.Element {
   const { status } = useSession()
@@ -20,8 +18,10 @@ export default function Register (): JSX.Element {
   const [step, setStep] = useState(0)
 
   const handleSubmit = async (data: RegisterFieldValues): Promise<any> => {
-    setIsSubmitted(true)
-    const { name, lastname, surname, email, password, city, birthdate, activity1, activity2, activity3 } = data
+    // setIsSubmitted(true)
+    const { name, lastname, surname, email, password, city, birthdate, activities } = data
+
+    const activitiesData = activities.map(({ value }) => Number(value))
     const payload: CreateUserDTO = {
       nombre: name,
       apellido_p: lastname,
@@ -30,29 +30,29 @@ export default function Register (): JSX.Element {
       password,
       ciudad: city,
       fecha_nacimiento: birthdate.toISOString().slice(0, 10),
-      actividad1: activity1,
-      actividad2: activity2,
-      actividad3: activity3
+      actividad1: activitiesData[0],
+      actividad2: activitiesData[1],
+      actividad3: activitiesData[2]
     }
 
-    toast.promise(userService.create(payload), {
-      loading: 'Registrando usuario...',
-      success: async () => {
-        await signIn('credentials', {
-          email,
-          password,
-          redirect: false
-        })
-        router.push('/')
-        return 'Usuario registrado con éxito'
+    const res = await fetch('/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
       },
-      error: async (error: any) => {
-        const errors = error.response
-        const keys = errors.data !== undefined ? Object.keys(JSON.parse(error.response.data)) : []
-        setIsSubmitted(false)
-        return `Ocurrió un error al intentar registrar: \n${keys.length > 0 ? keys.map((key) => registerErrors[key]).join('\n') : 'Error en el servidor, intente más tarde.'} `
-      },
-      style: { whiteSpace: 'pre-wrap' }
+      body: JSON.stringify(payload)
+    })
+
+    if (!res.ok) {
+      setIsSubmitted(false)
+      return toast.error('Ocurrió un error al intentar registrar al usuario, intente más tarde.')
+    }
+    toast.success('Registrado correctamente.')
+
+    await signIn('credentials', {
+      email,
+      password,
+      redirect: false
     })
   }
 
@@ -65,7 +65,9 @@ export default function Register (): JSX.Element {
   }, [])
 
   useEffect(() => {
-    if (status === 'authenticated') router.replace('/')
+    if (status === 'authenticated') {
+      router.push('/')
+    }
   }, [status])
 
   return (

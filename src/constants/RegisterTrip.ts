@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import { Section } from '@/types/components/Form'
 import { required, positive, number } from '@constants/YupErrors'
 import { CustomField } from '@/types/CustomField'
-import { citiesByState, stateOptions } from './States'
+import { activitiesOptions, citiesByState, stateOptions } from './FormOptions'
 
 export const registerSections: Section[] = [
   {
@@ -64,7 +64,7 @@ export const registerSections: Section[] = [
         customFieldProps: {
           id: 'motive',
           options: [
-            '1', '2', '3'
+            '1'
           ].map((option, index) => ({ label: option, value: index + 1 }))
         }
       },
@@ -91,20 +91,7 @@ export const registerSections: Section[] = [
         customField: CustomField.DropdownMultiple,
         customFieldProps: {
           id: 'activities',
-          options: [
-            'Agricultura',
-            'Alpinismo',
-            'Apuesta',
-            'Caida libre',
-            'Caminata',
-            'Camping',
-            'Caza',
-            'Degustación',
-            'Ganadería',
-            'Natación',
-            'Pesca',
-            'Senderismo'
-          ].map((option, index) => ({ label: option, value: index + 1 }))
+          options: activitiesOptions
         }
       }
     ],

@@ -8,7 +8,7 @@ import Form from '@components/Form'
 import { registerSections, registerTripSchema, initialValues as initialValuesConstant } from '@constants/RegisterTrip'
 import styles from './TripForm.module.scss'
 import { type TripFormProps } from '@/types/components/TripForm'
-import { type RegisterTripFieldValues, type CreateTripDTO } from '@/types/Trip'
+import { type RegisterTripFieldValues } from '@/types/Trip'
 import { useSession } from 'next-auth/react'
 
 export default function TripForm ({ editingElement }: TripFormProps): JSX.Element {
@@ -27,41 +27,66 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
   const handleSubmit = async (data: RegisterTripFieldValues): Promise<any> => {
     const token = session?.access_token
     setIsSubmitted(true)
-    const { destination, state, city, visitDate, review, destinationRate, spentMoney, zoneType, motive, climate, activities, images, lodging, lodgingRate, lodgingType } = data
-    const payload: CreateTripDTO = {
+
+    if (token === undefined) {
+      setIsSubmitted(false)
+      return toast.error('No se ha detectado una sesión activa.')
+    }
+
+    const {
       destination,
       state,
       city,
-      visitDate: visitDate.toString().slice(0, 10),
+      visitDate,
       review,
       destinationRate,
       spentMoney,
-      zoneType: zoneType.map((option) => option.value.toString()),
-      motive: motive.map((option) => option.value.toString()),
-      climate: climate.map((option) => option.value.toString()),
-      activities: activities.map((option) => option.value.toString()),
-      images,
-      lodgingName: lodging.displayName.text,
-      lodgingAddress: lodging.formattedAddress.slice(0, 50),
-      coordinates: JSON.stringify({ lat: lodging.location.latitude, lng: lodging.location.longitude }),
+      zoneType,
+      motive,
+      climate,
+      activities,
+      // images,
+      lodging,
       lodgingRate,
-      lodgingType: lodgingType.map((option) => option.value.toString())
-    }
+      lodgingType
+    } = data
 
-    if (token === undefined) return toast.error('No se ha iniciado sesión')
+    const formData = new FormData()
+    formData.append('destino',
+      destination)
+    formData.append('estado', state)
+    formData.append('ciudad', city)
+    formData.append('fecha_visita', visitDate.toString().slice(0, 10))
+    formData.append('resenia', review)
+    formData.append('calificacion_destiny', destinationRate.toString())
+    formData.append('cantidad_gastada', spentMoney.toString())
+    formData.append('zones', JSON.stringify(zoneType.map((option) => option.value.toString())))
+    formData.append('reasons', JSON.stringify(motive.map((option) => option.value.toString())))
+    formData.append('activities', JSON.stringify(activities.map((option) => option.value.toString())))
+    formData.append('climates', JSON.stringify(climate.map((option) => option.value.toString())))
+    // images.forEach((image) => {
+    //   formData.append('fotos', image, image.name)
+    // })
+    formData.append('nombre', lodging.displayName.text)
+    formData.append('calle', lodging.formattedAddress)
+    formData.append('numero', '12345')
+    formData.append('coordenadas', JSON.stringify({ lat: lodging.location.latitude, lng: lodging.location.longitude }))
+    formData.append('calificacion_lodging', lodgingRate.toString())
+    formData.append('environments', JSON.stringify(lodgingType.map((option) => option.value.toString())))
 
     const res = await fetch('/api/reviews', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(payload)
+      body: formData
     })
 
     if (!res.ok) {
       const errors = await res.json()
-      toast.error(`Error al registrar el viaje: ${Object.values(errors).join(', ')}`)
+      console.log(errors)
+      toast.error('Error al registrar el viaje.')
       setIsSubmitted(false)
       return
     }
