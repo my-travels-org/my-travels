@@ -1,0 +1,106 @@
+@use "@styles/variables.scss";
+
+.menuTrigger{
+    
+    overflow: hidden;
+    cursor: pointer;
+    
+    height: 90px;
+    width: 90px;
+    padding: 1rem;
+    visibility: visible;
+    
+    
+}
+
+
+.Avatar {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.dropDownMenu {
+    position: absolute;
+    top: 70%;
+    right: 25px;
+    background-color: variables.$secondary-background-color;
+    border-radius: 2rem;
+    padding: 10px 20px;
+    width: 200px;
+    margin: 1.5rem;
+}
+.dropDownMenuActive {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: all 0.15 ease;
+}
+.dropDownMenuInactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.15 ease;
+}
+.dropDownMenu::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    height: 20px;
+    width: 20px;
+    background-color: variables.$secondary-background-color;;
+    transform: rotate(45deg);
+}
+
+.dropDownMenu ul li {
+    padding: 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    color: black;
+}
+
+.dropDownMenu ul li:hover a  {
+    color:variables.$secondary-color;
+    cursor: pointer;
+}
+
+.userName{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    color: black;
+    line-height: 1.2rem;
+}
+.userName span {
+    font-size: 14px;
+    color:black;
+    font-weight: 400;
+}
+
+.dropDownItem {
+    display: flex;
+    margin: 10px auto;
+}
+
+.option{
+    max-width: 100px;
+    margin-left: 10px;
+    font-size: 16px;
+    transition: all 0.15;
+    color: black;
+}
+
+.signOut {
+    margin-left: 0.75rem;
+    border: none;
+    background-color: transparent;
+    padding: 0.5 1rem;
+    font-size: 1.6rem;
+    font-family: inherit;
+    &:hover{
+        color: variables.$secondary-color;
+        cursor: pointer;
+    }
+}

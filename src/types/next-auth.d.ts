@@ -21,6 +21,7 @@ declare module 'next-auth' {
     iat: number
     jti: string
     token_type: string
+    user: User
   }
 
 }

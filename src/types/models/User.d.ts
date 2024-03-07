@@ -32,3 +32,13 @@ export interface RegisterFieldValues {
   activity2: number // should be an enum
   activity3: number // should be an enum
 }
+
+export interface updateUser {
+  apellido_m?: string
+  apellido_p?: string
+  ciudad?: string
+  correo?: string
+  fecha_nacimiento?: date
+  id?: number
+  nombre?: string
+}
