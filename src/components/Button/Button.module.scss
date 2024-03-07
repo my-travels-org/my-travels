@@ -8,10 +8,16 @@
   background-color: variables.$tertiary-color;
   color: white;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 1.6rem;
   cursor: pointer;
   &:disabled{
     opacity: 0.5;
     cursor: not-allowed;
   }
+}
+
+@media screen and (min-width: 1920px) {
+  .button{
+    font-size: 1.8rem;
+  } 
 }

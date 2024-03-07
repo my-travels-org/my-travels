@@ -1,0 +1,21 @@
+@use "@styles/variables";
+
+.textarea{
+  padding: 1.5rem;
+  resize: vertical;
+  min-height: 12rem;
+  max-height: 18rem;
+  background-color: variables.$secondary-background-color;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  line-height: 2rem;
+}
+
+@media screen and (min-width: 1920px) {
+    .textarea{
+      font-size: 1.8rem;
+      padding: 2rem;
+  }
+}

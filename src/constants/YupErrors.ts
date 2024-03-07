@@ -11,5 +11,6 @@ const positive = 'Este campo debe ser un número positivo'
 const negative = 'Este campo debe ser un número negativo'
 const integer = 'Este campo debe ser un número entero'
 const alphanumeric = 'Este campo debe ser alfanumérico'
+const select = 'Debe seleccionar una opción'
 
-export { required, number, email, min, max, minString, maxString, url, positive, negative, integer, alphanumeric }
+export { required, number, email, min, max, minString, maxString, url, positive, negative, integer, alphanumeric, select }

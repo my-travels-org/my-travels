@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { signIn, useSession } from 'next-auth/react'
@@ -10,65 +10,69 @@ import { Form } from '@components/index'
 import { loginSections, loginSchema } from '@constants/LoginForm'
 import styles from './Login.module.scss'
 import { LoginUserDTO } from '@/types/models/User'
+import { useLoaderContext } from '@/contexts/Loader/context'
 
 export default function Login (): JSX.Element {
-  const { data: session, status } = useSession()
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+
+  const { handleLoader } = useLoaderContext()
+  const { status } = useSession()
   const router = useRouter()
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-
   const handleSubmit = async (values: LoginUserDTO): Promise<void> => {
-    const res = await signIn('credentials', {
+    setHasSubmitted(true)
+    handleLoader(true)
+    const result = await signIn('credentials', {
       email: values.email,
       password: values.password,
       redirect: false
     })
 
-    if (res?.error !== null) {
-      toast.error(res?.error)
-    } else setIsLoggedIn(true)
+    if (result?.ok !== true) {
+      handleLoader(false)
+      toast.error(result?.error)
+      setHasSubmitted(false)
+      return
+    }
+    handleLoader(false)
+    setTimeout(() => {
+      toast.success('Bienvenido a MyTravels.')
+      router.push('/')
+    }, 0)
   }
-  
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      if (isLoggedIn) {
-        toast.success(`Bienvenido, ${session.user?.name}`)
-      }
+    if (status === 'authenticated' && !hasSubmitted) {
       router.push('/')
     }
-  }, [status, isLoggedIn])
+  }, [status, hasSubmitted])
 
   useEffect(() => {
-    router.prefetch('')
+    router.prefetch('/login')
   }, [])
 
   return (
-    <>
-      {status === 'unauthenticated' && (
-        <section className={styles.login}>
-          <div className={styles.login_left}>
-            <h1 className={styles.login_left_title}>Bienvenido a MyTravels.</h1>
-          </div>
-          <div className={styles.login_form}>
-            <span className={styles.login_description}>
-              <strong>Inicia sesión con tu correo y contraseña.</strong>
-            </span>
-            <Form
-              sections={loginSections}
-              submitButton='Iniciar sesión'
-              onSubmit={handleSubmit}
-              schema={loginSchema}
-            />
-            <div className={styles.login_form_links}>
-              <span className={styles.login_form_links_element}>
-                ¿No tienes una cuenta? <Link className={styles.login_form_links_element_link} href='/register'>Regístrate</Link>
-              </span>
-              <Link className={styles.login_form_links_element_link} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
-            </div>
-          </div>
-        </section>
-      )}
-    </>
+    <section className={styles.login}>
+      <div className={styles.login_left}>
+        <h1 className={styles.login_left_title}>Bienvenido a MyTravels.</h1>
+      </div>
+      <div className={styles.login_form}>
+        <span className={styles.login_description}>
+          <strong>Inicia sesión con tu correo y contraseña.</strong>
+        </span>
+        <Form
+          sections={loginSections}
+          submitButton='Iniciar sesión'
+          onSubmit={handleSubmit}
+          schema={loginSchema}
+        />
+        <div className={styles.login_form_links}>
+          <span className={styles.login_form_links_element}>
+            ¿No tienes una cuenta? <Link className={styles.login_form_links_element_link} href='/register'>Regístrate</Link>
+          </span>
+          <Link className={styles.login_form_links_element_link} href='/forgot-password'>¿Olvidaste tu contraseña?</Link>
+        </div>
+      </div>
+    </section>
   )
 }

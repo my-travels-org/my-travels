@@ -1,40 +1,48 @@
+import { Option } from './Option'
+import { Place } from './components/Map'
 
 export interface CreateTripDTO {
-  nombre: string
-  estado: string
-  ciudad: string
-  fecha: string
-  resenia: string
-  calificacin: number
-  cantidadGastada: number
-  tipoZona: number
-  motivo: number
-  clima: number
-  actividades: number
-  imagenes: string
-  nombreHospedaje: string
-  coordenadas: string
-  tipoHospedaje: number
+  destination: string
+  state: string
+  city: string
+  visitDate: string
+  review: string
+  destinationRate: number
+  spentMoney: number
+  zoneType: string[]
+  motive: string[]
+  climate: string[]
+  activities: string[]
+  images: File[]
+  lodgingName: string
+  lodgingAddress: string
+  coordinates: string
+  lodgingRate: number
+  lodgingType: string[]
 }
 
 export interface Trip extends CreateTripDTO {
   id: number
 }
 
-export interface RegisterFieldValues {
-  name: string
+export type EditTripDTO = Partial<CreateTripDTO>
+
+export interface RegisterTripFieldValues {
+  destination: string
   state: string
   city: string
-  date: string
-  resenia: string
-  rate: number
-  spent: number
-  zoneType: number
-  motive: number
-  climate: number
-  activities: number
-  imagenes: string
-  lodgingName: string
-  coordinates: string
-  lodgingType: number
+  visitDate: string
+  review: string
+  destinationRate: number
+  spentMoney: number
+  zoneType: Option[]
+  motive: Option[]
+  climate: Option[]
+  activities: Option[]
+  images: File[]
+  lodging: Place
+  lodgingRate: number
+  lodgingType: Option[]
 }
+
+export type EditTripFieldValues = Partial<RegisterTripFieldValues>

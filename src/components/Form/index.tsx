@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { Button, Stepper, Field } from '@components/index'
-import { FormProps } from '@/types/components/Form'
+import { components } from '@/constants/CustomFields'
 import styles from './Form.module.scss'
+import { type FormProps } from '@/types/components/Form'
 
 export default function Form ({
   sections,
@@ -20,17 +21,17 @@ export default function Form ({
   currentStep = 0,
   handleStep = (_step: number): void => {}
 }: FormProps): JSX.Element {
-  const {
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm({
+  const formMethods = useForm({
     resolver: yupResolver(schema),
     mode: 'onChange'
   })
 
-  const onSubmit = (data: any): void => handleFormSubmit(data)
+  const { reset, register, handleSubmit, formState } = formMethods
+  const { errors } = formState
+
+  const onSubmit = (data: any): void => {
+    handleFormSubmit(data)
+  }
 
   useEffect(() => {
     if (Object.keys(initialValues).length === 0) return
@@ -56,23 +57,43 @@ export default function Form ({
                       step={i}
                       maxSteps={sections.length - 1}
                       handleStep={handleStep}
-                      register={register}
-                      errors={errors}
+                      formMethods={formMethods}
                     />
                   </div>
                   )
                 : (
-                    fields.map((field) => (
-                      <div key={`${title}-${field.id}`} className={styles.form_container_section}>
-                        <Field
-                          key={field.id}
-                          field={field}
-                          register={register}
-                          errors={errors}
-                        />
-
-                      </div>
-
+                    fields.map(({ showLabel = true, ...field }) => (
+                      field.customField !== undefined
+                        ? (
+                          <div key={`${title}-${field.id}`} className={styles.form_container_section}>
+                            {showLabel !== undefined && showLabel && (
+                              <label
+                                htmlFor={field.id}
+                                className={styles.form_label}
+                              >
+                                {field.label}
+                              </label>
+                            )}
+                            {components[field.customField]({
+                              ...field.customFieldProps,
+                              formMethods
+                            })}
+                            {(errors[field.id] !== undefined) && (
+                              <span className={styles.error}>
+                                {errors[field.id]?.message as string}
+                              </span>
+                            )}
+                          </div>
+                          )
+                        : (
+                          <div key={`${title}-${field.id}`} className={styles.form_container_section}>
+                            <Field
+                              key={field.id}
+                              field={field}
+                              formMethods={{ register, formState }}
+                            />
+                          </div>
+                          )
                     ))
                   )}
             </Fragment>

@@ -11,20 +11,28 @@ declare module 'next-auth' {
     estado_civil: string
     ciudad: string
     fecha_nacimiento: string
-    actividad1: number
-    actividad2: number
-    actividad3: number
   }
 
   interface Session {
     access_token: string
-    user: User
+    exp: number
+    expires: string
+    expires_in: number
+    iat: number
+    jti: string
+    token_type: string
   }
 
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
+    access_token: string
+    token_type: string
+    expires_in: number
+    exp: number
+    iat: number
+    jti: string
     user: User
   }
 }

@@ -29,7 +29,7 @@ export default function Header (): JSX.Element {
   return (
     <header className={styles.header}>
       <Link href='/'>
-        <Image className={styles.header_logo} width={125} height={72} src='/logo-white.png' alt='Imagen logo' />
+        <Image className={styles.header_logo} width={125} height={72} src='/logo-white.webp' alt='Imagen logo' />
       </Link>
       <div className={styles.header_aside}>
         <Aside  userName={userInfo.nombre} userLastName={userInfo.apellido_p} onLogout={handleLogout} />

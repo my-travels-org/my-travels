@@ -1,0 +1,14 @@
+@use "@styles/variables";
+
+.loading {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  &_loader{
+    height: auto !important;
+  }
+}

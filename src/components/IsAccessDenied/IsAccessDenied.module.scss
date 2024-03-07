@@ -1,0 +1,14 @@
+@use "@styles/variables";
+
+.section{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem auto;
+  &_title{
+    text-align: center;
+  }
+}
