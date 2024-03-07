@@ -40,13 +40,10 @@ export default function Login (): JSX.Element {
       router.push('/')
     }, 0)
   }
-  
 
   useEffect(() => {
     if (status === 'authenticated' && !hasSubmitted) {
-      toast.success(`Bienvenido a MyTravels`)
       router.push('/')
-
     }
   }, [status, hasSubmitted])
 

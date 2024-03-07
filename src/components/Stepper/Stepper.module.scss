@@ -3,12 +3,19 @@
 .stepper {
   display: grid;
   place-items: center;
-  gap: 1.5rem;
+  gap: 3rem;
+  &_label{
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: variables.$secondary-color;
+    padding-left: 4px;
+    cursor: pointer;
+  }
   &_field {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   &_buttons {
     display: grid;
@@ -29,6 +36,18 @@
 }
 
 .error{
-    font-weight: 500;
+    padding-left: 4px;  
+    font-weight: 700;
     color: red;
+}
+
+@media screen and (min-width: 1920px) {
+  .stepper{
+    &_label{
+      font-size: 1.8rem;
+    }
   }
+  .error{
+    font-size: 1.8rem;
+  }
+}

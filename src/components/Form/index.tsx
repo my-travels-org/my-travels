@@ -69,7 +69,7 @@ export default function Form ({
                             {showLabel !== undefined && showLabel && (
                               <label
                                 htmlFor={field.id}
-                                style={{ cursor: 'pointer' }}
+                                className={styles.form_label}
                               >
                                 {field.label}
                               </label>

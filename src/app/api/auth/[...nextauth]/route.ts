@@ -1,4 +1,6 @@
+import { httpErrors } from '@/constants/ErrorDictionary'
 import NextAuth from 'next-auth'
+import { JWT } from 'next-auth/jwt'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 const handler = NextAuth({
@@ -21,9 +23,8 @@ const handler = NextAuth({
           },
           body: JSON.stringify({ correo, password })
         })
-
         if (!res.ok) {
-          throw new Error('Credenciales inválidas.')
+          throw new Error(httpErrors[res.status as keyof typeof httpErrors] ?? 'Error desconocido')
         }
         return await res.json()
       }
@@ -38,20 +39,18 @@ const handler = NextAuth({
     maxAge: 60 * 60 * 24 * 30
   },
   callbacks: {
-    async jwt ({ token, user,  trigger, session}) {
+    async jwt ({ token, user }) {
       if (user !== undefined) {
-        token.user = user
-      }
-
-      if(trigger === "update" && session?.name) {
-        token.name= session.name;
+        token = user as unknown as JWT
       }
       return token
     },
     async session ({ session, token }) {
-      const expires = session.expires
-      session = token.user
-      session.expires = expires
+      const dto = {
+        ...token,
+        expires: token.expires_in.toString()
+      }
+      session = dto
       return session
     }
   }

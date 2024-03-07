@@ -1,20 +1,24 @@
+import { Option } from './Option'
+import { Place } from './components/Map'
 
 export interface CreateTripDTO {
-  nombre: string
-  estado: string
-  ciudad: string
-  fecha: string
-  resenia: string
-  calificacin: number
-  cantidadGastada: number
-  tipoZona: number
-  motivo: number
-  clima: number
-  actividades: number
-  imagenes: File[]
-  nombreHospedaje: string
-  coordenadas: string
-  tipoHospedaje: number
+  destination: string
+  state: string
+  city: string
+  visitDate: string
+  review: string
+  destinationRate: number
+  spentMoney: number
+  zoneType: string[]
+  motive: string[]
+  climate: string[]
+  activities: string[]
+  images: File[]
+  lodgingName: string
+  lodgingAddress: string
+  coordinates: string
+  lodgingRate: number
+  lodgingType: string[]
 }
 
 export interface Trip extends CreateTripDTO {
@@ -24,21 +28,21 @@ export interface Trip extends CreateTripDTO {
 export type EditTripDTO = Partial<CreateTripDTO>
 
 export interface RegisterTripFieldValues {
-  name: string
+  destination: string
   state: string
   city: string
-  date: string
+  visitDate: string
   review: string
-  starRating: number
-  spent: number
-  typeZone: number
-  motive: number
-  climate: number
-  activities: number
+  destinationRate: number
+  spentMoney: number
+  zoneType: Option[]
+  motive: Option[]
+  climate: Option[]
+  activities: Option[]
   images: File[]
-  lodgingName: string
-  coordinates: string
-  lodgingType: number
+  lodging: Place
+  lodgingRate: number
+  lodgingType: Option[]
 }
 
 export type EditTripFieldValues = Partial<RegisterTripFieldValues>

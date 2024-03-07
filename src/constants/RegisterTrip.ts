@@ -3,12 +3,12 @@ import * as yup from 'yup'
 import { Section } from '@/types/components/Form'
 import { required, positive, number } from '@constants/YupErrors'
 import { CustomField } from '@/types/CustomField'
-import { stateOptions } from './States'
+import { citiesByState, stateOptions } from './States'
 
 export const registerSections: Section[] = [
   {
     fields: [
-      { id: 'name', label: 'Lugar visitado', type: 'text' },
+      { id: 'destination', label: 'Lugar visitado', type: 'text' },
       {
         id: 'state',
         label: 'Estado',
@@ -24,13 +24,14 @@ export const registerSections: Section[] = [
         customField: CustomField.Dropdown,
         customFieldProps: {
           id: 'city',
-          options: stateOptions
+          options: citiesByState,
+          dependsOn: 'state'
         }
       },
-      { id: 'date', label: 'Fecha de visita', type: 'date', props: { max: new Date().toISOString().split('T')[0] } },
+      { id: 'visitDate', label: 'Fecha de visita', type: 'date', props: { max: new Date().toISOString().split('T')[0] } },
       { id: 'review', label: 'Reseña', customField: CustomField.TextArea, customFieldProps: { id: 'review' } },
-      { id: 'starRating', label: 'Puntuación', customField: CustomField.StarRating, customFieldProps: { id: 'starRating' } },
-      { id: 'spent', label: 'Cantidad de dinero gastado aproximadamente', type: 'number' } // should be type: select
+      { id: 'destinationRate', label: 'Puntuación', customField: CustomField.StarRating, customFieldProps: { id: 'destinationRate' } },
+      { id: 'spentMoney', label: 'Cantidad de dinero gastado aproximadamente', type: 'number' } // should be type: select
 
     ],
     title: 'Datos principales'
@@ -44,19 +45,46 @@ export const registerSections: Section[] = [
         customFieldProps: {
           id: 'zoneType',
           options: [
-            { label: 'Tropical', value: 1 },
-            { label: 'Húmedo', value: 2 },
-            { label: 'Áspero', value: 3 },
-            { label: 'Test', value: 4 },
-            { label: 'Test', value: 5 },
-            { label: 'Test', value: 6 },
-            { label: 'Test', value: 7 },
-            { label: 'Test', value: 8 }
-          ]
+            'Bosque',
+            'Ciudad',
+            'Desierto',
+            'Montaña',
+            'Lago',
+            'Playa',
+            'Pradera',
+            'Oceano',
+            'Selva'
+          ].map((option, index) => ({ label: option, value: index + 1 }))
         }
       },
-      { id: 'motive', label: 'Motivo de visita', type: 'number' },
-      { id: 'climate', label: 'Tipo de clima', type: 'number' },
+      {
+        id: 'motive',
+        label: 'Motivo de visita',
+        customField: CustomField.DropdownMultiple,
+        customFieldProps: {
+          id: 'motive',
+          options: [
+            '1', '2', '3'
+          ].map((option, index) => ({ label: option, value: index + 1 }))
+        }
+      },
+      {
+        id: 'climate',
+        label: 'Tipo de clima',
+        customField: CustomField.DropdownMultiple,
+        customFieldProps: {
+          id: 'climate',
+          options: [
+            'Ecuatorial',
+            'Húmedo',
+            'Monzónico',
+            'Polar',
+            'Seco',
+            'Templado',
+            'Tropical seco'
+          ].map((option, index) => ({ label: option, value: index + 1 }))
+        }
+      },
       {
         id: 'activities',
         label: 'Actividades realizadas',
@@ -64,10 +92,19 @@ export const registerSections: Section[] = [
         customFieldProps: {
           id: 'activities',
           options: [
-            { label: '1', value: 1 },
-            { label: '2', value: 2 },
-            { label: '3', value: 3 }
-          ]
+            'Agricultura',
+            'Alpinismo',
+            'Apuesta',
+            'Caida libre',
+            'Caminata',
+            'Camping',
+            'Caza',
+            'Degustación',
+            'Ganadería',
+            'Natación',
+            'Pesca',
+            'Senderismo'
+          ].map((option, index) => ({ label: option, value: index + 1 }))
         }
       }
     ],
@@ -93,42 +130,58 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'lodgingName', label: 'Nombre del alojamiento', type: 'text' },
-      { id: 'coordinates', label: 'Ubicación del alojamiento', type: 'coordinates' },
-      { id: 'lodgingType', label: 'Ambiente del alojamiento', type: 'number' }
+      { id: 'lodging', label: 'Nombre del alojamiento', customField: CustomField.Map, customFieldProps: { id: 'lodging' } },
+      { id: 'lodgingRate', label: 'Puntuación del alojamiento', customField: CustomField.StarRating, customFieldProps: { id: 'lodgingRate' } },
+      {
+        id: 'lodgingType',
+        label: 'Ambiente del alojamiento',
+        customField: CustomField.DropdownMultiple,
+        customFieldProps: {
+          id: 'lodgingType',
+          options: [
+            'Boreal',
+            'Costero',
+            'Desértico',
+            'Familiar',
+            'Marino',
+            'Paisaje ordenado',
+            'Pradera',
+            'Selvático',
+            'Tundra'
+          ].map((option, index) => ({ label: option, value: index + 1 }))
+        }
+      }
     ],
     title: 'Alojamiento'
   }
 ]
 
 export const initialValues = {
-  name: 'Viaje',
-  state: 'Aguascalientes',
-  city: 'Aguascalientes',
-  date: new Date().toISOString().split('T')[0],
+  destination: 'Viaje',
+  state: 'Jalisco',
+  city: 'Puerto Vallarta',
+  visitDate: new Date().toISOString().split('T')[0],
   review: 'Review',
-  starRating: 1,
-  spent: 1500,
-  zoneType: [
-    { label: 'Tropical', value: 1 }
-  ],
-  motive: 1,
-  climate: 1,
-  activities: [
-    { label: '1', value: 1 }
-  ],
-  images: []
+  destinationRate: 1,
+  spentMoney: 1500,
+  zoneType: [],
+  motive: [],
+  climate: [],
+  activities: [],
+  images: [],
+  lodgingRate: 1,
+  lodgingType: []
 }
 
 export const registerTripSchema = yup
   .object({
-    name: yup.string().required(required),
+    destination: yup.string().required(required),
     state: yup.string().required(required),
     city: yup.string().required(required),
-    date: yup.string().required(required),
+    visitDate: yup.string().required(required),
     review: yup.string().required(required),
-    starRating: yup.number().typeError(number).min(1, 'La puntuación debe de ser mínimo 1'),
-    spent: yup.number().typeError(number).positive(positive).required(required),
+    destinationRate: yup.number().typeError(number).min(1, 'La puntuación debe de ser mínimo 1'),
+    spentMoney: yup.number().typeError(number).positive(positive).required(required),
     zoneType: yup.array()
       .of(
         yup.object().shape({
@@ -136,9 +189,26 @@ export const registerTripSchema = yup
           label: yup.string().required('Label is required')
         })
       )
-      .min(1, 'Seleccione al menos una opción'),
-    motive: yup.number().typeError(positive).positive().required(required),
-    climate: yup.number().typeError(positive).positive().required(required),
+      .min(1, 'Seleccione al menos una opción')
+      .max(3, 'Seleccione máximo tres opciones'),
+    motive: yup.array()
+      .of(
+        yup.object().shape({
+          value: yup.string().required('Value is required'),
+          label: yup.string().required('Label is required')
+        })
+      )
+      .min(1, 'Seleccione al menos una opción')
+      .max(3, 'Seleccione máximo tres opciones'),
+    climate: yup.array()
+      .of(
+        yup.object().shape({
+          value: yup.string().required('Value is required'),
+          label: yup.string().required('Label is required')
+        })
+      )
+      .min(1, 'Seleccione al menos una opción')
+      .max(3, 'Seleccione máximo tres opciones'),
     activities: yup.array()
       .of(
         yup.object().shape({
@@ -146,12 +216,30 @@ export const registerTripSchema = yup
           label: yup.string().required('Label is required')
         })
       )
-      .min(1, 'Seleccione al menos una opción'),
+      .min(1, 'Seleccione al menos una opción')
+      .max(3, 'Seleccione máximo tres opciones'),
     images: yup.array()
       .of(
         yup.mixed()
       ).min(1, 'Sube por lo menos una imagen'),
-    lodgingName: yup.string().required(required),
-    coordinates: yup.string().required(required),
-    lodgingType: yup.number().typeError(positive).positive().required(required)
+    lodging: yup.object().shape({
+      id: yup.string(),
+      displayName: yup.object().shape({
+        text: yup.string(),
+        languageCode: yup.string()
+      }),
+      formattedAddress: yup.string(),
+      location: yup.object().shape({
+        latitude: yup.number(),
+        longitude: yup.number()
+      })
+    }),
+    lodgingRate: yup.number().typeError(number).min(1, 'La puntuación debe de ser mínimo 1'),
+    lodgingType: yup.array()
+      .of(
+        yup.object().shape({
+          value: yup.string().required('Value is required'),
+          label: yup.string().required('Label is required')
+        })
+      )
   })

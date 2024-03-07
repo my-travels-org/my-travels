@@ -12,7 +12,6 @@ import Login from './Login'
 import Navbar from './Navbar'
 import Register from './Register'
 import Stepper from './Stepper'
-import MultipleOption from './MultipleOption'
 import AboutUs from './AboutUS'
 import Conditions from './Conditions'
 import Search from './Search'
@@ -22,10 +21,10 @@ import Travels from './Travels'
 import Card from './Card'
 import CardTravel from './CardTravel'
 import Pagination from './Pagination'
-import UserProfile from './UserProfile'
-import UserDropdown from './UserDropdown'
 import TripSection from './TripSection'
 import CreateTripForm from './TripForm'
+// import UserProfile from './UserProfile'
+import UserDropdown from './UserDropdown'
 import Star from './Star'
 import FilledStar from './FilledStar'
 import IsAccessDenied from './IsAccessDenied'
@@ -51,15 +50,14 @@ export {
   Register,
   Search,
   Stepper,
-  MultipleOption,
   Travels,
   Card,
   CardTravel,
   Pagination,
-  UserProfile,
+  // UserProfile,
   UserDropdown,
-  TripSection,
   Star,
   FilledStar,
-  IsAccessDenied
+  IsAccessDenied,
+  TripSection
 }

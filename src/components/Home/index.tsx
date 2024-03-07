@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 
-
-import { Carousel,TripSection } from '@/components/index'
-import { carousel } from '@/constants/Carousel'
+// import { Carousel, TripSection } from '@/components/index'
+import { TripSection } from '@/components/index'
+// import { carousel } from '@/constants/Carousel'
 import styles from './Home.module.scss'
 import { useLoaderContext } from '@/contexts/Loader/context'
 import { useEffect } from 'react'
@@ -32,7 +32,7 @@ export default function Home (): JSX.Element {
         }
       </section>
       */}
-      <TripSection/>
+      <TripSection />
 
       <section className={`${styles.section} ${styles.home_travels}`}>
         <h2 className={styles.home_travels_title}>Sube viajes</h2>

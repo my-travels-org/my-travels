@@ -1,18 +1,12 @@
 'use client'
 import Link from 'next/link'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 import { usePathname } from 'next/navigation'
 
 import { navbarLinks } from '@/constants/Links'
 import styles from './Navbar.module.scss'
 import { NavbarProps } from '@/types/components/Navbar'
-
-
-import { infoUser } from '@/types/models/User'
-import {UserDropdown} from '@components/index'
-
-
 
 export default function Navbar ({ toggle }: NavbarProps): JSX.Element {
   const { status } = useSession()
@@ -26,7 +20,6 @@ export default function Navbar ({ toggle }: NavbarProps): JSX.Element {
   return (
     <nav className={styles.nav}>
       <ul className={styles.nav_list}>
-        
         {
       filteredNavbarLinks.map(({ name, path }) => {
         return (
@@ -48,12 +41,7 @@ export default function Navbar ({ toggle }: NavbarProps): JSX.Element {
         )
       })
     }
-   
-      
-      
-    
-    </ul>
-      
+      </ul>
     </nav>
   )
 }

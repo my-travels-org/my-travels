@@ -1,0 +1,25 @@
+.wrapper {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.map {
+  position: relative;
+  &_instructions {
+    width: 250px;
+    padding: 0.75rem 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba($color: #198d78, $alpha: 0.5);
+    &_list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      &_element {
+        font-size: 12px;
+        color: white;
+      }
+    }
+  }
+}

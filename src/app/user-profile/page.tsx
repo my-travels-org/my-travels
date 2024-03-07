@@ -1,10 +1,10 @@
-import { UserProfile } from "@/components";
-const UserProfilePage = () => {
+// import { UserProfile } from "@/components";
+const UserProfilePage = (): JSX.Element => {
+  return (
+    <div>UserProfile</div>
+  // <UserProfile/>
 
-    return(
-        <UserProfile/>
-        
-    );
+  )
 }
 
-export default UserProfilePage;
+export default UserProfilePage

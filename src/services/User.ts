@@ -14,5 +14,5 @@ const update = async (user: any): Promise<any> => {
 
 export const userService = {
   create,
-  update,
+  update
 }

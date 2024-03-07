@@ -5,7 +5,8 @@ export enum CustomField {
   StarRating = 'starRating',
   TextArea = 'textArea',
   Dropdown = 'dropdown',
-  DropdownMultiple = 'dropdownMultiple'
+  DropdownMultiple = 'dropdownMultiple',
+  Map = 'map'
 }
 
 export interface CustomFieldProps {

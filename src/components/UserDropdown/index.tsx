@@ -1,67 +1,49 @@
 'use client'
-import { Avatar } from '@mui/material';
+import { Avatar } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './DropDown.module.scss'
-import Link from 'next/link';
+import { faUser, faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
 
+import styles from './UserDropdown.module.scss'
+import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 
-const UserDropdown = ({ userName,userLastName, onLogout }: any) => {
-  const [isOpen, setIsOpen] = useState(false);
+const UserDropdown = (): JSX.Element => {
+  const [isOpen, setIsOpen] = useState(false)
+  const { data: session } = useSession()
 
-  let avatarName ="";
-  /*if(userName !== 'undefined' && userLastName !== 'undefined' ){
-     avatarName = userName[0] + userLastName[0] || "";
-  }*/
-  
-
-  let menuRef = useRef();
-
-  useEffect(() => {
-      let handler = (e) => {
-        if(!menuRef.current.contains(e.target)){
-          setIsOpen(false);
-        }
-        
-      };
-      document.addEventListener("mousedown", handler);
-
-      return() => {
-        document.removeEventListener("mousedown", handler);
-      }
-  });
-
-
+  const avatarName = ''
+  const user = session?.user
 
   return (
-    <div ref={menuRef}>
-
-    <div className={styles.menuTrigger}   onClick={() =>{setIsOpen(!isOpen)} }>
-    
-      <Avatar className={styles.Avatar} >{avatarName}</Avatar>
-
-      <div className={`${styles.dropDownMenu} ${isOpen? styles.dropDownMenuActive : styles.dropDownMenuInactive }`}>
-        <h3 className={styles.userName}>{userName +" "+ userLastName}</h3>
-        <ul>
-          
-          <li className={styles.dropDownItem}>
-            <FontAwesomeIcon icon={faUser}/>
-            <Link className={styles.option} href= {'/user-profile'} >Editar perfil</Link>
-          </li>
-    
-          <li className={styles.dropDownItem}>
-            <FontAwesomeIcon icon={faRightFromBracket}/>
-            <a className={styles.option} onClick={onLogout}>Cerrar sesión</a>
-          </li>
-        </ul>
+    <article>
+      <div className={styles.menuTrigger} onClick={() => setIsOpen((prev) => !prev)}>
+        <Avatar className={styles.Avatar}>{avatarName}</Avatar>
+        <div className={`${styles.dropDownMenu} ${isOpen ? styles.dropDownMenuActive : styles.dropDownMenuInactive}`}>
+          <h3 className={styles.userName}>{`${user?.nombre ?? ''} ${user?.apellido_p ?? ''}`}</h3>
+          <ul>
+            {
+              user !== undefined && (
+                <li className={styles.dropDownItem}>
+                  <FontAwesomeIcon icon={faUser} />
+                  <Link className={styles.option} href='/user-profile'>Editar perfil</Link>
+                </li>
+              )
+            }
+            <li className={styles.dropDownItem}>
+              <FontAwesomeIcon icon={user !== undefined ? faRightFromBracket : faRightToBracket} />
+              {
+                user !== undefined
+                  ? <button className={styles.signOut} onClick={() => { void signOut() }}>Cerrar sesión</button>
+                  : <Link className={styles.option} href='/login'>Iniciar sesión</Link>
+              }
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    </div>
+    </article>
 
-  );
-};
+  )
+}
 
-
-
-export default UserDropdown;
+export default UserDropdown
