@@ -23,8 +23,7 @@ export default function Dropdown ({ id, options: optionsData, formMethods: { set
   const filteredOptions = dependsOn === undefined
     ? (options)
         .filter((el) => el
-          .label.toLowerCase().startsWith(filter.toLowerCase()
-          ))
+          .label.toLowerCase().startsWith(filter.toLowerCase()))
     : dependsOnValue !== undefined && dependsOnValue !== ''
       ? (optionsData as Record<string, string[]>)[dependsOnValue]
           .map((el) => ({ value: el, label: el }))

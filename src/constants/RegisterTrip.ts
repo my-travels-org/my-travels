@@ -45,19 +45,37 @@ export const registerSections: Section[] = [
         customFieldProps: {
           id: 'zoneType',
           options: [
-            { label: 'Tropical', value: 1 },
-            { label: 'Húmedo', value: 2 },
-            { label: 'Áspero', value: 3 },
-            { label: 'Test', value: 4 },
-            { label: 'Test', value: 5 },
-            { label: 'Test', value: 6 },
-            { label: 'Test', value: 7 },
-            { label: 'Test', value: 8 }
-          ]
+            'Bosque',
+            'Ciudad',
+            'Desierto',
+            'Montaña',
+            'Lago',
+            'Playa',
+            'Pradera',
+            'Oceano',
+            'Selva'
+          ].map((option, index) => ({ label: option, value: index + 1 }))
         }
       },
-      { id: 'motive', label: 'Motivo de visita', type: 'number' },
-      { id: 'climate', label: 'Tipo de clima', type: 'number' },
+      { id: 'motive', label: 'Motivo de visita', type: 'text' },
+      {
+        id: 'climate',
+        label: 'Tipo de clima',
+        customField: CustomField.Dropdown,
+        customFieldProps: {
+          id: 'climate',
+          options: [
+            'Ecuatorial',
+            'Húmedo',
+            'Monzónico',
+            'Polar',
+            'Seco',
+            'Templado',
+            'Tropical seco'
+          ].map((option, index) => ({ label: option, value: index + 1 })),
+          dependsOn: undefined
+        }
+      },
       {
         id: 'activities',
         label: 'Actividades realizadas',
@@ -65,10 +83,19 @@ export const registerSections: Section[] = [
         customFieldProps: {
           id: 'activities',
           options: [
-            { label: '1', value: 1 },
-            { label: '2', value: 2 },
-            { label: '3', value: 3 }
-          ]
+            'Agricultura',
+            'Alpinismo',
+            'Apuesta',
+            'Caida libre',
+            'Caminata',
+            'Camping',
+            'Caza',
+            'Degustación',
+            'Ganadería',
+            'Natación',
+            'Pesca',
+            'Senderismo'
+          ].map((option, index) => ({ label: option, value: index + 1 }))
         }
       }
     ],
@@ -94,8 +121,7 @@ export const registerSections: Section[] = [
   },
   {
     fields: [
-      { id: 'lodgingName', label: 'Nombre del alojamiento', type: 'text' },
-      { id: 'coordinates', label: 'Ubicación del alojamiento', customField: CustomField.Map, customFieldProps: { id: 'coordinates' } },
+      { id: 'lodging', label: 'Nombre del alojamiento', customField: CustomField.Map, customFieldProps: { id: 'lodging' } },
       { id: 'lodgingType', label: 'Ambiente del alojamiento', type: 'number' }
     ],
     title: 'Alojamiento'
@@ -110,15 +136,12 @@ export const initialValues = {
   review: 'Review',
   starRating: 1,
   spent: 1500,
-  zoneType: [
-    { label: 'Tropical', value: 1 }
-  ],
+  zoneType: [],
   motive: 1,
   climate: 1,
-  activities: [
-    { label: '1', value: 1 }
-  ],
-  images: []
+  activities: [],
+  images: [],
+  lodgingType: []
 }
 
 export const registerTripSchema = yup
@@ -152,7 +175,23 @@ export const registerTripSchema = yup
       .of(
         yup.mixed()
       ).min(1, 'Sube por lo menos una imagen'),
-    lodgingName: yup.string().required(required),
-    coordinates: yup.string().required(required),
-    lodgingType: yup.number().typeError(positive).positive().required(required)
+    lodging: yup.object().shape({
+      id: yup.string().required('El id es requerido'),
+      displayName: yup.object().shape({
+        text: yup.string().required('El nombre es requerido'),
+        languageCode: yup.string().required('El lenguaje es requerido')
+      }),
+      formattedAddress: yup.string().required('La dirección es requerida'),
+      location: yup.object().shape({
+        latitude: yup.number().required('La latitud es requerida'),
+        longitude: yup.number().required('La longitud es requerida')
+      })
+    }),
+    lodgingType: yup.array()
+      .of(
+        yup.object().shape({
+          value: yup.string().required('Value is required'),
+          label: yup.string().required('Label is required')
+        })
+      )
   })

@@ -24,34 +24,35 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
   const [step, setStep] = useState(0)
 
   const handleSubmit = async (data: RegisterTripFieldValues): Promise<any> => {
-    setIsSubmitted(true)
-    const { name, state, city, date, review, starRating, spent, typeZone, motive, climate, activities, images, lodgingName, coordinates, lodgingType } = data
-    const payload: CreateTripDTO = {
-      nombre: name,
-      estado: state,
-      ciudad: city,
-      fecha: date.toString().slice(0, 10),
-      resenia: review,
-      calificacin: starRating,
-      cantidadGastada: spent,
-      tipoZona: typeZone,
-      motivo: motive,
-      clima: climate,
-      actividades: activities,
-      imagenes: images,
-      nombreHospedaje: lodgingName,
-      coordenadas: coordinates,
-      tipoHospedaje: lodgingType
-    }
+    console.log(data)
+    // setIsSubmitted(true)
+    // const { name, state, city, date, review, starRating, spent, typeZone, motive, climate, activities, images, lodgingName, coordinates, lodgingType } = data
+    // const payload: CreateTripDTO = {
+    //   nombre: name,
+    //   estado: state,
+    //   ciudad: city,
+    //   fecha: date.toString().slice(0, 10),
+    //   resenia: review,
+    //   calificacin: starRating,
+    //   cantidadGastada: spent,
+    //   tipoZona: typeZone,
+    //   motivo: motive,
+    //   clima: climate,
+    //   actividades: activities,
+    //   imagenes: images,
+    //   nombreHospedaje: lodgingName,
+    //   coordenadas: coordinates,
+    //   tipoHospedaje: lodgingType
+    // }
 
-    toast.promise(reviewService.create(payload), {
-      loading: 'Registrando viaje...',
-      success: () => 'Viaje registrado con éxito',
-      error: () => {
-        setIsSubmitted(false)
-        return 'Ocurrió un error al intentar registrar el viaje'
-      }
-    })
+    // toast.promise(reviewService.create(payload), {
+    //   loading: 'Registrando viaje...',
+    //   success: () => 'Viaje registrado con éxito',
+    //   error: () => {
+    //     setIsSubmitted(false)
+    //     return 'Ocurrió un error al intentar registrar el viaje'
+    //   }
+    // })
   }
 
   const handleStep = (step: number): void => {
