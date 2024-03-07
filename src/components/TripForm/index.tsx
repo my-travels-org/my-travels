@@ -5,13 +5,14 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 import Form from '@components/Form'
-import { reviewService } from '@/services/Reviews'
 import { registerSections, registerTripSchema, initialValues as initialValuesConstant } from '@constants/RegisterTrip'
 import styles from './TripForm.module.scss'
 import { type TripFormProps } from '@/types/components/TripForm'
 import { type RegisterTripFieldValues, type CreateTripDTO } from '@/types/Trip'
+import { useSession } from 'next-auth/react'
 
 export default function TripForm ({ editingElement }: TripFormProps): JSX.Element {
+  const { data: session } = useSession()
   const router = useRouter()
 
   const initialValues = editingElement !== undefined
@@ -24,34 +25,48 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
   const [step, setStep] = useState(0)
 
   const handleSubmit = async (data: RegisterTripFieldValues): Promise<any> => {
+    const token = session?.access_token
     setIsSubmitted(true)
-    const { name, state, city, date, review, starRating, spent, typeZone, motive, climate, activities, images, lodgingName, coordinates, lodgingType } = data
+    const { destination, state, city, visitDate, review, destinationRate, spentMoney, zoneType, motive, climate, activities, images, lodging, lodgingRate, lodgingType } = data
     const payload: CreateTripDTO = {
-      nombre: name,
-      estado: state,
-      ciudad: city,
-      fecha: date.toString().slice(0, 10),
-      resenia: review,
-      calificacin: starRating,
-      cantidadGastada: spent,
-      tipoZona: typeZone,
-      motivo: motive,
-      clima: climate,
-      actividades: activities,
-      imagenes: images,
-      nombreHospedaje: lodgingName,
-      coordenadas: coordinates,
-      tipoHospedaje: lodgingType
+      destination,
+      state,
+      city,
+      visitDate: visitDate.toString().slice(0, 10),
+      review,
+      destinationRate,
+      spentMoney,
+      zoneType: zoneType.map((option) => option.value.toString()),
+      motive: motive.map((option) => option.value.toString()),
+      climate: climate.map((option) => option.value.toString()),
+      activities: activities.map((option) => option.value.toString()),
+      images,
+      lodgingName: lodging.displayName.text,
+      lodgingAddress: lodging.formattedAddress.slice(0, 50),
+      coordinates: JSON.stringify({ lat: lodging.location.latitude, lng: lodging.location.longitude }),
+      lodgingRate,
+      lodgingType: lodgingType.map((option) => option.value.toString())
     }
 
-    toast.promise(reviewService.create(payload), {
-      loading: 'Registrando viaje...',
-      success: () => 'Viaje registrado con éxito',
-      error: () => {
-        setIsSubmitted(false)
-        return 'Ocurrió un error al intentar registrar el viaje'
-      }
+    if (token === undefined) return toast.error('No se ha iniciado sesión')
+
+    const res = await fetch('/api/reviews', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
     })
+
+    if (!res.ok) {
+      const errors = await res.json()
+      toast.error(`Error al registrar el viaje: ${Object.values(errors).join(', ')}`)
+      setIsSubmitted(false)
+      return
+    }
+    toast.success('Viaje registrado con éxito')
+    router.push('/my-travels')
   }
 
   const handleStep = (step: number): void => {

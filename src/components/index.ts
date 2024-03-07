@@ -12,7 +12,6 @@ import Login from './Login'
 import Navbar from './Navbar'
 import Register from './Register'
 import Stepper from './Stepper'
-import MultipleOption from './MultipleOption'
 import AboutUs from './AboutUS'
 import Conditions from './Conditions'
 import Search from './Search'
@@ -47,7 +46,6 @@ export {
   Register,
   Search,
   Stepper,
-  MultipleOption,
   Travels,
   Card,
   Pagination,

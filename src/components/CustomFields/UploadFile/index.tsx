@@ -25,8 +25,6 @@ export default function UploadFile ({
     } else {
       clearErrors(id)
     }
-
-    console.log(files)
   }, [files])
 
   const handleFileChanges = (e: React.ChangeEvent<HTMLInputElement>): void => {

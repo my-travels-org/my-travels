@@ -6,7 +6,7 @@ import { Option } from '@/types/Option'
 import { DropdownMultipleProps } from '@/types/components/DropdownMultiple'
 import IconClose from '@/components/IconClose'
 
-export default function DropdownMultiple ({ id, options: optionsData, formMethods: { setValue, clearErrors, setError, watch, formState: { errors } } }: DropdownMultipleProps): JSX.Element {
+export default function DropdownMultiple ({ id, options: optionsData, formMethods: { setValue, clearErrors, setError, watch } }: DropdownMultipleProps): JSX.Element {
   const dropdownValue: Option[] = watch(id) ?? []
   const hasBeenEdited = useRef(false)
   const dropdownElement = useRef<HTMLInputElement>(null)
@@ -14,13 +14,9 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
     optionsData
       .filter((el) => !dropdownValue?.some((value) => value.value === el.value))
       .sort((a, b) => a.label.localeCompare(b.label))
-
   )
   const [showOptions, setShowOptions] = useState(false)
   const [filter, setFilter] = useState('')
-
-  const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1)
-  const optionsRef = useRef<HTMLLIElement[] | any>(optionsData.map(() => useRef(null)))
 
   const handleSearchChange = (e: React.FormEvent<HTMLInputElement>): void => {
     setFilter(e.currentTarget.value)
@@ -41,6 +37,8 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
         setFilter('')
         dropdownElement.current?.blur()
       }
+    } else {
+      setValue(id, [])
     }
     hasBeenEdited.current = true
     setShowOptions(false)
@@ -52,27 +50,14 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
       const values = options
         .filter((el) => el.label.toLowerCase().startsWith(filter.toLowerCase()))
       if (values.length > 0) {
-        let value
-        if (focusedOptionIndex >= 0 && focusedOptionIndex < options.length) {
-          value = options[focusedOptionIndex]
-        } else {
-          value = values.at(0)
-        }
+        const value = values.at(0)
         handleValueChange(value as Option)
       }
     }
-    if (e.key === 'Tab') {
+    if (e.key === 'Tab' || e.key === 'Escape') {
+      e.preventDefault()
       setShowOptions(false)
-      return
-    }
-    if (e.key === 'ArrowDown') {
-      e.preventDefault()
-      const nextIndex = focusedOptionIndex + 1 < options.length ? focusedOptionIndex + 1 : 0
-      setFocusedOptionIndex(nextIndex)
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault()
-      const prevIndex = focusedOptionIndex - 1 >= 0 ? focusedOptionIndex - 1 : options.length - 1
-      setFocusedOptionIndex(prevIndex)
+      dropdownElement.current?.blur()
     }
   }
 
@@ -101,16 +86,6 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
     }
     setError(id, { type: 'min', message: 'Seleccione al menos una opción' })
   }, [dropdownValue])
-
-  useEffect(() => {
-    if (focusedOptionIndex >= 0) {
-      const option = optionsRef.current[focusedOptionIndex].current as HTMLLIElement
-      const optionsContainer = option.parentElement as HTMLUListElement
-      const height = option.getBoundingClientRect().height
-      const finalScrollTop = (option.offsetTop - (height * 2))
-      optionsContainer.scrollTo({ top: finalScrollTop, behavior: 'instant' })
-    }
-  }, [focusedOptionIndex])
 
   return (
     <>
@@ -145,12 +120,11 @@ export default function DropdownMultiple ({ id, options: optionsData, formMethod
         <ul className={`${styles.dropdown_options} ${showOptions ? styles.dropdown_options_show : ''}`}>
           {options
             .filter((el) => el.label.toLowerCase().startsWith(filter.toLowerCase()))
-            .map(({ label, value }, index) =>
+            .map(({ label, value }) =>
               <li
                 key={value}
                 onClick={() => handleValueChange({ value, label })}
-                className={`${styles.dropdown_options_element} ${focusedOptionIndex === index ? styles.dropdown_options_element_focused : ''}`}
-                ref={optionsRef.current[index]}
+                className={styles.dropdown_options_element}
               >
                 {label}
               </li>
