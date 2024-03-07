@@ -54,8 +54,10 @@ export default function Dropdown ({ id, options: optionsData, formMethods: { set
         handleValueChange({ label: value })
       }
     }
-    if (e.key === 'Tab') {
+    if (e.key === 'Tab' || e.key === 'Escape') {
+      e.preventDefault()
       setShowOptions(false)
+      dropdownElement.current?.blur()
     }
   }
 

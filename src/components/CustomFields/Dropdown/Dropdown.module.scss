@@ -9,6 +9,7 @@
     border: none;
     background-color: variables.$secondary-background-color;
     padding: 1rem;
+    font-size: 1.6rem;
     font-family: inherit;
     border: 1px solid transparent;
     &_focus {
@@ -59,6 +60,15 @@
       border: none;
       position: absolute;
       inset: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .dropdown{
+    &_input{
+      font-size: 1.8rem;
+      padding: 1rem 2rem;
     }
   }
 }

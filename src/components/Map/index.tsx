@@ -21,7 +21,7 @@ const mapOptions: google.maps.MapOptions = {
   draggable: true
 }
 
-export default function Map ({ id, formMethods: { setValue, watch }, viewOnly = false }: MapProps): JSX.Element {
+export default function Map ({ formMethods: { setValue, watch }, viewOnly = false }: MapProps): JSX.Element {
   const [selected, setSelected] = useState<Place | null>(null)
   const [showInfoWindow, setShowInfoWindow] = useState(false)
   const [centerCoordinates, setCenterCoordinates] =
@@ -34,8 +34,6 @@ export default function Map ({ id, formMethods: { setValue, watch }, viewOnly = 
 
   if (loadError !== undefined) return <div>Error cargando el mapa</div>
   if (!isLoaded) return <div>Cargando mapa...</div>
-
-  console.log(selected)
 
   return isLoaded
     ? (

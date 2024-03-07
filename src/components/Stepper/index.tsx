@@ -32,7 +32,7 @@ export default function Stepper ({
               {showLabel !== undefined && showLabel && (
                 <label
                   htmlFor={field.id}
-                  style={{ cursor: 'pointer' }}
+                  className={styles.stepper_label}
                 >
                   {field.label}
                 </label>

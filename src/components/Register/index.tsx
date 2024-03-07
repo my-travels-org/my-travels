@@ -48,7 +48,6 @@ export default function Register (): JSX.Element {
       },
       error: async (error: any) => {
         const errors = error.response
-        console.log(error.response)
         const keys = errors.data !== undefined ? Object.keys(JSON.parse(error.response.data)) : []
         setIsSubmitted(false)
         return `Ocurrió un error al intentar registrar: \n${keys.length > 0 ? keys.map((key) => registerErrors[key]).join('\n') : 'Error en el servidor, intente más tarde.'} `

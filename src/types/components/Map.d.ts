@@ -1,7 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
-import { CustomFieldProps } from '../CustomField'
 
-export interface MapProps extends CustomFieldProps {
+export interface MapProps {
   formMethods: Pick<UseFormReturn, 'watch' | 'setValue'>
   viewOnly?: boolean
 }

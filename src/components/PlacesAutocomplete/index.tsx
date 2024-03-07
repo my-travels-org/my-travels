@@ -168,35 +168,37 @@ export default function PlacesAutocomplete ({ setSelected, formMethods: { setVal
   }, [])
 
   return (
-    <div className={styles.dropdown}>
-      <input
-        type='text'
-        placeholder='Escribe una dirección...'
-        onFocus={() => setShowOptions(true)}
-        onKeyDown={handleKeyPressed}
-        onChange={(e) => setDebouncer(e.target.value)}
-        className={`${styles.dropdown_input} ${showOptions ? styles.dropdown_input_focus : ''}`}
-        ref={inputRef}
-      />
-      <ul
-        ref={listParentElementRef}
-        className={`${styles.dropdown_options} ${showOptions ? styles.dropdown_options_show : ''}`}
-      >
-        {options.length > 0 && options
-          .map((option, index) =>
-            <li
-              key={option.id}
-              onClick={() => handleSelect(option)}
-              className={`${styles.dropdown_options_element} ${focusedOnElementIndex === index ? styles.dropdown_options_element_focused : ''}`}
-            >
-              {option.displayName.text}
-            </li>
-          )}
-      </ul>
+    <>
+      <div className={styles.dropdown}>
+        <input
+          type='text'
+          placeholder='Escribe una dirección...'
+          onFocus={() => setShowOptions(true)}
+          onKeyDown={handleKeyPressed}
+          onChange={(e) => setDebouncer(e.target.value)}
+          className={`${styles.dropdown_input} ${showOptions ? styles.dropdown_input_focus : ''}`}
+          ref={inputRef}
+        />
+        <ul
+          ref={listParentElementRef}
+          className={`${styles.dropdown_options} ${showOptions ? styles.dropdown_options_show : ''}`}
+        >
+          {options.length > 0 && options
+            .map((option, index) =>
+              <li
+                key={option.id}
+                onClick={() => handleSelect(option)}
+                className={`${styles.dropdown_options_element} ${focusedOnElementIndex === index ? styles.dropdown_options_element_focused : ''}`}
+              >
+                {option.displayName.text}
+              </li>
+            )}
+        </ul>
 
+      </div>
       {showOptions && (
         <button className={styles.dropdown_options_toggleShow} onClick={() => setShowOptions(false)} />
       )}
-    </div>
+    </>
   )
 }
