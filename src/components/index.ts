@@ -21,7 +21,7 @@ import Travels from './Travels'
 import Card from './Card'
 import CreateTripForm from './TripForm'
 import Pagination from './Pagination'
-import UserProfile from './UserProfile'
+// import UserProfile from './UserProfile'
 import UserDropdown from './UserDropdown'
 import Star from './Star'
 import FilledStar from './FilledStar'
@@ -51,7 +51,7 @@ export {
   Travels,
   Card,
   Pagination,
-  UserProfile,
+  // UserProfile,
   UserDropdown,
   Star,
   FilledStar,

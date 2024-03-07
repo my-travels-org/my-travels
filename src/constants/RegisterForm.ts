@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 import { Section } from '@/types/components/Form'
-import { required, email, positive, integer } from '@constants/YupErrors'
+import { required, email } from '@constants/YupErrors'
 
 export const registerSections: Section[] = [
   {
@@ -22,14 +22,6 @@ export const registerSections: Section[] = [
       { id: 'city', label: 'Ciudad', type: 'text' }
     ],
     title: 'Información de contacto'
-  },
-  {
-    fields: [
-      { id: 'activity1', label: 'Tipo de actividad 1', type: 'text' },
-      { id: 'activity2', label: 'Tipo de actividad 2', type: 'text' },
-      { id: 'activity3', label: 'Tipo de actividad 3', type: 'text' }
-    ],
-    title: 'Otros'
   }
 ]
 
@@ -41,10 +33,7 @@ export const initialValues = {
   password: '',
   confirmPassword: '',
   city: '',
-  birthdate: '',
-  activity1: 1,
-  activity2: 1,
-  activity3: 1
+  birthdate: ''
 
 }
 
@@ -57,19 +46,15 @@ export const registerSchema = yup
     password: yup.string().required(required),
     confirmPassword: yup.string().oneOf([yup.ref('password'), undefined], 'Las contraseñas deben coincidir').required(required),
     city: yup.string().required(required),
-    birthdate: yup.date().required(required),
-    activity1: yup.number().typeError(positive).positive().integer(integer).required(required),
-    activity2: yup.number().typeError(positive).positive().integer(integer).required(required),
-    activity3: yup.number().typeError(positive).positive().integer(integer).required(required)
+    birthdate: yup.date().required(required)
   })
 
-
-  export const resetUserSchema = yup
+export const resetUserSchema = yup
   .object({
     nombre: yup.string().required(required),
     apellidoP: yup.string().required(required),
     apellidoM: yup.string().required(required),
     correo: yup.string().email(email).required(required),
     ciudad: yup.string().required(required),
-    fechaNacimiento: yup.date().required(required),
+    fechaNacimiento: yup.date().required(required)
   })

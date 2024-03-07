@@ -34,13 +34,13 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
-    transition: var(--speed) ease;
+    transition: all 0.15 ease;
 }
 .dropDownMenuInactive{
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
-    transition: var(--speed) ease;
+    transition: all 0.15 ease;
 }
 .dropDownMenu::before {
     content: '';
@@ -59,7 +59,7 @@
     color: black;
 }
 
-.dropDownMenu ul li:hover a {
+.dropDownMenu ul li:hover a  {
     color:variables.$secondary-color;
     cursor: pointer;
 }
@@ -88,14 +88,19 @@
     max-width: 100px;
     margin-left: 10px;
     font-size: 16px;
-    transition: var(--speed);
+    transition: all 0.15;
     color: black;
 }
-@media (max-width: 1024px) {
-    .Avatar{
-      
-        
 
-
+.signOut {
+    margin-left: 0.75rem;
+    border: none;
+    background-color: transparent;
+    padding: 0.5 1rem;
+    font-size: 1.6rem;
+    font-family: inherit;
+    &:hover{
+        color: variables.$secondary-color;
+        cursor: pointer;
     }
 }
