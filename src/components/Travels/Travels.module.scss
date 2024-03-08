@@ -26,6 +26,15 @@
   }
 }
 
+.link{
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1.5rem;
+  border-radius: 2rem;
+  background-color: variables.$secondary-background-color;
+}
+
 @media screen and (min-width: 768px) {
   .container{
     &_add{

@@ -43,9 +43,13 @@ export default function Travels (): JSX.Element {
       <div className={styles.container_wrapper}>
         {reviews.length > 0 && reviews.slice((currentPage * elementsPerPage) - elementsPerPage, currentPage * elementsPerPage).map((review, i) => (
           (
-            <Card key={`${review['destino-resenia']}-${i}`}>
+            <Link
+              href={`/dashboard/${review['resenia-id']}`}
+              key={`${review['destino-resenia']}-${i}`}
+              className={styles.link}
+            >
               <h2>{`${review['destino-destino']} - ${review['destino-ciudad']}`}</h2>
-            </Card>
+            </Link>
           )
         ))}
       </div>
