@@ -7,11 +7,12 @@ import { Review } from '@/types/models/Review'
 import { Chip, Divider } from '@mui/material'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-
-import { reviewService } from '@/services/Reviews'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+
+import StarRating from '@/components/StarRating'
 import styles from './dashboard.module.scss'
+import { reviewService } from '@/services/Reviews'
 
 interface Props {
   params: { id: number }
@@ -32,9 +33,8 @@ const images = [
 ]
 
 export default function DashboardDetail ({ params }: Props): JSX.Element {
-  const { status } = useSession()
+  const { data: session, status } = useSession()
   const [review, setReview] = useState <Review[]>([])
-  const router = useRouter()
 
   useEffect(() => {
     const fetchReviews = async (): Promise<void> => {
@@ -47,10 +47,17 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
 
   const saveReview = async (id: number): Promise<void> => {
     if (status === 'authenticated') {
-      const response = await reviewService.saveOneReview({ id })
-      console.log(response)
+      const res = await fetch(`/api/reviews/${id}`, {
+        method: 'POST',
+        body: JSON.stringify(session)
+      })
+      if (!res.ok) {
+        toast.error('No se ha podido guardar el viaje.')
+        return
+      }
+      toast.success('Viaje guardado con éxito.')
     } else {
-      router.push('/register')
+      toast.error('Necesitas tener una sesión activa para guardar el viaje.')
     }
   }
 
@@ -80,7 +87,7 @@ export default function DashboardDetail ({ params }: Props): JSX.Element {
               <p className={styles.review}>"{review['destino-resenia']}"</p>
               <div className={styles.infoContainer}>
                 <div className={styles.ratingContainer}>
-                  {/* <StarRating rating={review['destino-calificacion_destino']} /> */}
+                  <StarRating rating={review['destino-calificacion_destino']} />
                 </div>
                 <div className={styles.reviewInfo}>
 

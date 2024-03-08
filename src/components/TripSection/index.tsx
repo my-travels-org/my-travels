@@ -26,15 +26,14 @@ const TripSection = (): JSX.Element => {
 
   const filterItems = (index: number): void => {
     setActive(index)
-    if (index === 1) { // Mejor Calificados
+    if (index === 1) {
       setReviews(data.filter((newValue) => newValue['destino-calificacion_destino'] === 5))
     }
 
-    if (index === 2) { // últimos descubrimientos
+    if (index === 2) {
       setReviews(data.filter((newValue) => compareDates(new Date(newValue['destino-fecha_visita']))))
     }
-    if (index === 3) { // Económicos
-      console.log()
+    if (index === 3) {
       setReviews(data.filter((newValue) => newValue['destino-cantidad_gastada'] < 5000.00))
     }
   }
@@ -44,7 +43,6 @@ const TripSection = (): JSX.Element => {
     const diff = today.getTime() - date.getTime()
     const days = diff / (1000 * 60 * 60 * 24)
     if (days <= 250) {
-      console.log(days)
       return true
     } else { return false }
   }
@@ -58,7 +56,7 @@ const TripSection = (): JSX.Element => {
   return (
     <section className={styles.recommend}>
       <div className={styles.title}>
-        <h2>Nuestar selección</h2>
+        <h2>Nuestra selección</h2>
       </div>
       <div className={styles.categories}>
         <ul className={styles.ul}>

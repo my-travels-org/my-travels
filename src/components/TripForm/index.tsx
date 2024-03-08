@@ -45,7 +45,7 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
       motive,
       climate,
       activities,
-      // images,
+      images,
       lodging,
       lodgingRate,
       lodgingType
@@ -56,7 +56,7 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
       destination)
     formData.append('estado', state)
     formData.append('ciudad', city)
-    formData.append('fecha_visita', visitDate.toString().slice(0, 10))
+    formData.append('fecha_visita', visitDate)
     formData.append('resenia', review)
     formData.append('calificacion_destiny', destinationRate.toString())
     formData.append('cantidad_gastada', spentMoney.toString())
@@ -64,28 +64,21 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
     formData.append('reasons', JSON.stringify(motive.map((option) => option.value.toString())))
     formData.append('activities', JSON.stringify(activities.map((option) => option.value.toString())))
     formData.append('climates', JSON.stringify(climate.map((option) => option.value.toString())))
-    // images.forEach((image) => {
-    //   formData.append('fotos', image, image.name)
-    // })
-    formData.append('nombre', lodging.displayName.text)
-    formData.append('calle', lodging.formattedAddress)
+    formData.append('fotos', images[0])
+    formData.append('nombre', lodging.displayName.text ?? '')
+    formData.append('calle', lodging.formattedAddress ?? '')
     formData.append('numero', '12345')
-    formData.append('coordenadas', JSON.stringify({ lat: lodging.location.latitude, lng: lodging.location.longitude }))
-    formData.append('calificacion_lodging', lodgingRate.toString())
+    formData.append('coordenadas', JSON.stringify(lodging.location !== undefined ? { lat: lodging.location.latitude, lng: lodging.location.longitude } : {}))
+    formData.append('calificacion_lodging', (lodgingRate ?? '').toString())
     formData.append('environments', JSON.stringify(lodgingType.map((option) => option.value.toString())))
+    formData.append('session', JSON.stringify(session))
 
     const res = await fetch('/api/reviews', {
       method: 'POST',
-      headers: {
-        // 'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
       body: formData
     })
 
     if (!res.ok) {
-      const errors = await res.json()
-      console.log(errors)
       toast.error('Error al registrar el viaje.')
       setIsSubmitted(false)
       return
