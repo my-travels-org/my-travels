@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { Card, Pagination } from '@components/index'
+import { Pagination } from '@components/index'
 import styles from './Travels.module.scss'
 import usePagination from '@/hooks/usePagination'
 import { useEffect, useState } from 'react'

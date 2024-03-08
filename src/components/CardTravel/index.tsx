@@ -12,6 +12,7 @@ import { Review } from '@/types/models/Review'
 import styles from './CardTravel.module.scss'
 
 export interface ViewerProps {
+  style?: React.CSSProperties
   review: Review
   className?: string
   children?: React.ReactNode
