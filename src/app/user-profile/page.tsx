@@ -1,9 +1,10 @@
-// import { UserProfile } from "@/components";
+import { Register } from '@/components'
+
 const UserProfilePage = (): JSX.Element => {
   return (
-    <div>UserProfile</div>
-  // <UserProfile/>
-
+    <Register
+      isEditing
+    />
   )
 }
 

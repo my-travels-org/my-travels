@@ -1,4 +1,4 @@
-import { Dropdown, StarRating, TextArea, UploadFile } from '@/components/CustomFields'
+import { Checkbox, Dropdown, StarRating, TextArea, UploadFile } from '@/components/CustomFields'
 import { CustomField } from '@/types/CustomField'
 import { UploadFileProps } from '@/types/components/UploadFile'
 import { TextAreaProps } from '@/types/components/TextArea'
@@ -8,6 +8,7 @@ import { DropdownMultipleProps } from '@/types/components/DropdownMultiple'
 import DropdownMultiple from '@/components/CustomFields/DropdownMultiple'
 import { MapProps } from '@/types/components/Map'
 import Map from '@/components/Map'
+import { CheckboxProps } from '@/types/components/Checkbox'
 
 export const components: { [key in CustomField]: (props: any) => JSX.Element } = {
   [CustomField.File]: (props: UploadFileProps) => {
@@ -33,5 +34,8 @@ export const components: { [key in CustomField]: (props: any) => JSX.Element } =
   [CustomField.Map]: (props: MapProps) => {
     const { setValue, watch } = props.formMethods
     return <Map {...props} formMethods={{ setValue, watch }} />
+  },
+  [CustomField.Checkbox]: (props: CheckboxProps) => {
+    return <Checkbox {...props} formMethods={props.formMethods} />
   }
 }

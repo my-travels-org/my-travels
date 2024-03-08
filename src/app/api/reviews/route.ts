@@ -1,77 +1,33 @@
+import { Session } from 'next-auth'
 import {
   NextRequest,
   NextResponse
 } from 'next/server'
 
-// import { httpErrors } from '@/constants/ErrorDictionary'
-
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_API ?? ''
 
 export async function POST (request: NextRequest): Promise<Response> {
-  const token = request.headers.get('Authorization')
-  if (token === null) throw new Error('No hay sesión')
+  const payload = await request.formData()
+  const session = JSON.parse(payload.get('session') as string) as Session
+  payload.delete('session')
 
-  const {
-    destination,
-    state,
-    city,
-    visitDate,
-    review,
-    destinationRate,
-    spentMoney,
-    zoneType,
-    // motive,
-    climate,
-    activities,
-    images,
-    lodgingName,
-    lodgingAddress,
-    coordinates,
-    lodgingRate,
-    lodgingType
-  } = await request.json()
+  const { access_token: accessToken, exp } = session
 
-  const payload = JSON.stringify(
-    {
-      destino: destination,
-      estado: state,
-      ciudad: city,
-      fecha_visita: visitDate,
-      resenia: review,
-      calificacion_destiny: destinationRate,
-      cantidad_gastada: spentMoney,
-      zones: zoneType,
-      // destinyReason: motive,
-      activities,
-      climates: climate,
-      images,
-      nombre: lodgingName,
-      calle: lodgingAddress,
-      numero: 12345,
-      coordenadas: coordinates,
-      environments: lodgingType,
-      calificacion_lodging: lodgingRate
-    }
-  )
+  const date = new Date().getTime() / 1000
 
-  console.log(payload)
+  if (exp < date) return NextResponse.json({ message: 'Sesión expirada' }, { status: 401 })
 
   const res = await fetch(`${baseUrl}/review/saveReview`,
     {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       },
       body: payload
     })
 
-  console.log(await res.json())
+  if (!res.ok) {
+    return NextResponse.json({ message: await res.text() }, { status: 400 })
+  }
   return NextResponse.json({ message: 'Review created' })
-  // console.log(await res.json())
 }
-
-// if (!res.ok) {
-//   throw new Error(httpErrors[res.status as keyof typeof httpErrors] ?? 'Error desconocido')
-// }
-// return res

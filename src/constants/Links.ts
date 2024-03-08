@@ -8,11 +8,6 @@ export const navbarLinks: Link[] = [
     isProtected: false
   },
   {
-    name: 'Categorías',
-    path: '/categories',
-    isProtected: false
-  },
-  {
     name: 'Para ti',
     path: '/for-you',
     isProtected: true

@@ -1,18 +1,14 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Review } from '@/types/models/Review'
-import { CardTravel, Pagination } from '@components/index'
 import { reviewService } from '@/services/Reviews'
-import usePagination from '@/hooks/usePagination'
 import styles from './TripSection.module.scss'
-
-const elementsPerPage = 32
+import DestinationWrapper from '../DestinationWrapper'
 
 const TripSection = (): JSX.Element => {
   const [active, setActive] = useState(0)
   const [reviews, setReviews] = useState <Review[]>([])
   const [data, setData] = useState <Review[]>([])
-  const { currentPage, handleChangePage } = usePagination()
 
   useEffect(() => {
     const fetchReviews = async (): Promise<void> => {
@@ -26,15 +22,14 @@ const TripSection = (): JSX.Element => {
 
   const filterItems = (index: number): void => {
     setActive(index)
-    if (index === 1) { // Mejor Calificados
+    if (index === 1) {
       setReviews(data.filter((newValue) => newValue['destino-calificacion_destino'] === 5))
     }
 
-    if (index === 2) { // últimos descubrimientos
+    if (index === 2) {
       setReviews(data.filter((newValue) => compareDates(new Date(newValue['destino-fecha_visita']))))
     }
-    if (index === 3) { // Económicos
-      console.log()
+    if (index === 3) {
       setReviews(data.filter((newValue) => newValue['destino-cantidad_gastada'] < 5000.00))
     }
   }
@@ -44,7 +39,6 @@ const TripSection = (): JSX.Element => {
     const diff = today.getTime() - date.getTime()
     const days = diff / (1000 * 60 * 60 * 24)
     if (days <= 250) {
-      console.log(days)
       return true
     } else { return false }
   }
@@ -58,7 +52,7 @@ const TripSection = (): JSX.Element => {
   return (
     <section className={styles.recommend}>
       <div className={styles.title}>
-        <h2>Nuestar selección</h2>
+        <h2>Nuestra selección</h2>
       </div>
       <div className={styles.categories}>
         <ul className={styles.ul}>
@@ -76,21 +70,11 @@ const TripSection = (): JSX.Element => {
       </div>
       <div className={styles.destinations}>
         <h1 className={styles.text}>{active === 1 ? 'Destinos mejor calificados' : active === 2 ? 'Nuevos destinos' : active === 3 ? 'Destinos más económicos' : 'Todos nuestros destinos'}</h1>
-        <div className={styles.tripcard}>
-          {reviews !== undefined && reviews.length > 0 && reviews.slice((currentPage * elementsPerPage) - elementsPerPage, currentPage * elementsPerPage).map((review, count) => {
-            return (
-              <CardTravel review={review} key={review['resenia-id']} />
-            )
-          })}
-        </div>
+        <DestinationWrapper
+          reviews={reviews}
+          elementsPerPage={8}
+        />
       </div>
-      <Pagination
-        count={reviews.length}
-        elementsPerPage={elementsPerPage}
-        currentPage={currentPage}
-        handlePageChange={handleChangePage}
-        className={styles.pagination}
-      />
     </section>
   )
 }

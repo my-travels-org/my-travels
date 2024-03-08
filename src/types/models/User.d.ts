@@ -1,3 +1,6 @@
+import { Session } from 'next-auth'
+// import { Option } from '../Option'
+
 export interface CreateUserDTO {
   nombre: string
   apellido_p: string
@@ -6,11 +9,14 @@ export interface CreateUserDTO {
   password: string
   ciudad: string
   fecha_nacimiento: string
-  actividad1: number
-  actividad2: number
-  actividad3: number
+  // actividad1: number
+  // actividad2: number
+  // actividad3: number
 }
 
+export type UpdateUserDTO = Omit<CreateUserDTO, 'password'> & {
+  session: Session
+}
 export interface LoginUserDTO {
   email: string
   password: string
@@ -28,10 +34,10 @@ export interface RegisterFieldValues {
   password: string
   city: string
   birthdate: Date
-  activity1: number // should be an enum
-  activity2: number // should be an enum
-  activity3: number // should be an enum
+  // activities: Option[]
 }
+
+export type UpdateFieldValues = Omit<RegisterFieldValues, 'password'>
 
 export interface updateUser {
   apellido_m?: string

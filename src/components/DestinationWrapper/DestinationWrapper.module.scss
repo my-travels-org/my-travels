@@ -1,0 +1,42 @@
+@use '@styles/variables';
+
+.section{
+  position: relative;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  &_card{
+    margin: 0;
+  }
+  &_pagination{
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .section{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .section{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem 2rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .section{
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem 2rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .section{
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4rem 2rem;
+  }
+}

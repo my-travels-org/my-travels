@@ -1,6 +1,6 @@
-import { httpErrors } from '@/constants/ErrorDictionary'
 import NextAuth from 'next-auth'
 import { JWT } from 'next-auth/jwt'
+
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 const handler = NextAuth({
@@ -24,7 +24,7 @@ const handler = NextAuth({
           body: JSON.stringify({ correo, password })
         })
         if (!res.ok) {
-          throw new Error(httpErrors[res.status as keyof typeof httpErrors] ?? 'Error desconocido')
+          throw new Error('Credenciales inválidas')
         }
         return await res.json()
       }

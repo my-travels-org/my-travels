@@ -25,8 +25,6 @@ export default function Header (): JSX.Element {
         <UserDropdown />
       )}
 
-      {/* {status === 'unauthenticated' && <Link href='/login'>Sign In</Link>} */}
-      {/* {status === 'authenticated' && <Button onClick={signOut} className={styles.dashboard_nav_signout}>Sign Out</Button>} */}
     </header>
   )
 }
