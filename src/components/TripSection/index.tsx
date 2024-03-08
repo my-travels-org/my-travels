@@ -1,18 +1,14 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Review } from '@/types/models/Review'
-import { CardTravel, Pagination } from '@components/index'
 import { reviewService } from '@/services/Reviews'
-import usePagination from '@/hooks/usePagination'
 import styles from './TripSection.module.scss'
-
-const elementsPerPage = 32
+import DestinationWrapper from '../DestinationWrapper'
 
 const TripSection = (): JSX.Element => {
   const [active, setActive] = useState(0)
   const [reviews, setReviews] = useState <Review[]>([])
   const [data, setData] = useState <Review[]>([])
-  const { currentPage, handleChangePage } = usePagination()
 
   useEffect(() => {
     const fetchReviews = async (): Promise<void> => {
@@ -74,21 +70,11 @@ const TripSection = (): JSX.Element => {
       </div>
       <div className={styles.destinations}>
         <h1 className={styles.text}>{active === 1 ? 'Destinos mejor calificados' : active === 2 ? 'Nuevos destinos' : active === 3 ? 'Destinos más económicos' : 'Todos nuestros destinos'}</h1>
-        <div className={styles.tripcard}>
-          {reviews !== undefined && reviews.length > 0 && reviews.slice((currentPage * elementsPerPage) - elementsPerPage, currentPage * elementsPerPage).map((review, count) => {
-            return (
-              <CardTravel review={review} key={review['resenia-id']} />
-            )
-          })}
-        </div>
+        <DestinationWrapper
+          reviews={reviews}
+          elementsPerPage={8}
+        />
       </div>
-      <Pagination
-        count={reviews.length}
-        elementsPerPage={elementsPerPage}
-        currentPage={currentPage}
-        handlePageChange={handleChangePage}
-        className={styles.pagination}
-      />
     </section>
   )
 }

@@ -18,6 +18,10 @@ export default function Pagination ({
   const pagesArray = Array.from({ length: pages }, (_, i) => i + 1)
 
   const handleClick = (page: number): void => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
     handlePageChange(page)
   }
 

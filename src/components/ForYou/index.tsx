@@ -5,8 +5,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { toast } from 'sonner'
 
-import CardTravel from '../CardTravel'
-import styles from './ForYou.module.scss'
+import DestinationWrapper from '../DestinationWrapper'
 
 export default function ForYou (): JSX.Element {
   const { data: session, status } = useSession()
@@ -33,14 +32,9 @@ export default function ForYou (): JSX.Element {
   }, [status])
 
   return (
-    <section className={styles.section}>
-      {reviews.length > 0 && reviews.map((review) => (
-        <CardTravel
-          key={review['resenia-id']}
-          review={review}
-          className={styles.section_card}
-        />
-      ))}
-    </section>
+    <DestinationWrapper
+      reviews={reviews}
+      elementsPerPage={8}
+    />
   )
 }
