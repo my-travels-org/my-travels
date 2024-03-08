@@ -2,6 +2,7 @@ import * as yup from 'yup'
 
 import { Section } from '@/types/components/Form'
 import { required, email } from '@constants/YupErrors'
+import { CustomField } from '@/types/CustomField'
 // import { CustomField } from '@/types/CustomField'
 // import { activitiesOptions } from './FormOptions'
 
@@ -21,7 +22,8 @@ export const registerSections: Section[] = [
       { id: 'email', label: 'Correo electrónico', type: 'email' },
       { id: 'password', label: 'Contraseña', type: 'password' },
       { id: 'confirmPassword', label: 'Repite tu contraseña', type: 'password' },
-      { id: 'city', label: 'Ciudad', type: 'text' }
+      { id: 'city', label: 'Ciudad', type: 'text' },
+      { id: 'agrees', showLabel: false, label: '', customField: CustomField.Checkbox, customFieldProps: { id: 'agrees', label: 'Acepto los términos y condiciones' } }
     ],
     title: 'Información de contacto'
   }
@@ -56,7 +58,8 @@ export const initialValues = {
   password: '',
   confirmPassword: '',
   city: '',
-  birthdate: ''
+  birthdate: '',
+  agrees: false
   // activities: [
   //   activitiesOptions[0],
   //   activitiesOptions[1],
@@ -73,7 +76,8 @@ export const registerSchema = yup
     password: yup.string().required(required),
     confirmPassword: yup.string().oneOf([yup.ref('password'), undefined], 'Las contraseñas deben coincidir').required(required),
     city: yup.string().required(required),
-    birthdate: yup.date().typeError('Debe de ser una fecha válida').required(required)
+    birthdate: yup.date().typeError('Debe de ser una fecha válida').required(required),
+    agrees: yup.boolean().oneOf([true], 'Debes aceptar los términos y condiciones')
     // activities: yup.array()
     //   .of(
     //     yup.object().shape({

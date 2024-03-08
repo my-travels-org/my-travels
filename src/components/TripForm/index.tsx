@@ -43,9 +43,9 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
       spentMoney,
       zoneType,
       motive,
+      images,
       climate,
       activities,
-      images,
       lodging,
       lodgingRate,
       lodgingType
@@ -64,7 +64,9 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
     formData.append('reasons', JSON.stringify(motive.map((option) => option.value.toString())))
     formData.append('activities', JSON.stringify(activities.map((option) => option.value.toString())))
     formData.append('climates', JSON.stringify(climate.map((option) => option.value.toString())))
-    formData.append('fotos', images[0])
+    images.forEach((image, index) => {
+      formData.append(`fotos[${index}]`, image)
+    })
     formData.append('nombre', lodging.displayName.text ?? '')
     formData.append('calle', lodging.formattedAddress ?? '')
     formData.append('numero', '12345')

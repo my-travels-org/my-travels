@@ -6,7 +6,8 @@ export enum CustomField {
   TextArea = 'textArea',
   Dropdown = 'dropdown',
   DropdownMultiple = 'dropdownMultiple',
-  Map = 'map'
+  Map = 'map',
+  Checkbox = 'checkbox'
 }
 
 export interface CustomFieldProps {
