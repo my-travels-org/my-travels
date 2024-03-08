@@ -27,13 +27,12 @@ export default function Pagination ({
 
   const getMaxElementsSubset = (originalArray: number[], maxElements: number, count: number): number[] => {
     const centeredIndex = Math.floor(count - (maxElements / 2))
-
     let startIndex = Math.max(centeredIndex, 0)
-
     const endIndex = Math.min(startIndex + maxElements, originalArray.length)
 
     if (endIndex - startIndex < maxElements && startIndex > 0) {
       startIndex -= maxElements - (endIndex - startIndex)
+      startIndex = Math.max(startIndex, 0)
     }
 
     return originalArray.slice(startIndex, endIndex)
