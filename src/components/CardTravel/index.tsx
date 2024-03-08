@@ -12,8 +12,8 @@ import { Review } from '@/types/models/Review'
 import styles from './CardTravel.module.scss'
 
 export interface ViewerProps {
-  style?: React.CSSProperties
   review: Review
+  className?: string
   children?: React.ReactNode
 }
 const images = [
@@ -35,7 +35,7 @@ const images = [
   }
 ]
 
-export default function CardTravel ({ review }: ViewerProps): JSX.Element {
+export default function CardTravel ({ review, className = '' }: ViewerProps): JSX.Element {
   const { data: session, status } = useSession()
 
   const saveReview = async (id: number): Promise<void> => {
@@ -66,7 +66,7 @@ export default function CardTravel ({ review }: ViewerProps): JSX.Element {
 
   return (
 
-    <div className={styles.card}>
+    <div className={`${styles.card} ${className}`}>
 
       <div className={styles.img_container}>
         <ImageGallery
