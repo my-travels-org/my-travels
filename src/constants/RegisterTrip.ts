@@ -64,7 +64,20 @@ export const registerSections: Section[] = [
         customFieldProps: {
           id: 'motive',
           options: [
-            '1'
+            'Vacaciones',
+            'Hacer turismo',
+            'Visitar a la familia',
+            'Religion',
+            'Cumpleaños',
+            'Voluntariado',
+            'Evento cultural',
+            'Evento deportivo',
+            'Intercambio',
+            'Negocios',
+            'Evento musical',
+            'Graduación',
+            'Aniversario',
+            'Congreso'
           ].map((option, index) => ({ label: option, value: index + 1 }))
         }
       },

@@ -24,6 +24,7 @@ export default function ForYou (): JSX.Element {
       }
     })
     const { data } = await response.json()
+    console.log(data)
     setReviews(data)
   }
 

@@ -43,10 +43,10 @@ export default function Register ({ isEditing }: RegisterProps): JSX.Element {
       apellido_m: surname,
       correo: email,
       ciudad: city,
-      fecha_nacimiento: birthdate.toISOString().slice(0, 10)
-      // actividad1: activitiesData[0],
-      // actividad2: activitiesData[1],
-      // actividad3: activitiesData[2]
+      fecha_nacimiento: birthdate.toISOString().slice(0, 10),
+      actividad1: 1,
+      actividad2: 2,
+      actividad3: 3
     }
 
     if (!isEditing) {
@@ -68,6 +68,7 @@ export default function Register ({ isEditing }: RegisterProps): JSX.Element {
     })
 
     if (!res.ok) {
+      console.log(await res.json())
       setIsSubmitted(false)
       try {
         const text = await res.json().then(({ message }) => message)

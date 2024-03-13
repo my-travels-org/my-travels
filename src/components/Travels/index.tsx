@@ -8,14 +8,20 @@ import usePagination from '@/hooks/usePagination'
 import { useEffect, useState } from 'react'
 import { Review } from '@/types/models/Review'
 import { toast } from 'sonner'
+import { useSession } from 'next-auth/react'
 
 const elementsPerPage = 5
 
 export default function Travels (): JSX.Element {
+  const { data: session } = useSession()
   const [reviews, setReviews] = useState<Review[]>([])
   const { currentPage, handleChangePage } = usePagination()
 
   useEffect(() => {
+    const user = session?.user
+    const name = user?.nombre
+    const lastName = user?.apellido_p
+    const surName = user?.apellido_m
     const fetchReviews = async (): Promise<void> => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_API ?? ''}/review/viewReviews`, {
         method: 'GET'
@@ -25,11 +31,11 @@ export default function Travels (): JSX.Element {
       }
 
       const { reviews } = await response.json()
-      setReviews(reviews)
+      setReviews(reviews.filter((review: Review) => review['usuario-nombre'] === name && review['usuario-apellido_p'] === lastName && review['usuario-apellido_m'] === surName))
     }
 
     void fetchReviews()
-  }, [])
+  }, [session])
 
   return (
     <section className={styles.container}>

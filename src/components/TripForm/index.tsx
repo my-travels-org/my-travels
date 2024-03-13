@@ -82,6 +82,7 @@ export default function TripForm ({ editingElement }: TripFormProps): JSX.Elemen
 
     if (!res.ok) {
       toast.error('Error al registrar el viaje.')
+      console.log(await res.json())
       setIsSubmitted(false)
       return
     }
