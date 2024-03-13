@@ -161,16 +161,27 @@ export const initialValues = {
   state: 'Jalisco',
   city: 'Puerto Vallarta',
   visitDate: new Date().toISOString().split('T')[0],
-  review: 'Review',
-  destinationRate: 1,
-  spentMoney: 1500,
-  zoneType: [],
-  motive: [],
-  climate: [],
-  activities: [],
+  review: 'Me encantó el lugar, el oleaje de la playa es tranquilo.',
+  destinationRate: 5,
+  spentMoney: 33000,
+  zoneType: [
+    { value: 6, label: 'Playa' },
+    { value: 8, label: 'Oceano' }
+  ],
+  motive: [
+    { value: 1, label: 'Vacaciones' }
+  ],
+  climate: [
+    { value: 1, label: 'Húmedo' }
+  ],
+  activities: [
+    { value: 10, label: 'Natación' }
+  ],
   images: [],
-  lodgingRate: 1,
-  lodgingType: []
+  lodgingRate: 5,
+  lodgingType: [
+    { value: 6, label: 'Paisaje ordenado' }
+  ]
 }
 
 export const registerTripSchema = yup
